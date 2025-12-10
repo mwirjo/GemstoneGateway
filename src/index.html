@@ -6,119 +6,153 @@
     <title>GemstoneGateway | Home</title>
     <link rel="stylesheet" href="/css/style.css" />
     <script src="js/mission.js" defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="module" src="js/main.js" defer></script>
+    
+
     <script type="module" src="js/dragon.js" defer></script>
     <script type="module" src="js/modes.js" defer></script>
+    
   </head>
 
   <body>
-    <header class="divider">
-      <div class="logo">
-        <img src="/images/logos/logo.png" alt="tent image for logo" >
-        <a href="index.html"> Gemstone<span class="highlight">Gateway</span></a>
-        <button id="burger-btn" class="burger-btn" aria-label="Toggle Player Info">
-          &#9776; <!-- burger icon -->
-        </button>
+  
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="logo-container">
+        <img src="/images/logos/logo.png" alt="Gemstone Gateway Logo" class="preloader-logo">
+        <h1>GemstoneGateway</h1>
       </div>
-      <!-- Hamburger button for mobile -->
-      
-
-      <div class="player-status" id="player-status">
-        <div class="dragon-info">
-          <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" >
-          <span id="dragon-level">Lvl 1</span>
-        </div>
-        <div class="gems-info">
-          <img src="/images/logos/gem-icon.png" alt="Gems" class="icon" >
-          <span id="gem-amount">0</span>
-        </div>
-        <div class="player-profile">
-          <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" >
-          <span id="player-name">PlayerName</span>
-        </div>
+    
+      <!-- Progress bar -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
       </div>
-
-    </header>
-    <main class="divider">
-      <div class="hero">
-      
-        <picture class="hero-img">
-          <source srcset="images/hero-mobile.webp" media="(max-width: 600px)" />
-          <source srcset="images/hero-tablet.webp" media="(max-width: 1024px)" />
-          <img src="images/hero-desktop.webp" alt="image of a high mountain lake">
-        </picture>
-      
-       
-      
-        <!-- Mission text -->
-        <div class="mission">
-          <p id="mission-text"></p>
-        </div>
-      
+    
+      <!-- Login button -->
+      <button id="show-login-btn" class="login-btn" style="display:none;">
+        Login
+      </button>
+    
+      <!-- Login options -->
+      <div class="login-options" id="login-options" style="display:none;">
+        <button id="email-login">Login with Email</button>
+        <div id="google-login"></div> <!-- Google button will render here -->
+        <button id="guest-login">Continue as Guest</button>
       </div>
+    </div>
+    <div id="main-content" style="display:none;">
+      <header class="divider">
+        <div class="logo">
+          <img src="/images/logos/logo.png" alt="tent image for logo">
+          <a href="index.html"> Gemstone<span class="highlight">Gateway</span></a>
+          <button id="burger-btn" class="burger-btn" aria-label="Toggle Player Info">
+            &#9776; <!-- burger icon -->
+          </button>
+        </div>
+        <!-- Hamburger button for mobile -->
+      
+      
+        <div class="player-status" id="player-status">
+          <div class="dragon-info">
+            <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon">
+            <span id="dragon-level">Lvl 1</span>
+          </div>
+          <div class="gems-info">
+            <img src="/images/logos/gem-icon.png" alt="Gems" class="icon">
+            <span id="gem-amount">0</span>
+          </div>
+          <div class="player-profile">
+            <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon">
+            <span id="player-name">PlayerName</span>
+          </div>
+        </div>
+      
+      </header>
+      <main class="divider">
+        <div class="hero">
+      
+          <picture class="hero-img">
+            <source srcset="images/hero-mobile.webp" media="(max-width: 600px)" />
+            <source srcset="images/hero-tablet.webp" media="(max-width: 1024px)" />
+            <img src="images/hero-desktop.webp" alt="image of a high mountain lake">
+          </picture>
+      
+      
+      
+          <!-- Mission text -->
+          <div class="mission">
+            <p id="mission-text"></p>
+          </div>
+      
+        </div>
+      
+      
+        <section class="mode-selection">
+      
+          <div class="mode-card" id="learn-mode">
+            <div class="mode-card-inner">
+              <div class="mode-card-front">
+                <h3>Learn Mode</h3>
+                <p>Explore and study content interactively.</p>
+              </div>
+              <div class="mode-card-back">
+                <h3>Start</h3>
+                <p>Click to begin learning!</p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="mode-card" id="guess-mode">
+            <div class="mode-card-inner">
+              <div class="mode-card-front">
+                <h3>Guess Mode</h3>
+                <p>Test your knowledge with challenges.</p>
+              </div>
+              <div class="mode-card-back">
+                <h3>Start</h3>
+                <p>Click to take the challenge!</p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="mode-card" id="formula-mode">
+            <div class="mode-card-inner">
+              <div class="mode-card-front">
+                <h3>Formula Mode</h3>
+                <p>Practice calculations and formulas.</p>
+              </div>
+              <div class="mode-card-back">
+                <h3>Start</h3>
+                <p>Click to solve formulas!</p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="mode-card" id="dragon-mode">
+            <div class="mode-card-inner">
+              <div class="mode-card-front">
+                <h3>Dragon</h3>
+                <p>Interact with your dragon and earn rewards.</p>
+              </div>
+              <div class="mode-card-back">
+                <h3>Start</h3>
+                <p>Click to feed and play with your dragon!</p>
+              </div>
+            </div>
+          </div>
+      
+        </section>
+      
+      
+      </main>
+      <footer>
+        &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway
+        Worldwide Online
+      </footer>
+    </div>
 
-      
-      <section class="mode-selection">
-      
-        <div class="mode-card" id="learn-mode">
-          <div class="mode-card-inner">
-            <div class="mode-card-front">
-              <h3>Learn Mode</h3>
-              <p>Explore and study content interactively.</p>
-            </div>
-            <div class="mode-card-back">
-              <h3>Start</h3>
-              <p>Click to begin learning!</p>
-            </div>
-          </div>
-        </div>
-      
-        <div class="mode-card" id="guess-mode">
-          <div class="mode-card-inner">
-            <div class="mode-card-front">
-              <h3>Guess Mode</h3>
-              <p>Test your knowledge with challenges.</p>
-            </div>
-            <div class="mode-card-back">
-              <h3>Start</h3>
-              <p>Click to take the challenge!</p>
-            </div>
-          </div>
-        </div>
-      
-        <div class="mode-card" id="formula-mode">
-          <div class="mode-card-inner">
-            <div class="mode-card-front">
-              <h3>Formula Mode</h3>
-              <p>Practice calculations and formulas.</p>
-            </div>
-            <div class="mode-card-back">
-              <h3>Start</h3>
-              <p>Click to solve formulas!</p>
-            </div>
-          </div>
-        </div>
-      
-        <div class="mode-card" id="dragon-mode">
-          <div class="mode-card-inner">
-            <div class="mode-card-front">
-              <h3>Dragon</h3>
-              <p>Interact with your dragon and earn rewards.</p>
-            </div>
-            <div class="mode-card-back">
-              <h3>Start</h3>
-              <p>Click to feed and play with your dragon!</p>
-            </div>
-          </div>
-        </div>
-      
-      </section>
-
-
-    </main>
-    <footer>
-      &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway
-      Worldwide Online
-    </footer>
+    
     
 
 
