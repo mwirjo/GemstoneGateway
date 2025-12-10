@@ -15,9 +15,14 @@
       <div class="logo">
         <img src="/images/logos/logo.png" alt="tent image for logo" >
         <a href="index.html"> Gemstone<span class="highlight">Gateway</span></a>
+        <button id="burger-btn" class="burger-btn" aria-label="Toggle Player Info">
+          &#9776; <!-- burger icon -->
+        </button>
       </div>
-      <div class="player-status">
-        
+      <!-- Hamburger button for mobile -->
+      
+
+      <div class="player-status" id="player-status">
         <div class="dragon-info">
           <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" >
           <span id="dragon-level">Lvl 1</span>
@@ -35,39 +40,79 @@
     </header>
     <main class="divider">
       <div class="hero">
-        <img
-          src="/images/hero.jpg"
-          srcset="images/hero.jpg 500w, images/hero.jpg"
-          alt="image of a high mountain lake"
-        >
-        <div class="logo logo--square">
-          <img src="/images/logos/logo.png" alt="tent image for logo" >
-          <div>Gemstone<span class="highlight">Gateway</span></div>
-        </div>
+      
+        <picture class="hero-img">
+          <source srcset="images/hero-mobile.webp" media="(max-width: 600px)" />
+          <source srcset="images/hero-tablet.webp" media="(max-width: 1024px)" />
+          <img src="images/hero-desktop.webp" alt="image of a high mountain lake">
+        </picture>
+      
+       
+      
+        <!-- Mission text -->
         <div class="mission">
           <p id="mission-text"></p>
         </div>
-
+      
       </div>
 
+      
       <section class="mode-selection">
+      
         <div class="mode-card" id="learn-mode">
-          <h3>Learn Mode</h3>
-          <p>Explore and study content interactively.</p>
+          <div class="mode-card-inner">
+            <div class="mode-card-front">
+              <h3>Learn Mode</h3>
+              <p>Explore and study content interactively.</p>
+            </div>
+            <div class="mode-card-back">
+              <h3>Start</h3>
+              <p>Click to begin learning!</p>
+            </div>
+          </div>
         </div>
+      
         <div class="mode-card" id="guess-mode">
-          <h3>Guess Mode</h3>
-          <p>Test your knowledge with challenges.</p>
+          <div class="mode-card-inner">
+            <div class="mode-card-front">
+              <h3>Guess Mode</h3>
+              <p>Test your knowledge with challenges.</p>
+            </div>
+            <div class="mode-card-back">
+              <h3>Start</h3>
+              <p>Click to take the challenge!</p>
+            </div>
+          </div>
         </div>
+      
         <div class="mode-card" id="formula-mode">
-          <h3>Formula Mode</h3>
-          <p>Practice calculations and formulas.</p>
+          <div class="mode-card-inner">
+            <div class="mode-card-front">
+              <h3>Formula Mode</h3>
+              <p>Practice calculations and formulas.</p>
+            </div>
+            <div class="mode-card-back">
+              <h3>Start</h3>
+              <p>Click to solve formulas!</p>
+            </div>
+          </div>
         </div>
+      
         <div class="mode-card" id="dragon-mode">
-          <h3>Dragon</h3>
-          <p>Interact with your dragon and earn rewards.</p>
+          <div class="mode-card-inner">
+            <div class="mode-card-front">
+              <h3>Dragon</h3>
+              <p>Interact with your dragon and earn rewards.</p>
+            </div>
+            <div class="mode-card-back">
+              <h3>Start</h3>
+              <p>Click to feed and play with your dragon!</p>
+            </div>
+          </div>
         </div>
+      
       </section>
+
 
     </main>
     <footer>

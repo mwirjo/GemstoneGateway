@@ -124,27 +124,7 @@ header {
 }
 
 /* --------------------- Hero Section --------------------- */
-.hero {
-  position: relative;
-}
 
-.hero .logo {
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 0.5em 1em;
-  border-radius: 6px;
-  border: 2px solid var(--primary-color);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  max-width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 /* --------------------- Utility Classes --------------------- */
 .highlight {
@@ -166,28 +146,40 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
-/* --------------------- Mission Banner --------------------- */
+/* -------------------- Hero Section -------------------- */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* -------------------- Mission Box -------------------- */
 .mission {
   position: absolute;
-  top: 1rem;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  text-align: center;
-  background-color: var(--dark-grey);
-  color: var(--bg-color);
-  opacity: 0.85;
-  padding: 0.5rem;
-  font-size: 1.1em;
+  background: rgba(0, 0, 0, 0.70);
+  color: white;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
   border: 2px solid var(--primary-color);
-  border-radius: 8px;
-  max-width: 80%;
-  margin: auto;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  z-index: 5;
 }
 
 .mission p {
-  margin: 0 auto;
-  width: 50%;
-  text-align: center;
+  margin: 0;
+  font-size: 1.1rem;
 }
 
 /* --------------------- Mode Selection --------------------- */
@@ -227,6 +219,163 @@ button {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* ---------------------- MODE CARD ADVANCED EFFECTS ---------------------- */
+
+/* Card container for 3D flipping */
+.mode-card {
+  perspective: 1000px;
+  /* enables 3D effects */
+  position: relative;
+  height: 260px;
+}
+
+.mode-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+/* Hover flips the card */
+.mode-card:hover .mode-card-inner {
+  transform: rotateY(180deg) scale(1.03);
+}
+
+/* FRONT + BACK of the card */
+.mode-card-front,
+.mode-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  border: 2px solid var(--primary-color);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+/* BACK SIDE */
+.mode-card-back {
+  transform: rotateY(180deg);
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Glow effect */
+.mode-card:hover .mode-card-front,
+.mode-card:hover .mode-card-back {
+  box-shadow: 0 0 18px var(--accent-color);
+}
+
+/* Slight lift animation */
+.mode-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Title styling */
+.mode-card h3 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+  font-family: var(--font-headline);
+}
+
+/* Back text style */
+.mode-card-back h3 {
+  color: white;
+}
+
+.mode-card p {
+  color: var(--dark-grey);
+}
+
+.mode-card-back p {
+  color: #f1f1f1;
+}
+
+/* Entry fade animation */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mode-card {
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.mode-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.mode-card:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.mode-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.mode-card:nth-child(4) {
+  animation-delay: 0.55s;
+}
+
+
+
+/* Hamburger button hidden on desktop */
+.burger-btn {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-grey);
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Show burger button on mobile */
+  .burger-btn {
+    display: inline-block;
+  }
+
+  /* Hide player-status by default on mobile */
+  .player-status {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  /* Show player-status when active */
+  .player-status.active {
+    display: flex;
+  }
+
+  .player-status>div {
+    flex: 1 1 100%;
+  }
+}
+
 /* --------------------- Responsive --------------------- */
 @media screen and (max-width: 768px) {
   header {
@@ -234,11 +383,25 @@ button {
     align-items: flex-start;
     gap: 0.5rem;
   }
+  
 
-  .player-status {
-    width: 100%;
-    justify-content: flex-start;
-  }
+    .burger-btn {
+      display: inline-block;
+    }
+  
+    /* Hide player-status by default on mobile */
+    .player-status {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+  
+    /* Show player-status when active */
+    .player-status.active {
+      display: flex;
+    }
 
   .player-status>div {
     flex: 1 1 100%;
@@ -250,13 +413,55 @@ button {
   }
 
   .mode-card {
-    width: 90%;
+    width: 300px;
+    height: 300px;
   }
 
-  .mission p {
-    width: 90%;
-    font-size: 1em;
-  }
+    /* HEADER LOGO + TEXT SMALLER */
+    .logo img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .logo {
+      font-size: 20px;
+      /* reduce text size */
+      line-height: 40px;
+    }
+  
+    /* HERO LOGO SMALLER */
+        /* Remove old absolute positioning */
+        .hero .logo {
+          position: static;
+          transform: none;
+          margin: -25px auto 0;
+          /* slight overlap with hero image top edge */
+          z-index: 10;
+        }
+    
+        /* Adjust hero logo size for mobile */
+        .hero .logo img {
+          width: 40px;
+          height: 40px;
+        }
+    
+        .hero .logo div {
+          font-size: 20px;
+        }
+    
+        /* Mission moves BELOW logo now */
+        .mission {
+          position: static;
+          transform: none;
+          width: 100%;
+          max-width: 100%;
+          margin: 0.8rem auto 0;
+          text-align: center;
+        }
+    
+        .mission p {
+          width: 100%;
+        }
 }
 
 @media screen and (min-width: 769px) {

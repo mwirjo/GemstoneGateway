@@ -26,3 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
     card.addEventListener("mouseleave", () => card.classList.remove("hovered"));
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const burgerBtn = document.getElementById("burger-btn");
+  const playerStatus = document.getElementById("player-status");
+
+  burgerBtn.addEventListener("click", () => {
+    playerStatus.classList.toggle("active");
+  });
+});
