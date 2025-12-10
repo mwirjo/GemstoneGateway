@@ -1,18 +1,23 @@
-import { setLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import { qs, setClick, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-const dataSource = new ProductData("tents");
+document.addEventListener("DOMContentLoaded", () => {
+  const modeContent = qs("#mode-content");
 
-function addProductToCart(product) {
-  setLocalStorage("so-cart", product);
-}
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
-}
+  function loadMode(mode) {
+    switch(mode) {
+      case "learn":
+        modeContent.innerHTML = "<h2>Learn Mode</h2><p>Learn new formulas and concepts here.</p>";
+        break;
+      case "guess":
+        modeContent.innerHTML = "<h2>Guess Mode</h2><p>Guess the correct answers to earn gems!</p>";
+        break;
+      case "formula":
+        modeContent.innerHTML = "<h2>Formula Mode</h2><p>Practice formulas with interactive examples.</p>";
+        break;
+    }
+  }
 
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+  setClick("#learn-mode-btn", () => loadMode("learn"));
+  setClick("#guess-mode-btn", () => loadMode("guess"));
+  setClick("#formula-mode-btn", () => loadMode("formula"));
+});
