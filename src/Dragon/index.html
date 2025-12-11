@@ -4,7 +4,7 @@
 <head>
   <title>D&D Dragon Stat Block Generator</title>
   <style>
-    /* CSS styles for the official D&D 5e stat block look */
+    /* All your existing CSS unchanged */
     .stat-block {
       background-color: #fdf1dc;
       border: 1px solid #c9c9c9;
@@ -16,7 +16,6 @@
       margin: 20px auto;
     }
 
-    /* Styles for the new image placeholder */
     .image-placeholder {
       height: 150px;
       background-color: #e0e0e0;
@@ -32,7 +31,6 @@
 
     .stat-block h1 {
       border-bottom: 2px solid #8A1A23;
-      /* The rust red line */
       font-size: 24px;
       font-variant: small-caps;
       margin: 0 0 10px 0;
@@ -85,22 +83,17 @@
       font-style: italic;
     }
 
-    .stat-block .actions h3 {
-      font-size: 18px;
-      font-variant: small-caps;
-      color: #8A1A23;
-      border-bottom: 1px solid #8A1A23;
-      margin: 15px 0 10px 0;
-    }
-
-    .stat-block .action-item p {
-      margin: 0 0 10px 0;
-    }
-
     .stat-block .dragon-type-line {
       font-style: italic;
       margin-bottom: 10px;
       color: #8A1A23;
+    }
+
+    .dragon-image {
+      width: 100%;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -111,12 +104,9 @@
     <label for="givename">Give Name (optional):</label>
     <input type="text" id="givename" placeholder="Enter custom name">
     <button onclick="generateRandomStatBlock()">Generate Dragon Stat Block</button>
-
     <hr>
-
     <h2>Generated Stat Block:</h2>
     <div id="statBlockDetails">
-      <!-- Stat block data will be injected here -->
       <p>Click "Generate Dragon Stat Block" to load a random dragon.</p>
     </div>
   </div>
@@ -124,11 +114,25 @@
   <script>
     let dragonsData = [];
 
+    let dragonImages = {};
+
+    async function loadDragonImages() {
+        try {
+          const response = await fetch("/json/dragonImages.json");
+          dragonImages = await response.json();
+          console.log("🖼️ Dragon images loaded:", dragonImages);
+        } catch (error) {
+          console.error("❌ Failed to load dragon images JSON:", error);
+        }
+      }
+
+
     async function fetchDragonsList() {
       try {
         const response = await fetch('https://www.dnd5eapi.co/api/monsters');
         const data = await response.json();
         dragonsData = data.results.filter(m => m.name.toLowerCase().includes('dragon'));
+        console.log(dragonsData)
         console.log(`Loaded ${dragonsData.length} dragons`);
       } catch (error) {
         console.error('Dragons list fetch failed:', error);
@@ -140,6 +144,26 @@
       return mod >= 0 ? `+${mod}` : `${mod}`;
     }
 
+    // ADDED: Detailed console logging for image debugging
+    function getDragonImage(dragonName) {
+      console.log('🔍 ORIGINAL dragon name:', dragonName);
+      const normalizedName = dragonName.toLowerCase().trim();
+      console.log('🔍 NORMALIZED (lowercased):', normalizedName);
+
+      // Check for exact match in dragonImages
+      if (dragonImages[normalizedName]) {
+        console.log('✅ EXACT MATCH FOUND:', normalizedName, '→', dragonImages[normalizedName]);
+        return dragonImages[normalizedName];
+      }
+
+      console.log('❌ No exact match. Available keys:', Object.keys(dragonImages));
+      console.log('❌ Returning fallback image');
+
+      // Fallback with colored placeholder
+      return "https://via.placeholder.com/400x150/cccccc/000000?text=No+Image";
+    }
+
+    // FIXED: Pass imageUrl to renderStatBlock
     async function generateRandomStatBlock() {
       if (dragonsData.length === 0) {
         await fetchDragonsList();
@@ -158,44 +182,55 @@
         const display_name = customName || monster.name;
         const dragonType = monster.name;
 
-        detailsDiv.innerHTML = renderStatBlock(monster, display_name, dragonType);
+        // FIXED: Call getDragonImage and log result
+        const dragonImageUrl = getDragonImage(dragonType);
+        console.log('🎨 FINAL IMAGE URL:', dragonImageUrl);
+
+        // FIXED: Pass the imageUrl parameter
+        detailsDiv.innerHTML = renderStatBlock(monster, display_name, dragonType, dragonImageUrl);
       } catch (error) {
         console.error('Failed to fetch monster details:', error);
         detailsDiv.innerHTML = '<p>Sorry, an error occurred fetching the full stat block.</p>';
       }
     }
 
-    function renderStatBlock(m, name, type) {
-      const renderActions = (actions) => actions.map(action => `
-        <div class="action-item">
-          <strong>${action.name}.</strong> <span>${action.desc}</span>
-        </div>
-      `).join('');
+    // FIXED: Accept imageUrl parameter
+    function renderStatBlock(m, name, type, imageUrl) {
+      console.log('📱 Rendering with imageUrl:', imageUrl);
+
+      const renderActions = (actions) => (actions || []).map(action =>
+        `<div class="action-item"><strong>${action.name}.</strong> <span>${Array.isArray(action.desc) ? action.desc[0] : action.desc}</span></div>`
+      ).join('');
 
       const formatProficiencies = (proficiencies, filterType) => {
-        return proficiencies
-          .filter(p => p.proficiency.name.includes(filterType))
+        return (proficiencies || [])
+          .filter(p => p.proficiency && p.proficiency.name.includes(filterType))
           .map(p => {
-            const namePart = p.proficiency.name.split(': ')[1] || p.proficiency.name.split('Skill: ')[1];
-            return `${namePart} +${p.value}`;
+            const namePart = p.proficiency.name.split(': ')[1] || p.proficiency.name.split('Skill: ')[1] || p.proficiency.name;
+            return `${namePart} ${calculateModifier(p.value)}`;
           })
-          .join(', ');
+          .join(', ') || '—';
       };
 
       return `
         <div class="stat-block">
-          <!-- Placeholder DIV for the image -->
-          <div class="image-placeholder">
-            [Dragon Image Placeholder - Add Image URL Later]
+          <div style="text-align: center; margin-bottom: 15px;">
+            <img src="${imageUrl}" alt="${type}" class="dragon-image" 
+                 onerror="console.log('❌ Image failed to load:', this.src); this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                 onload="console.log('✅ Image loaded successfully:', this.src);"
+                 style="display: block; max-width: 100%; height: auto;">
+            <div class="image-placeholder" style="display: none;">
+              Dragon Illustration
+            </div>
           </div>
           
           <h1>${name}</h1>
-          <p class="dragon-type-line">${type ? `Dragon Type: ${type}` : ''}</p>
+          <p class="dragon-type-line">Dragon Type: ${type}</p>
           <p class="property-line"><span>${m.size} ${m.type}, ${m.alignment}</span></p>
           <hr>
-          <p class="property-line"><strong>Armor Class</strong> <span>${m.armor_class}</span></p>
+          <p class="property-line"><strong>Armor Class</strong> <span>${Array.isArray(m.armor_class) ? m.armor_class[0].value : m.armor_class}</span></p>
           <p class="property-line"><strong>Hit Points</strong> <span>${m.hit_points} (${m.hit_dice})</span></p>
-          <p class="property-line"><strong>Speed</strong> <span>${Object.entries(m.speed).map(([stype, val]) => `${stype} ${val}`).join(', ')}</span></p>
+          <p class="property-line"><strong>Speed</strong> <span>${Object.entries(m.speed || {}).map(([k, v]) => `${k} ${v}`).join(', ')}</span></p>
           <hr>
           <div class="abilities">
             <div class="ability-score"><strong>STR</strong> <span>${m.strength} (${calculateModifier(m.strength)})</span></div>
@@ -208,19 +243,17 @@
           <hr>
           <p class="property-line"><strong>Saving Throws</strong> <span>${formatProficiencies(m.proficiencies, 'Saving Throw')}</span></p>
           <p class="property-line"><strong>Skills</strong> <span>${formatProficiencies(m.proficiencies, 'Skill')}</span></p>
-          <p class="property-line"><strong>Damage Immunities</strong> <span>${m.damage_immunities.join(', ') || 'None'}</span></p>
-          <p class="property-line"><strong>Condition Immunities</strong> <span>${m.condition_immunities.map(c => c.name).join(', ') || 'None'}</span></p>
+          <p class="property-line"><strong>Damage Immunities</strong> <span>${(m.damage_immunities || []).join(', ') || '—'}</span></p>
+          <p class="property-line"><strong>Condition Immunities</strong> <span>${(m.condition_immunities || []).map(c => c.name).join(', ') || '—'}</span></p>
           <p class="property-line"><strong>Senses</strong> <span>${m.senses}</span></p>
           <p class="property-line"><strong>Languages</strong> <span>${m.languages}</span></p>
           <p class="property-line"><strong>Challenge</strong> <span>${m.challenge_rating} (${m.xp} XP)</span></p>
           
-          <h2>Special Abilities</h2>
-          ${renderActions(m.special_abilities || [])}
-          
+          ${m.special_abilities && m.special_abilities.length ? `<h2>Special Abilities</h2>${renderActions(m.special_abilities)}` : ''}
           <h2>Actions</h2>
           ${renderActions(m.actions)}
-
-          ${m.legendary_actions && m.legendary_actions.length > 0 ? `
+          
+          ${m.legendary_actions && m.legendary_actions.length ? `
             <h2>Legendary Actions</h2>
             <p>The ${m.name} can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The ${m.name} regains spent legendary actions at the start of its turn.</p>
             ${renderActions(m.legendary_actions)}
@@ -228,8 +261,7 @@
         </div>
       `;
     }
-
-    // Initial data load
+    loadDragonImages();
     fetchDragonsList();
   </script>
 </body>

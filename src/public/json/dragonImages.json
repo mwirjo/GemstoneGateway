@@ -1,0 +1,52 @@
+{
+  "ancient red dragon": "/images/AncientRedDragon.webp",
+  "adult red dragon": "/images/adultRedDragon.webp",
+  "young red dragon": "/images/youngRedDragon.webp",
+  "red dragon wyrmling": "/images/redDragonWyrmling.webp",
+
+  "ancient black dragon": "/images/ancientBlackDragon.webp",
+  "adult black dragon": "/images/adultBlackDragon.webp",
+  "young black dragon": "/images/youngBlackDragon.webp",
+  "black dragon wyrmling": "/images/blackDragonWyrmling.webp",
+
+  "ancient blue dragon": "/images/ancientBlueDragon.webp",
+  "adult blue dragon": "/images/AdultBlueDragon.webp",
+  "young blue dragon": "/images/youngBlueDragon.webp",
+  "blue dragon wyrmling": "/images/blueDragonWyrmling.webp",
+
+  "ancient green dragon": "/images/ancientGreenDragon.webp",
+  "adult green dragon": "/images/adultGreenDragon.webp",
+  "young green dragon": "/images/youngGreenDragon.webp",
+  "green dragon wyrmling": "/images/greenDragonWyrmling.webp",
+
+  "ancient white dragon": "/images/ancientWhiteDragon.webp",
+  "adult white dragon": "/images/adultWhiteDragon.webp",
+  "young white dragon": "/images/youngWhiteDragon.webp",
+  "white dragon wyrmling": "/images/whiteDragonWyrmling.webp",
+
+  "ancient gold dragon": "/images/ancientGoldDragon.webp",
+  "adult gold dragon": "/images/adultGoldDragon.webp",
+  "young gold dragon": "/images/youngGoldDragon.webp",
+  "gold dragon wyrmling": "/images/goldDragonWyrmling.webp",
+
+  "ancient silver dragon": "/images/ancientSilverDragon.webp",
+  "adult silver dragon": "/images/adultSilverDragon.webp",
+  "young silver dragon": "/images/youngSilverDragon.webp",
+  "silver dragon wyrmling": "/images/silverDragonWyrmling.webp",
+
+  "ancient bronze dragon": "/images/ancientBronzeDragon.webp",
+  "adult bronze dragon": "/images/adultBronzeDragon.webp",
+  "young bronze dragon": "/images/youngBronzeDragon.webp",
+  "bronze dragon wyrmling": "/images/bronzeDragonWyrmling.webp",
+
+  "ancient brass dragon": "/images/ancientBrassDragon.webp",
+  "adult brass dragon": "/images/adultBrassDragon.webp",
+  "young brass dragon": "/images/youngBrassDragon.webp",
+  "brass dragon wyrmling": "/images/brassDragonWyrmling.webp",
+
+  "ancient copper dragon": "/images/ancientCopperDragon.webp",
+  "adult copper dragon": "/images/adultCopperDragon.webp",
+  "young copper dragon": "/images/youngCopperDragon.webp",
+  "copper dragon wyrmling": "/images/copperDragonWyrmling.webp"
+
+}
