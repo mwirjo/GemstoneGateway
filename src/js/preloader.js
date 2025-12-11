@@ -122,14 +122,24 @@ document.addEventListener("DOMContentLoaded", () => {
     updateHeader(playerObj);
   }
 
-  function loadPlayerFromUsername(username) {
+  function loadPlayerFromUsername(username, payload = null) {
     let player = getLocalStorage("player");
+    
     if (!player || player.name !== username) {
-      player = { name: username, gems: 0, dragonLevel: 0, dragonExperience: 0, dragonMood: "Happy", icon: null };
-      setLocalStorage("player", player);
+        player = {
+            name: username,
+            email: payload?.email || "",
+            gems: 0,
+            dragonLevel: 0,
+            dragonExperience: 0,
+            dragonMood: "Happy",
+            icon: payload?.picture || null
+        };
+        setLocalStorage("player", player);
     }
     updateHeader(player);
-  }
+}
+
 
   function updateHeader(player) {
     qs("#player-name").textContent = player.name;
