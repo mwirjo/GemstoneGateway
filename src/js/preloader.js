@@ -1,110 +1,21 @@
-/*  global google 
-import { googleClientId } from "./externalServices.js";
-
-document.addEventListener("DOMContentLoaded", () => {
-  const progressBar = document.getElementById("progress-bar");
-  const mainButtons = document.querySelector(".auth-main-buttons");
-  const loginOptions = document.getElementById("login-section");
-  const preloader = document.getElementById("preloader");
-  const mainContent = document.getElementById("main-content");
-
-  // -----------------------------
-  // Progress Bar Animation
-  // -----------------------------
-  let width = 0;
-  const interval = setInterval(() => {
-    width++;
-    progressBar.style.width = width + "%";
-
-    if (width >= 100) {
-      clearInterval(interval);
-
-      // Show Login and Sign Up buttons
-      mainButtons.style.display = "flex";
-      mainButtons.style.opacity = "1";
-    }
-  }, 30);
-
-  // -----------------------------
-  // Login (shows login options)
-  // -----------------------------
-  document.getElementById("show-login-btn").addEventListener("click", () => {
-    loginOptions.style.display = "flex";
-    mainButtons.style.display = "none";
-  });
-
-  // -----------------------------
-  // SIGN UP button
-  // -----------------------------
-  document.getElementById("show-signup-btn").addEventListener("click", () => {
-    alert("Signup screen not implemented yet");
-  });
-
-  // -----------------------------
-  // Guest Login
-  // -----------------------------
-  document.getElementById("guest-login").addEventListener("click", () => {
-    preloader.style.display = "none";
-    mainContent.style.display = "block";
-  });
-
-  // -----------------------------
-  // Email Login (placeholder)
-  // -----------------------------
-  document.getElementById("email-login").addEventListener("click", () => {
-    alert("Email login not implemented yet");
-  });
-
-  // -----------------------------
-  // Google Login Initialization
-  // -----------------------------
-  function initGoogleLogin() {
-    if (!window.google) {
-      console.error("Google Identity Services not loaded yet.");
-      return;
-    }
-
-    google.accounts.id.initialize({
-      client_id: googleClientId,
-      callback: handleGoogleLogin
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById("google-login"),
-      { theme: "outline", size: "large" }
-    );
-  }
-
-  function handleGoogleLogin(response) {
-    console.log("JWT token:", response.credential);
-
-    preloader.style.display = "none";
-    mainContent.style.display = "block";
-  }
-
-  // Load GIS script
-  const gisScript = document.createElement("script");
-  gisScript.src = "https://accounts.google.com/gsi/client";
-  gisScript.async = true;
-  gisScript.defer = true;
-  gisScript.onload = initGoogleLogin;
-  document.head.appendChild(gisScript);
-});
- */
-
 /* global google */
-import { googleClientId, baseURL } from "./externalServices.js";
+import { googleClientId } from "./externalServices.js";
+import { qs, getLocalStorage, setLocalStorage, setClick } from "./utils.mjs";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const progressBar = document.getElementById("progress-bar");
-  const mainButtons = document.querySelector(".auth-main-buttons");
-  const loginSection = document.getElementById("login-section");
-  const signupSection = document.getElementById("signup-section");
-  const preloader = document.getElementById("preloader");
-  const mainContent = document.getElementById("main-content");
+  // -----------------------------
+  // Elements
+  // -----------------------------
+  const progressBar = qs("#progress-bar");
+  const mainButtons = qs(".auth-main-buttons");
+  const preloader = qs("#preloader");
+  const mainContent = qs("#main-content");
+  const googleUsernameForm = qs("#google-username-form");
 
-  const loginMessage = document.getElementById("login-message");
-  const signupMessage = document.getElementById("signup-message");
+  const googleUsernameInput = qs("#google-username-input");
+  const googleSaveBtn = qs("#google-save-username");
+
+  const feedBtn = qs("#feed-dragon-btn");
 
   // -----------------------------
   // Progress Bar Animation
@@ -113,102 +24,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const interval = setInterval(() => {
     width++;
     progressBar.style.width = width + "%";
-
     if (width >= 100) {
       clearInterval(interval);
       mainButtons.style.display = "flex";
-      mainButtons.style.opacity = "1";
+      renderGoogleButton();
     }
   }, 30);
 
   // -----------------------------
-  // Show Login Section
-  // -----------------------------
-  document.getElementById("show-login-btn").addEventListener("click", () => {
-    loginSection.style.display = "flex";
-    mainButtons.style.display = "none";
-  });
-
-  // -----------------------------
-  // Show Sign Up Section
-  // -----------------------------
-  document.getElementById("show-signup-btn").addEventListener("click", () => {
-    signupSection.style.display = "flex";
-    mainButtons.style.display = "none";
-  });
-
-  // -----------------------------
-  // Back buttons
-  // -----------------------------
-  document.querySelectorAll(".back-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      loginSection.style.display = "none";
-      signupSection.style.display = "none";
-      mainButtons.style.display = "flex";
-      loginMessage.textContent = "";
-      signupMessage.textContent = "";
-    });
-  });
-
-  // -----------------------------
   // Guest Login
   // -----------------------------
-  document.getElementById("guest-login").addEventListener("click", () => {
+  qs("#guest-login").addEventListener("click", () => {
+    loadPlayer({ name: "Guest", gems: 0, dragonLevel: 0, dragonExperience: 0, dragonMood: "Happy", icon: null });
     preloader.style.display = "none";
     mainContent.style.display = "block";
   });
 
   // -----------------------------
-  // Email Login (placeholder)
+  // Google Login
   // -----------------------------
-  document.getElementById("email-login").addEventListener("click", async () => {
-    const username = document.getElementById("username-input").value.trim();
-    if (!username) return loginMessage.textContent = "Enter a username.";
-
-    // Check user with server
-    const res = await fetch(`${baseURL}users/check?username=${username}`);
-    const data = await res.json();
-
-    if (data.exists) {
-      loginMessage.textContent = "";
-      preloader.style.display = "none";
-      mainContent.style.display = "block";
-      console.log("User logged in:", username);
-    } else {
-      loginMessage.textContent = "Username not found. Please sign up or go back.";
-    }
-  });
-
-  // -----------------------------
-  // Sign Up
-  // -----------------------------
-  document.getElementById("signup-confirm-btn").addEventListener("click", async () => {
-    const username = document.getElementById("signup-username").value.trim();
-    if (!username) return signupMessage.textContent = "Enter a username.";
-
-    // Save user to server
-    const res = await fetch(`${baseURL}users/create`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username })
-    });
-    const data = await res.json();
-
-    if (data.success) {
-      signupMessage.textContent = "Account created! Logging in...";
-      setTimeout(() => {
-        preloader.style.display = "none";
-        mainContent.style.display = "block";
-      }, 1000);
-    } else {
-      signupMessage.textContent = "Username already taken.";
-    }
-  });
-
-  // -----------------------------
-  // Google Login Initialization
-  // -----------------------------
-  function initGoogleLogin() {
+  function renderGoogleButton() {
     if (!window.google) return console.error("Google Identity Services not loaded yet.");
 
     google.accounts.id.initialize({
@@ -216,44 +51,152 @@ document.addEventListener("DOMContentLoaded", () => {
       callback: handleGoogleLogin
     });
 
-    // Render button when login section is visible
-    document.getElementById("show-login-btn").addEventListener("click", () => {
-      google.accounts.id.renderButton(
-        document.getElementById("google-login"),
-        { theme: "outline", size: "large" }
-      );
-    });
+    google.accounts.id.renderButton(
+      qs("#google-login"),
+      { theme: "outline", size: "large" }
+    );
+  }
+    function parseJwt(token) {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(atob(base64));
+    }
+
+    async function handleGoogleLogin(response) {
+        
+        const jwtToken = response.credential;
+        const payload = parseJwt(jwtToken);
+        const googleId = payload.sub; // persistent user ID
+
+        const savedUsers = getLocalStorage("googleUsers") || {};
+        const username = savedUsers[googleId];
+
+        if (username) {
+            console.log("Returning Google user:", username);
+            loadPlayerFromUsername(username);
+            preloader.style.display = "none";
+            mainContent.style.display = "block";
+        } else {
+            console.log("New Google user. Show username form.");
+            mainButtons.style.display = "none";
+            googleUsernameForm.style.display = "flex";
+            googleUsernameForm.dataset.googleId = googleId;
+        }
+    }
+
+
+  // -----------------------------
+  // Username creation for Google users
+  // -----------------------------
+  googleSaveBtn.addEventListener("click", () => {
+        const username = googleUsernameInput.value.trim();
+        if (!username) return alert("Enter a username.");
+
+        const googleId = googleUsernameForm.dataset.googleId;
+        const savedUsers = getLocalStorage("googleUsers") || {};
+
+        // Check if username already exists
+        const usernames = Object.values(savedUsers);
+        if (usernames.includes(username)) return alert("Username already taken.");
+
+        savedUsers[googleId] = username;
+        setLocalStorage("googleUsers", savedUsers);
+
+        loadPlayer({ name: username, gems: 0, dragonLevel: 0, dragonExperience: 0, dragonMood: "Happy", icon: null });
+
+        googleUsernameForm.style.display = "none";
+        preloader.style.display = "none";
+        mainContent.style.display = "block";
+        });
+
+  // -----------------------------
+  // Player Data
+  // -----------------------------
+  function loadPlayer(playerObj) {
+    setLocalStorage("player", playerObj);
+    updateHeader(playerObj);
   }
 
-  async function handleGoogleLogin(response) {
-    const jwtToken = response.credential;
+  function loadPlayerFromUsername(username) {
+    let player = getLocalStorage("player");
+    if (!player || player.name !== username) {
+      player = { name: username, gems: 0, dragonLevel: 0, dragonExperience: 0, dragonMood: "Happy", icon: null };
+      setLocalStorage("player", player);
+    }
+    updateHeader(player);
+  }
 
-    // Send token to backend for verification & user lookup
-    const res = await fetch(`${baseURL}auth/google-login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: jwtToken })
-    });
-    const data = await res.json();
+  function updateHeader(player) {
+    qs("#player-name").textContent = player.name;
+    qs("#gem-amount").textContent = player.gems;
+    qs("#dragon-level").textContent = "Lvl " + player.dragonLevel;
 
-    if (data.exists) {
-      preloader.style.display = "none";
-      mainContent.style.display = "block";
-      console.log("Google user logged in:", data.username);
+    const profileContainer = qs(".player-profile");
+    const profileIcon = qs(".player-profile .profile-icon");
+
+    const existingLetter = qs(".profile-letter", profileContainer);
+    if (existingLetter) existingLetter.remove();
+
+    if (player.icon) {
+      profileIcon.src = player.icon;
+      profileIcon.style.display = "inline-block";
     } else {
-      loginMessage.textContent = "Google account not registered. Please sign up.";
-      loginSection.style.display = "none";
-      signupSection.style.display = "flex";
+      profileIcon.style.display = "none";
+      const letterEl = document.createElement("span");
+      letterEl.textContent = player.name.charAt(0).toUpperCase() || "M";
+      letterEl.classList.add("profile-letter");
+      profileContainer.appendChild(letterEl);
     }
   }
 
   // -----------------------------
-  // Load GIS script
+  // Dragon Actions
+  // -----------------------------
+  function savePlayer(player) {
+    setLocalStorage("player", player);
+    updateHeader(player);
+  }
+
+  function addGems(amount = 1) {
+    const player = getLocalStorage("player");
+    player.gems += amount;
+    savePlayer(player);
+  }
+
+  function feedDragon(cost = 5) {
+    const player = getLocalStorage("player");
+    if (player.gems < cost) return alert("Not enough gems!");
+
+    player.gems -= cost;
+    player.dragonExperience += 5;
+
+    if (player.dragonExperience >= 10) {
+      player.dragonLevel += 1;
+      player.dragonExperience = 0;
+      alert("Your dragon leveled up!");
+    }
+
+    savePlayer(player);
+  }
+
+  function dragonEvent() {
+    const player = getLocalStorage("player");
+    const events = ["Found a shiny gem!", "Dragon is sleepy", "Dragon learned a trick"];
+    const event = events[Math.floor(Math.random() * events.length)];
+    alert("Event: " + event);
+
+    if (event === "Found a shiny gem!") addGems(3);
+  }
+
+  if (feedBtn) setClick("#feed-dragon-btn", () => feedDragon(5));
+
+  // -----------------------------
+  // Load Google Identity Services
   // -----------------------------
   const gisScript = document.createElement("script");
   gisScript.src = "https://accounts.google.com/gsi/client";
   gisScript.async = true;
   gisScript.defer = true;
-  gisScript.onload = initGoogleLogin;
+  gisScript.onload = () => console.log("GIS script loaded.");
   document.head.appendChild(gisScript);
 });

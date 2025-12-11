@@ -19,70 +19,31 @@
 
   <body>
   
-    <!-- Preloader -->
-    
-    <div id="preloader">
-      <div class="logo-container">
-        <img src="/images/logos/logo.png" alt="Gemstone Gateway Logo" class="preloader-logo">
-        <h1>GemstoneGateway</h1>
-      </div>
-
-      <!-- Progress bar -->
-      <div class="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
-      </div>
-
-      <!-- MAIN BUTTONS -->
-      <div class="auth-main-buttons"  style="display:none;">
-        <button id="show-login-btn" class="auth-btn">Login</button>
-        <button id="show-signup-btn" class="auth-btn">Sign Up</button>
-      </div>
-
-      <!-- LOGIN OPTIONS -->
-      <div class="login-options auth-section" id="login-section" style="display:none;">
-        <button id="email-login">Login with Email</button>
-        <div id="google-login"></div>
-        <button id="guest-login">Continue as Guest</button>
-        <button class="back-btn" data-back>Back</button>
-      </div>
-
-      <!-- SIGNUP OPTIONS -->
-      <div class="signup-options auth-section" id="signup-section" style="display:none;">
-        <h2>Create an Account</h2>
-        <button id="email-signup">Sign Up with Email</button>
-        <div id="google-login-signup"></div>
-        <button id="guest-signup">Continue as Guest</button>
-        <button class="back-btn" data-back>Back</button>
-      </div>
-
-      <!-- EMAIL LOGIN FORM -->
-      <div id="email-login-form" class="auth-section" style="display:none;">
-        <h2>Email Login</h2>
-        <input type="email" id="login-email" placeholder="Email">
-        <input type="password" id="login-password" placeholder="Password">
-        <button id="submit-login">Login</button>
-        <button class="back-btn" data-back>Back</button>
-      </div>
-
-      <!-- EMAIL SIGNUP FORM -->
-      <div id="email-signup-form" class="auth-section" style="display:none;">
-        <h2>Email Sign Up</h2>
-        <input type="text" id="signup-username" placeholder="Choose Username">
-        <input type="email" id="signup-email" placeholder="Email">
-        <input type="password" id="signup-password" placeholder="Password">
-        <button id="submit-signup">Create Account</button>
-        <button class="back-btn" data-back>Back</button>
-      </div>
-
-      <!-- USERNAME CREATION AFTER GOOGLE SIGNUP -->
-      <div id="google-username-form" class="auth-section" style="display:none;">
-        <h2>Choose a Username</h2>
-        <p>Welcome! Pick a username for your GemstoneGateway profile.</p>
-        <input type="text" id="google-username-input" placeholder="Your Username">
-        <button id="google-save-username">Save</button>
-        <button class="back-btn" data-back>Back</button>
-      </div>
+  <div id="preloader">
+    <div class="logo-container">
+      <img src="/images/logos/logo.png" alt="Gemstone Gateway Logo" class="preloader-logo">
+      <h1>GemstoneGateway</h1>
     </div>
+  
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+  
+    <!-- Main Buttons -->
+    <div class="auth-main-buttons" style="display:none;">
+      <div id="google-login"></div> <!-- Google button here -->
+      <button id="guest-login" class="auth-btn">Continue as Guest</button>
+    </div>
+  
+    <!-- Username creation after Google signup -->
+    <div id="google-username-form" class="auth-section" style="display:none;">
+      <h2>Choose a Username</h2>
+      <input type="text" id="google-username-input" placeholder="Your Username">
+      <button id="google-save-username">Save</button>
+    </div>
+  </div>
+
 
 
     <div id="main-content" style="display:none;">
