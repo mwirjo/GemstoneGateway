@@ -20,8 +20,11 @@ export default defineConfig({
         learn: resolve(__dirname, "src/LearnMode/index.html"),
         mineral: resolve(__dirname, "src/mineralPages/index.html"),
         mineral_listing: resolve(__dirname, "src/mineralListing/index.html"),
-       macro_theory:resolve(__dirname, "src/MacroscopicTheory/index.html"),
+        macro_theory: resolve(__dirname, "src/MacroscopicTheory/index.html"),
+        privacy: resolve(__dirname, "src/privacy.html"),
+        terms: resolve(__dirname, "src/terms.html"),
       },
+
     },
   },
 });
