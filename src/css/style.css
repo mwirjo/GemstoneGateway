@@ -388,20 +388,17 @@ button {
   transition: width 0.2s ease-in-out;
 }
 
-/* Login button */
-.login-btn {
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--secondary-color);
-  color: white;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: transform 0.2s, box-shadow 0.2s;
+.auth-main-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  /* increase space between buttons */
+  margin-top: 20px;
+  /* optional extra spacing from elements above */
 }
 
-.login-btn:hover {
+
+button:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

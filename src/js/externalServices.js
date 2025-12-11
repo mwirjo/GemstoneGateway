@@ -1,4 +1,3 @@
-// src/js/externalServices.js
 const baseURL = import.meta.env.VITE_SERVER_URL;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -26,16 +25,8 @@ export default class ExternalServices {
     return data.Result;
   }
 
-  async checkout(payload) {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    };
-    return await fetch(`${baseURL}checkout/`, options).then(convertToJson);
-  }
+
 }
 
-export { googleClientId };
+// Export both so other modules can import
+export { googleClientId, baseURL };
