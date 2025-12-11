@@ -462,6 +462,134 @@ button:hover {
   }
 }
 
+.dragon-section {
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #d4af37;
+  border-radius: 8px;
+}
+
+.owned-dragons {
+  background-color: #f8f8f8;
+}
+
+.summon-dragon {
+  background-color: #e8f4f8;
+}
+
+.dragon-stat-bar {
+  background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.hatch-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hatch-btn:hover {
+  background-color: #218838;
+}
+
+.stat-block {
+  background-color: #fdf1dc;
+  border: 1px solid #c9c9c9;
+  padding: 15px;
+  max-width: 600px;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 20px auto;
+}
+
+.image-placeholder {
+  height: 150px;
+  background-color: #e0e0e0;
+  border: 1px dashed #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.stat-block h1 {
+  border-bottom: 2px solid #8A1A23;
+  font-size: 24px;
+  font-variant: small-caps;
+  margin: 0 0 10px 0;
+  padding-bottom: 5px;
+  color: #8A1A23;
+}
+
+.stat-block h2 {
+  border-bottom: 1px solid #8A1A23;
+  font-size: 18px;
+  font-variant: small-caps;
+  margin: 15px 0 10px 0;
+  padding-bottom: 5px;
+  color: #8A1A23;
+}
+
+.stat-block p {
+  margin: 5px 0;
+}
+
+.stat-block .property-line {
+  font-weight: bold;
+}
+
+.stat-block .property-line span {
+  font-weight: normal;
+}
+
+.stat-block .abilities {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 15px 0;
+  border-top: 2px solid #8A1A23;
+  border-bottom: 2px solid #8A1A23;
+  padding: 10px 0;
+}
+
+.stat-block .ability-score {
+  flex: 1;
+}
+
+.stat-block .ability-score strong {
+  display: block;
+  font-size: 16px;
+}
+
+.stat-block .ability-score span {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.stat-block .dragon-type-line {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #8A1A23;
+}
+
+.dragon-image {
+  width: 100%;
+  max-height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+
+
 /* --------------------- Responsive --------------------- */
 @media screen and (max-width: 768px) {
   header {
