@@ -82,6 +82,13 @@
     .stat-block .action-item p {
       margin: 0 0 10px 0;
     }
+
+    /* Added style for the new line */
+    .stat-block .dragon-type-line {
+      font-style: italic;
+      margin-bottom: 10px;
+      color: #8A1A23;
+    }
   </style>
 </head>
 
@@ -136,27 +143,28 @@
 
         const customName = document.getElementById('givename').value.trim();
         const display_name = customName || monster.name;
+        // The original monster name is saved to this variable
+        const dragonType = monster.name;
 
-        detailsDiv.innerHTML = renderStatBlock(monster, display_name);
+        // Pass the new variable to the render function
+        detailsDiv.innerHTML = renderStatBlock(monster, display_name, dragonType);
       } catch (error) {
         console.error('Failed to fetch monster details:', error);
         detailsDiv.innerHTML = '<p>Sorry, an error occurred fetching the full stat block.</p>';
       }
     }
 
-    function renderStatBlock(m, name) {
+    function renderStatBlock(m, name, type) {
       const renderActions = (actions) => actions.map(action => `
         <div class="action-item">
           <strong>${action.name}.</strong> <span>${action.desc}</span>
         </div>
       `).join('');
 
-      // FIX applied here: correctly filtering and formatting proficiency names
-      const formatProficiencies = (proficiencies, type) => {
+      const formatProficiencies = (proficiencies, filterType) => {
         return proficiencies
-          .filter(p => p.proficiency.name.includes(type))
+          .filter(p => p.proficiency.name.includes(filterType))
           .map(p => {
-            // Extract the relevant part of the name (e.g., "DEX" from "Saving Throw: DEX")
             const namePart = p.proficiency.name.split(': ')[1] || p.proficiency.name.split('Skill: ')[1];
             return `${namePart} +${p.value}`;
           })
@@ -166,11 +174,13 @@
       return `
         <div class="stat-block">
           <h1>${name}</h1>
+          <!-- This line will now display the original type -->
+          <p class="dragon-type-line">${type ? `Dragon Type: ${type}` : ''}</p>
           <p class="property-line"><span>${m.size} ${m.type}, ${m.alignment}</span></p>
           <hr>
           <p class="property-line"><strong>Armor Class</strong> <span>${m.armor_class}</span></p>
           <p class="property-line"><strong>Hit Points</strong> <span>${m.hit_points} (${m.hit_dice})</span></p>
-          <p class="property-line"><strong>Speed</strong> <span>${Object.entries(m.speed).map(([type, val]) => `${type} ${val}`).join(', ')}</span></p>
+          <p class="property-line"><strong>Speed</strong> <span>${Object.entries(m.speed).map(([stype, val]) => `${stype} ${val}`).join(', ')}</span></p>
           <hr>
           <div class="abilities">
             <div class="ability-score"><strong>STR</strong> <span>${m.strength} (${calculateModifier(m.strength)})</span></div>
