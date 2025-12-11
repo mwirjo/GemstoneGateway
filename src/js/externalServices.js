@@ -1,4 +1,5 @@
-const baseURL = import.meta.env.VITE_SERVER_URL
+// src/js/externalServices.js
+const baseURL = import.meta.env.VITE_SERVER_URL;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 async function convertToJson(res) {
@@ -11,18 +12,17 @@ async function convertToJson(res) {
 }
 
 export default class ExternalServices {
-  constructor() {
-    
-  } // removed ../public because the vite(?) server was complaining and I couldn't add to cart
+  constructor() {}
+
   async getData(category) {
-  const response = await fetch(`${baseURL}products/search/${category} `);
-  const data = await convertToJson(response);
-  return data.Result;
-}
+    const response = await fetch(`${baseURL}products/search/${category}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
+
   async findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
-
     return data.Result;
   }
 
@@ -36,5 +36,6 @@ export default class ExternalServices {
     };
     return await fetch(`${baseURL}checkout/`, options).then(convertToJson);
   }
-
 }
+
+export { googleClientId };
