@@ -63,6 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function handleGoogleLogin(response) {
+        /* localStorage.removeItem("googleUsers");
+
+        console.log("All Google users cleared from localStorage."); */
+
+       
         
         const jwtToken = response.credential;
         const payload = parseJwt(jwtToken);
