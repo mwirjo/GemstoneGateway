@@ -16,6 +16,20 @@
       margin: 20px auto;
     }
 
+    /* Styles for the new image placeholder */
+    .image-placeholder {
+      height: 150px;
+      background-color: #e0e0e0;
+      border: 1px dashed #aaa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
     .stat-block h1 {
       border-bottom: 2px solid #8A1A23;
       /* The rust red line */
@@ -83,7 +97,6 @@
       margin: 0 0 10px 0;
     }
 
-    /* Added style for the new line */
     .stat-block .dragon-type-line {
       font-style: italic;
       margin-bottom: 10px;
@@ -143,10 +156,8 @@
 
         const customName = document.getElementById('givename').value.trim();
         const display_name = customName || monster.name;
-        // The original monster name is saved to this variable
         const dragonType = monster.name;
 
-        // Pass the new variable to the render function
         detailsDiv.innerHTML = renderStatBlock(monster, display_name, dragonType);
       } catch (error) {
         console.error('Failed to fetch monster details:', error);
@@ -173,8 +184,12 @@
 
       return `
         <div class="stat-block">
+          <!-- Placeholder DIV for the image -->
+          <div class="image-placeholder">
+            [Dragon Image Placeholder - Add Image URL Later]
+          </div>
+          
           <h1>${name}</h1>
-          <!-- This line will now display the original type -->
           <p class="dragon-type-line">${type ? `Dragon Type: ${type}` : ''}</p>
           <p class="property-line"><span>${m.size} ${m.type}, ${m.alignment}</span></p>
           <hr>
