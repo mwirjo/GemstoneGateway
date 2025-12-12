@@ -39,7 +39,7 @@ function fillMineralData(mineral) {
   // Header
   qs("#mineral-name").textContent = mineral.name;
   qs("#mineral-number").textContent = mineral.number;
-  qs("#mineral-image").src = `/mineralListing/images/${mineral.image}`;
+  
   qs("#mineral-image").alt = mineral.name;
   
   // Basic properties

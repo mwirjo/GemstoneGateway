@@ -52,10 +52,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Elements card specific (safe)
-    setClick("#elements-card", () => {
-        window.location.href = "/minerallist/index.html?category=elements";
-    });
+    const elementsCard = document.getElementById("elements-card");
+      if (elementsCard) {
+          setClick("#elements-card", () => {
+              window.location.href = "/minerallist/index.html?category=elements";
+          });
+      }
 
     // Main/Sub card toggle system (SAFE)
     initMainSubCards();
@@ -129,39 +131,45 @@ function initMainSubCards() {
     });
 }
 
-// -----------------------------
-// Mark Done Buttons - SAFE
-// -----------------------------
-function initMarkDoneButtons() {
+async function initMarkDoneButtons() {
     document.querySelectorAll("#markDoneBtn").forEach(btn => {
         if (btn) {
             btn.addEventListener("click", async function(e) {
                 e.preventDefault();
                 
                 try {
-                    // Use imported addGems directly (already imported at top)
-                    addGems(5);
+                    // 1. Add gems (awaited)
+                    await addGems(5);
                     
-                    // Visual feedback
-                    const gemCountEl = this.closest(".mark-done-section")?.querySelector("#gemCount");
+                    // 2. IMMEDIATE visual feedback (like mineral)
                     this.innerHTML = "✅ +5 GEMS!";
                     this.style.background = "#218838";
                     this.style.transform = "scale(0.95)";
+                    this.disabled = true;
+                    
+                    // 3. Read FRESH from localStorage (bypasses getPlayer cache)
+                    const playerData = JSON.parse(localStorage.getItem("player") || "{}");
+                    const gemCountEl = this.closest(".mark-done-section")?.querySelector("#gemCount");
                     
                     if (gemCountEl) {
-                        const gems = parseInt(localStorage.getItem("player")?.gems || "0");
-                        gemCountEl.textContent = gems;
+                        gemCountEl.textContent = playerData.gems || 0;
                     }
                     
+                    // 4. Reset button (like mineral)
                     setTimeout(() => {
                         this.innerHTML = "+5 GEMS EARNED";
+                        this.disabled = false;
                         this.style.background = "";
                         this.style.transform = "scale(1)";
-                    }, 1500);
+                    }, 2000);
+                    
                 } catch (error) {
                     console.error("Mark done failed:", error);
+                    this.innerHTML = "❌ Try again";
+                    setTimeout(() => { this.innerHTML = "+5 GEMS"; }, 1500);
                 }
             });
         }
     });
 }
+
