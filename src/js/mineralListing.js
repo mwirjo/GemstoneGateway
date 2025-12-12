@@ -26,7 +26,7 @@ function createMineralCard(mineral) {
   `;
   
   div.addEventListener("click", () => {
-    window.location.href = `/mineralPages/index.html?mineral=${mineral.name.toLowerCase()}`;
+    window.location.href = `/mineral_pages/index.html?mineral=${mineral.name.toLowerCase()}`;
   });
   
   return div;

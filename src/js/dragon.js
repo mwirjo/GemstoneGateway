@@ -1,5 +1,5 @@
 // dragon.js - Wyrmling system with stable saving
-import { getPlayer, updateHeader, feedDragon, savePlayer } from "./playerLoader.js";
+import { getPlayer, updateHeader, feedDragon, savePlayer } from "./player_loader.js";
 
 let dragonImages = {};
 let dragonsData = [];

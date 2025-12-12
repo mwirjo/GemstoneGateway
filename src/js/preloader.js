@@ -1,7 +1,7 @@
 
 /*global google */
 
-import { loadPlayer, loadPlayerFromUsername } from "./playerLoader.js";
+import { loadPlayer, loadPlayerFromUsername } from "./player_loader.js";
 import { qs, getLocalStorage } from "./utils.mjs";
 import { googleClientId } from "./externalServices.js";
 

@@ -1,6 +1,6 @@
 // modes.js - RENDER PRODUCTION SAFE
 import { qs, setClick } from "./utils.mjs";
-import { getPlayer, updateHeader, addGems } from "./playerLoader.js";
+import { getPlayer, updateHeader, addGems } from "./player_loader.js";
 
 // SINGLE DOMContentLoaded - handles ALL initialization
 document.addEventListener("DOMContentLoaded", async () => {
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Mode navigation buttons
     const modeMap = {
-        "learn-mode": "learnmode/index.html",
-        "guess-mode": "guessmode/index.html",
-        "formula-mode": "formulamode/index.html",
+        "learn-mode": "learn_mode/index.html",
+        "guess-mode": "guess_mode/index.html",
+        "formula-mode": "formula_mode/index.html",
         "dragon-mode": "dragon/index.html"
     };
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             card.addEventListener("click", function() {
                 const cardId = this.id;
                 if (cardId === "macroscopic-card") {
-                    window.location.href = "/MacroscopicTheory/index.html";
+                    window.location.href = "/macroscopic_theory/index.html";
                 } else {
                     window.location.href = "/mineralListing/index.html";
                 }
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Elements card specific (safe)
     setClick("#elements-card", () => {
-        window.location.href = "/mineralListing/index.html?category=elements";
+        window.location.href = "/mineral_listing/index.html?category=elements";
     });
 
     // Main/Sub card toggle system (SAFE)
