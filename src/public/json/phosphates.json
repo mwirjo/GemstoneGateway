@@ -1,0 +1,25 @@
+{
+  "category": "phosphates",
+  "minerals": [
+    {
+      "number": 73,
+      "name": "Apatiet",
+      "formula": "Ca₅(PO₄)₃(F,Cl,OH)",
+      "color": "Bruin, groen",
+      "streak": "Wit",
+      "hardness": "4-5, 5-6",
+      "habit": "Prismatisch, hexagonaal",
+      "luster": "Glas, vet op breuken",
+      "cleavage": "Perfect 3R",
+      "fracture": "Bros, oneffen",
+      "properties": ["Fosfaat bron"],
+      "crystalSystem": "Hexagonaal",
+      "occurrences": "igneuze, sedimentaire, metamorfe gesteenten",
+      "locations": ["Marokko", "Verenigde Staten", "China"],
+      "associations": ["calciet", "kwarts", "veldspaten"],
+      "uses": ["kunstmest", "glas", "keramiek", "fosforzuur"],
+      "etymology": "Grieks apatao (bedriegen)",
+      "image": "https://www.mindat.org/imagecache/c4/f3/05867590017479319874715.jpg"
+    }
+  ]
+}

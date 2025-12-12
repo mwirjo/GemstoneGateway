@@ -99,7 +99,7 @@
       "associations": ["spinel", "saffier", "robijn", "rutil"],
       "uses": ["edelstenen", "schuurmiddel", "sieraden"],
       "etymology": "Sanskriet kuruvinda (robijn)",
-      "image": "korund.jpg"
+      "image": "https://www.mindat.org/imagecache/e4/72/00520210017596157291798.jpg"
     },
     {
       "number": 66,
@@ -119,7 +119,7 @@
       "associations": ["hematiet", "pyriet", "chloriet"],
       "uses": ["ijzererts", "magneten"],
       "etymology": "Grieks magnes (magnetisch)",
-      "image": "magnetiet.jpg"
+      "image": "https://www.mindat.org/imagecache/53/ad/03136920017631860071592.jpg"
     },
     {
       "number": 22,
@@ -139,7 +139,7 @@
       "associations": ["goethiet", "hematiet", "kleimineralen"],
       "uses": ["laagwaardig ijzererts", "pigmenten", "oker"],
       "etymology": "Grieks leimōn (moeras)",
-      "image": "limoniet.jpg"
+      "image": "https://www.mindat.org/imagecache/25/c1/05413990017640428432275.jpg"
     }
   ]
 }

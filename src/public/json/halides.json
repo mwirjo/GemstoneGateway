@@ -1,0 +1,45 @@
+{
+  "category": "halides",
+  "minerals": [
+    {
+      "number": 95,
+      "name": "Fluoriet",
+      "formula": "CaF₂",
+      "color": "Groen",
+      "streak": "wit",
+      "hardness": "4-5",
+      "habit": "Octahedral",
+      "luster": "Glas glans",
+      "cleavage": "4-R",
+      "fracture": "oneffen",
+      "properties": ["Fluoresceert onder UV-licht", "Levendige kleuren"],
+      "crystalSystem": "Kubisch",
+      "occurrences": "hydrothermische aders, silica-rijke gesteenten",
+      "locations": ["Engeland", "Duitsland", "China", "Italië"],
+      "associations": ["kwarts", "calciet", "bariet", "dolomiet", "sulfiden"],
+      "uses": ["staalproductie", "optische apparatuur", "fluorwaterstofzuur", "tandpasta"],
+      "etymology": "Latijn fluere (stromen/vloeien)",
+      "image": "https://www.mindat.org/imagecache/94/96/02083020017573381906204.jpg"
+    },
+    {
+      "number": 18,
+      "name": "Haliet",
+      "formula": "NaCl",
+      "color": "kleurloos",
+      "streak": "wit",
+      "hardness": "2",
+      "habit": "Kubisch, tafelvormig",
+      "luster": "Glasglans, vetglans",
+      "cleavage": "Perfect 3-R",
+      "fracture": "onregelmatig",
+      "properties": ["Lost op in water", "Zout smaak"],
+      "crystalSystem": "Kubisch",
+      "occurrences": "verdamping zout water, lagunes, zoutmeren",
+      "locations": ["Great Salt Lake (VS)", "Wieliczka (Polen)", "Uyuni (Bolivia)", "Zechstein (Europa)"],
+      "associations": ["anhydriet", "gips", "sylviet"],
+      "uses": ["keukenzout", "natriumhydroxide", "chloor", "ijs smelten", "conserveringsmiddel"],
+      "etymology": "Grieks háls (zout)",
+      "image": "https://www.mindat.org/imagecache/b5/29/00400010017449890687254.jpg"
+    }
+  ]
+}

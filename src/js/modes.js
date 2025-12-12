@@ -64,8 +64,41 @@ document.addEventListener("DOMContentLoaded", async () => {
               window.location.href = "/minerallist/?category=oxides";
           });
       }
+    const halidesCard = document.getElementById("halides-card");
+      if (halidesCard) {
+          setClick("#halides-card", () => {
+              window.location.href = "/minerallist/?category=halides";
+          });
+      }
 
-
+    const sulfidesCard = document.getElementById("sulfides-card");
+      if (sulfidesCard) {
+          setClick("#sulfides-card", () => {
+              window.location.href = "/minerallist/?category=sulfides";
+          });
+      }
+    const carbonatesCard = document.getElementById("carbonates-card");
+      if (carbonatesCard) {
+          setClick("#carbonates-card", () => {
+              window.location.href = "/minerallist/?category=carbonates";
+          });
+      }
+    
+    const sulfatesCard = document.getElementById("sulfates-card");
+      if (sulfatesCard) {
+          setClick("#sulfates-card", () => {
+              window.location.href = "/minerallist/?category=sulfates";
+          });
+      }
+    
+    const phosphatesCard = document.getElementById("phosphates-card");
+      if (phosphatesCard) {
+          setClick("#phosphates-card", () => {
+              window.location.href = "/minerallist/?category=phosphates";
+          });
+      }
+    
+    
     // Main/Sub card toggle system (SAFE)
     initMainSubCards();
 
