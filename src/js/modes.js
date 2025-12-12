@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Elements card specific (safe)
     setClick("#elements-card", () => {
-        window.location.href = "mineralListing.html?category=elements";
+        window.location.href = "/mineralListing/index.html?category=elements";
     });
 
     // Main/Sub card toggle system (SAFE)
