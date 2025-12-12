@@ -7,12 +7,32 @@
   <title>D&D Dragon Stat Block Generator</title>
   <link rel="stylesheet" href="../css/style.css">
   <script type="module" src="/js/externalServices.js"></script>
+  <script type="module" src="/js/preloader.js"></script>
   <script type="module" src="/js/dragon.js" defer></script>
 
 </head>
 
 <body>
-  
+  <!-- Hidden preloader structure -->
+  <div id="preloader" style="display: none;">
+    <div class="logo-container">
+      <img src="/images/logos/logo.png" alt="Gemstone Gateway Logo" class="preloader-logo">
+      <h1>GemstoneGateway</h1>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="auth-main-buttons" style="display:none;">
+      <div id="google-login"></div>
+      <button id="guest-login" class="auth-btn">Continue as Guest</button>
+    </div>
+    <div id="google-username-form" class="auth-section" style="display:none;">
+      <h2>Choose a Username</h2>
+      <input type="text" id="google-username-input" placeholder="Your Username">
+      <button id="google-save-username">Save</button>
+    </div>
+  </div>
+
   <!-- Main content -->
   <div id="main-content">
     <header class="divider">
@@ -47,17 +67,13 @@
           <h2>🐉 Owned Dragons</h2>
           <div id="ownedDragonContent">
             <p>No dragons owned yet. <strong>Hatch your first dragon!</strong></p>
-            
+            <button id="reset-dragon-btn"
+              style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
+              🗑️ Delete Wyrmling (Dev)
+            </button>
           </div>
           
-        </div>
-        <!-- Add this standalone dev button after ownedDragons div -->
-        <div
-          style="text-align: center; margin: 20px 0; padding: 15px; background: #ffebee; border: 2px dashed #f44336; border-radius: 8px;">
-          <button id="devResetLevel"
-            style="padding: 12px 24px; background: #f44336; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer;">
-            🔄 RESET LEVEL TO 0 (DEV)
-          </button>
+          
         </div>
 
         <!-- Summon Dragon Section -->

@@ -75,7 +75,7 @@ function setupMarkDone(mineralName) {
   const btn = qs("#markMineralDone");
   btn.addEventListener("click", async () => {
     // Use YOUR addGems system
-    const { addGems } = await import("./player_loader.js");
+    const { addGems } = await import("./playerLoader.js");
     addGems(2);
     
     // Visual feedback
