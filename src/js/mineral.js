@@ -3,26 +3,29 @@ import { qs } from "../js/utils.mjs";
 
 async function loadMineral() {
   try {
-    // 1. Get mineral name from URL (?mineral=goud)
+    // 1. Get mineral name AND category from URL
     const urlParams = new URLSearchParams(window.location.search);
     const mineralName = urlParams.get("mineral");
+    const category = urlParams.get("category") || "elements";
     
     if (!mineralName) {
       qs("#mineral-detail").innerHTML = "<h2>❌ Selecteer een mineraal</h2>";
       return;
     }
     
-    // 2. Load JSON data
-    const response = await fetch("/json/elements.json");
+    // 2. Load DYNAMIC JSON - NO 'this' + CORRECT VITE PATH
+    const jsonPath = `/json/${category}.json`;  // ← FIXED: /json/ NOT ./json/
+    console.log("🔍 Loading:", jsonPath);
+    const response = await fetch(jsonPath);
     const data = await response.json();
     
-    // 3. Find the mineral
+    // 3. Find mineral (URL-safe matching)
     const mineral = data.minerals.find(m => 
-      m.name.toLowerCase() === mineralName
+      m.name.toLowerCase().replace(/\s+/g, "-") === mineralName
     );
     
     if (!mineral) {
-      qs("#mineral-detail").innerHTML = `<h2>❌ Mineraal "${mineralName}" niet gevonden</h2>`;
+      qs("#mineral-detail").innerHTML = `<h2>❌ Mineraal "${mineralName}" niet gevonden in ${category}</h2>`;
       return;
     }
     
@@ -31,9 +34,10 @@ async function loadMineral() {
     
   } catch (error) {
     console.error("Load error:", error);
-    qs("#mineral-detail").innerHTML = "<h2 >❌ Data laden mislukt</h2>";
+    qs("#mineral-detail").innerHTML = "<h2>❌ Data laden mislukt</h2>";
   }
 }
+
 
 function fillMineralData(mineral) {
   // Header

@@ -58,6 +58,13 @@ document.addEventListener("DOMContentLoaded", async () => {
               window.location.href = "/minerallist/index.html?category=elements";
           });
       }
+    const oxidesCard = document.getElementById("oxides-card");
+      if (oxidesCard) {
+          setClick("#oxides-card", () => {
+              window.location.href = "/minerallist/index.html?category=oxides";
+          });
+      }
+
 
     // Main/Sub card toggle system (SAFE)
     initMainSubCards();
