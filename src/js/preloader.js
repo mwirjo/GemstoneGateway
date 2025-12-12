@@ -3,7 +3,7 @@
 
 import { loadPlayer, loadPlayerFromUsername } from "./playerLoader.js";
 import { qs, getLocalStorage } from "./utils.mjs";
-import { googleClientId } from "./mineralServices.js";
+import { googleClientId } from "./mineralServices.mjs";
 
 document.addEventListener("DOMContentLoaded", () => {
     const progressBar = qs("#progress-bar");

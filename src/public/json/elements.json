@@ -20,7 +20,7 @@
       "associations": ["kwarts", "pyriet", "chalcopyriet", "telluriden"],
       "uses": ["sieraden", "munten"],
       "etymology": "Oudengels geolu (geel), Latijn aurum (glanzend ochtendlicht)",
-      "image": "goud.jpg"
+      "image": "https://www.mindat.org/imagecache/5d/4f/02066640017629438378804.jpg"
     },
     {
       "number": 3,
@@ -40,7 +40,7 @@
       "associations": ["chalcopyriet", "malachiet", "azuriet", "borniet"],
       "uses": ["elektrische bedrading", "leidingen", "munten", "sieraden", "brons", "messing", "elektronica"],
       "etymology": "Latijn cuprum (Cyprus)",
-      "image": "koper.jpg"
+      "image": "https://www.mindat.org/imagecache/99/df/01276760017649725793947.jpg"
     },
     {
       "number": 6,
@@ -60,7 +60,7 @@
       "associations": ["pyriet", "gips", "galeniet", "cinnaber"],
       "uses": ["zwavelzuur", "kunstmest", "rubber", "buskruit", "medicijnen", "papierindustrie"],
       "etymology": "Latijn sulfur/sulphur",
-      "image": "zwavel.jpg"
+      "image": "https://www.mindat.org/imagecache/ac/ee/05263450017365251439581.jpg"
     },
     {
       "number": 19,
@@ -80,7 +80,7 @@
       "associations": ["kwarts", "mica", "veldspaat", "pyriet"],
       "uses": ["potloden", "smeermiddelen", "vuurvaste materialen"],
       "etymology": "Grieks graphein (schrijven)",
-      "image": "grafiet.jpg"
+      "image": "https://www.mindat.org/imagecache/38/2f/08147840017609067267856.jpg"
     },
     {
       "number": 2,
@@ -100,7 +100,7 @@
       "associations": ["galeniet", "sfaleriet", "chalcopyriet", "goud"],
       "uses": ["sieraden", "munten"],
       "etymology": "Germaanse silubra, Latijn argentum",
-      "image": "zilver.jpg"
+      "image": "https://www.mindat.org/imagecache/32/12/06068680017634864623975.jpg"
     },
     {
       "number": 5,
@@ -120,7 +120,7 @@
       "associations": ["kwarts", "wolframiet", "molybddeen"],
       "uses": ["medicijnen", "cosmetica", "loodvrij soldeer"],
       "etymology": "Duits Wismut",
-      "image": "bismuth.jpg"
+      "image": "https://www.mindat.org/imagecache/06/ef/03771510017271921562206.jpg"
     }
   ]
 }

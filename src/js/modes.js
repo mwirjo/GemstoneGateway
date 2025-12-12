@@ -55,13 +55,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const elementsCard = document.getElementById("elements-card");
       if (elementsCard) {
           setClick("#elements-card", () => {
-              window.location.href = "/minerallist/index.html?category=elements";
+              window.location.href = "/minerallist/?category=elements";
           });
       }
     const oxidesCard = document.getElementById("oxides-card");
       if (oxidesCard) {
           setClick("#oxides-card", () => {
-              window.location.href = "/minerallist/index.html?category=oxides";
+              window.location.href = "/minerallist/?category=oxides";
           });
       }
 

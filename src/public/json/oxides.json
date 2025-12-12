@@ -19,7 +19,7 @@
       "associations": ["hematiet", "goethiet", "kleimineralen"],
       "uses": ["aluminium productie", "cement"],
       "etymology": "Les Baux-de-Provence, Frankrijk",
-      "image": "bauxiet.jpg"
+      "image": "https://www.mindat.org/imagecache/e2/47/08617450017371087895045.jpg"
     },
     {
       "number": 28,
@@ -39,7 +39,7 @@
       "associations": ["magnetiet", "goethiet", "kwarts", "limoniet"],
       "uses": ["ijzererts", "staalproductie", "pigmenten"],
       "etymology": "Grieks haima (bloed)",
-      "image": "hematiet1.jpg"
+      "image": "https://geology.com/rocks/pictures/hematite-380.jpg"
     },
     {
       "number": 7,
@@ -59,7 +59,7 @@
       "associations": ["magnetiet", "goethiet", "kwarts", "limoniet"],
       "uses": ["ijzererts", "staalproductie", "pigmenten"],
       "etymology": "Grieks haima (bloed)",
-      "image": "hematiet2.jpg"
+      "image": "https://geology.com/minerals/photos/hematite-292.jpg"
     },
     {
       "number": 74,
@@ -79,7 +79,7 @@
       "associations": ["magnetiet", "goethiet", "kwarts", "limoniet"],
       "uses": ["ijzererts", "staalproductie", "pigmenten"],
       "etymology": "Grieks haima (bloed)",
-      "image": "hematiet3.jpg"
+      "image": "https://geology.com/minerals/photos/hematite-61.jpg"
     },
     {
       "number": 30,
