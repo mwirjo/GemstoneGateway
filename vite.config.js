@@ -14,7 +14,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"),
-        dragon: resolve(__dirname, "src/dragon/index.html"),
+        dragon: resolve(__dirname, "src/mydragon/index.html"),
         formula: resolve(__dirname, "src/formula/index.html"),
         guess: resolve(__dirname,"src/guess/index.html",),
         learn: resolve(__dirname, "src/learn/index.html"),

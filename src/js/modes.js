@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         "learn-mode": "learn/index.html",
         "guess-mode": "guess/index.html",
         "formula-mode": "formula/index.html",
-        "dragon-mode": "dragon/index.html"
+        "dragon-mode": "mydragon/index.html"
     };
 
     Object.keys(modeMap).forEach(modeId => {
