@@ -1,52 +1,566 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GemstoneGateway | Home</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script type="module" src="/js/mission.js" defer></script>
-    <script type="module" src="/js/dragon.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macroscopic Theory | GemstoneGateway</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="/js/externalServices.js"></script>
     <script type="module" src="/js/modes.js" defer></script>
+   
 </head>
 
 <body>
-
-    <header class="divider">
-        <div class="logo">
-            <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
-            <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
-        </div>
-        <div class="player-status">
-
-            <div class="dragon-info">
-                <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
-                <span id="dragon-level">Lvl 1</span>
+    <!-- Main content -->
+    <div id="main-content">
+        <header class="divider">
+            <div class="logo">
+                <img src="../images/logos/logo.png" alt="Gemstone Gateway Logo" />
+                <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
             </div>
-            <div class="gems-info">
-                <img src="/images/logos/dragon-icon.png" alt="Gems" class="icon" />
-                <span id="gem-amount">0</span>
+            <div class="player-status">
+                <div class="dragon-info">
+                    <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
+                    <span id="dragon-level">Lvl 0</span>
+                </div>
+                <div class="gems-info">
+                    <img src="/images/logos/gem-icon.png" alt="Gems" class="icon" />
+                    <span id="gem-amount">0</span>
+                </div>
+                <div class="player-profile">
+                    <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" />
+                    <span id="player-name">PlayerName</span>
+                </div>
             </div>
-            <div class="player-profile">
-                <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" />
-                <span id="player-name">PlayerName</span>
+        </header>
+
+        <main class="divider">
+            <!-- VISUELE KLEUR SECTION -->
+            <div class="content-section">
+                <h1 class="section-title">1.1 👁️ VISUELE KLEUR</h1>
+        
+                <div class="definition">
+                    <strong>De visuele kleur</strong> is slechts een kleur van het gevoel van het blote oog, met
+                    macromineraalonderzoek.
+                </div>
+        
+                <h2>Idiochromatische vs Allochromatische kleur</h2>
+                <p>Met visuele kleuren wordt een verschil gemaakt tussen <span class="highlight">idiochromatische kleur</span>
+                    en <span class="highlight">allochromatische kleur</span>.</p>
+        
+                <div class="definition">
+                    <h3>Idiochromatische kleur</h3>
+                    <p>Met idiochromatische kleur wordt de kleur bepaald door een <strong>bepaald element in het minerale
+                            frame</strong>.</p>
+                    <div class="example">
+                        <strong>Bv:</strong> kwarts, Toermalijn, enz.
+                    </div>
+                </div>
+        
+                <div class="definition">
+                    <h3>Allochromatische kleur</h3>
+                    <p>In allochromatische mineralen is de kleur afgeleid van het <strong>spoor van factoren</strong> die
+                        optreden in mineralen.</p>
+                    <p>Dit is de reden waarom allochromatische mineralen <strong>verschillende visuele kleuren</strong> kunnen
+                        weergeven.</p>
+                </div>
             </div>
-        </div>
+        
+            <!-- STREEP KLEUR SECTION -->
+            <div class="content-section">
+                <h1 class="section-title">📏 STREEP KLEUR</h1>
+        
+                <div class="definition">
+                    <strong>Streep kleur (poederkleur)</strong> is de kleur van de mineralen die na het verstuiven zichtbaar
+                    kunnen zijn.
+                </div>
+        
+                <h3>Test methode</h3>
+                <ul>
+                    <li>Lijn trekken op <strong>ongeglazuurd porseleinen plaat</strong></li>
+                    <li>Mineralen scheren met <strong>scherp object</strong></li>
+                    <li><strong>Donker gestreepte mineralen:</strong> wit ijzer</li>
+                    <li><strong>Licht gestreepte mineralen:</strong> zwart ijzer</li>
+                </ul>
+        
+                <div class="note">
+                    <strong>Belangrijk:</strong> Mineraalpoeder is een goed kenmerk om idiochromatische mineralen te
+                    onderscheiden van allochromatische mineralen.
+                </div>
+        
+                <div class="definition">
+                    <h3>Beperkingen</h3>
+                    <p>Het strijkplaatje heeft een hardheid van <strong>6 tot 6,5</strong>. Mineralen met grotere hardheid
+                        beschadigen het plaatje.</p>
+                    <p>In practicum: streepkleur uit <strong>literatuur</strong> gebruiken.</p>
+                </div>
+            </div>
+        
+            <!-- HARDHEID SECTION -->
+            <div class="content-section">
+                <h1 class="section-title">⚡ HARDHEID (1.2)</h1>
+        
+                <div class="definition">
+                    <strong>Hardheid</strong> van een mineraal wordt gedefinieerd als zijn <strong>krasweerstand</strong>.
+                </div>
+        
+                <h3>Mohs schaal</h3>
+                <p><strong>Friedrich Mohs (1773-1839)</strong> rangschikte 10 mineralen van kleinste naar maximale hardheid.</p>
+                <p>De <strong>MOHS Empiri-schaal</strong> toont de relatieve hardheid.</p>
+        
+                <h3>Test materialen</h3>
+                <ul>
+                    <li><strong>Nagel:</strong> 2.5</li>
+                    <li><strong>Koperen plaat:</strong> 3</li>
+                    <li><strong>Glazen panelen:</strong> 5-6</li>
+                    <li><strong>Porseleinen panelen:</strong> 6-7</li>
+                </ul>
+        
+                <h3>Test procedure</h3>
+                <ol style="margin-left: 20px;">
+                    <li>Selecteer mineraal uit hardheidsschaal</li>
+                    <li>Zoek fris/glad oppervlak</li>
+                    <li>Schuur/krassen mineralen</li>
+                    <li>Veeg poeder af</li>
+                    <li>Vergrootglas: permanente kras?</li>
+                </ol>
+        
+                <div class="note">
+                    <strong>Regel:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Onbekend krast referentie → <strong>harder</strong></li>
+                        <li>Referentie krast onbekend → <strong>zachter</strong></li>
+                        <li>Bv: krast gips (2) niet calciet (3) → <strong>hardheid 2-3</strong></li>
+                    </ul>
+                </div>
+        
+                <div class="example">
+                    <strong>Opmerkingen:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Mineralen met specifieke hardheid krassen zichzelf <strong>niet</strong></li>
+                        <li>Hardheid varieert per richting (splijting vs loodrecht)</li>
+                    </ul>
+                </div>
+            </div>
 
-    </header>
-    <main class="divider">
+            <!-- 1.3 SPLIJTING EN BREUK SECTION -->
+            <div class="content-section">
+                <h1 class="section-title">🔹 SPLIJTING EN BREUK (1.3)</h1>
+            
+                <div class="definition">
+                    <strong>Splijting</strong> is het vermogen van een mineraal om langs <strong>zwakke kristallografische
+                        vlakken</strong> of richtingen te breken wanneer het onder druk wordt gezet.
+                </div>
+            
+                <div class="note">
+                    <strong>Oorzaken zwakke vlakken:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Mineralen onder druk</li>
+                        <li>Tweelingsvormen</li>
+                        <li>Exsolutie</li>
+                    </ul>
+                </div>
+            
+                <h3>Hoekbepaling</h3>
+                <p>De hoek in een mineraal kan bepaald worden door:
+                <ul style="margin-left: 20px;">
+                    <li><strong>Inschatten</strong></li>
+                    <li><strong>Goniometer</strong> gebruiken</li>
+                </ul>
+                </p>
+            
+                <h2>Soorten Splijting</h2>
+            
+                <div class="definition">
+                    <h3>Planair</h3>
+                    <p><strong>1 splijtingsrichting</strong></p>
+                </div>
+            
+                <div class="definition">
+                    <h3>Prismatisch</h3>
+                    <p><strong>2 splijtingsrichtingen</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Hoek = <strong>90°</strong></li>
+                        <li>Hoek ≠ <strong>90°</strong></li>
+                    </ul>
+                </div>
+            
+                <div class="definition">
+                    <h3>Kubisch</h3>
+                    <p><strong>3 splijtingsrichtingen</strong>; hoek = <strong>90°</strong></p>
+                </div>
+            
+                <div class="definition">
+                    <h3>Rhombohedraal</h3>
+                    <p><strong>3 splijtingsrichtingen</strong>; hoek ≠ <strong>90°</strong></p>
+                </div>
+            
+                <div class="definition">
+                    <h3>Octahedraal</h3>
+                    <p><strong>4 splijtingsrichtingen</strong></p>
+                </div>
+            
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 30px;">
+                    <div class="definition" style="text-align: center;">
+                        <strong>PLANAIR</strong><br>1 richting
+                    </div>
+                    <div class="definition" style="text-align: center;">
+                        <strong>PRISMATISCH</strong><br>2 richtingen
+                    </div>
+                    <div class="definition" style="text-align: center;">
+                        <strong>KUBISCH</strong><br>3 richtingen<br>90°
+                    </div>
+                    <div class="definition" style="text-align: center;">
+                        <strong>RHOMBOHEDRAAL</strong><br>3 richtingen<br>≠90°
+                    </div>
+                    <div class="definition" style="text-align: center;">
+                        <strong>OCTAHEDRAAL</strong><br>4 richtingen
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREUK SECTION (toevoegen na Splijting) -->
+            <div class="content-section">
+                <h1 class="section-title">🔸 BREUK</h1>
+            
+                <div class="definition">
+                    <strong>Breuk</strong> is het breken van een mineraal <strong>NIET langs zwakke kristallografische
+                        vlakken</strong>.
+                </div>
+            
+                <div class="note">
+                    <strong>Verschil met splijting:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Splijting: <strong>langs vlakken</strong></li>
+                        <li>Breuk: <strong>niet langs vlakken</strong></li>
+                        <li>Moet breukvlakken <strong>onderzoeken</strong></li>
+                    </ul>
+                </div>
+            
+                <h2>Soorten Breuk</h2>
+            
+                <div class="definition">
+                    <h3>Onregelmatige breuk</h3>
+                    <p><strong>Ruwe breuk</strong> of <strong>brosse breuk</strong></p>
+                </div>
+            
+                <div class="definition">
+                    <h3>Conchoïdaal (schelpbreuk)</h3>
+                    <p>Golvormige breuk, zoals een <strong>schelp</strong></p>
+                </div>
+            
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+                    <div class="definition" style="text-align: center; background: linear-gradient(145deg, #ffeaa7, #fdcb6e);">
+                        <h4 style="color: #2d3436;">🪨 ONREGELMATIGE BREUK</h4>
+                        <p><strong>Ruwe / brosse breuk</strong></p>
+                        <p>Oneffen, splinterig oppervlak</p>
+                    </div>
+                    <div class="definition" style="text-align: center; background: linear-gradient(145deg, #fd79a8, #e84393);">
+                        <h4 style="color: white;">🐚 CONCHOÏDAAL</h4>
+                        <p><strong>Schelpbreuk</strong></p>
+                        <p>Golvormig, glad oppervlak</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1.4 GLANS SECTION -->
+            <div class="content-section">
+                <h1 class="section-title">✨ GLANS (1.4)</h1>
+            
+                <div class="definition">
+                    <strong>Glans</strong> beschrijft hoe licht wordt <strong>gereflecteerd op het oppervlak</strong> van een
+                    mineraal. Helpt bij herkennen.
+                </div>
+            
+                <h2>Hoofdgroepen</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                    <div class="definition">
+                        <h3>Metaal glans</h3>
+                        <p><strong>Kenmerken:</strong></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Reflecteert als <strong>metaal</strong></li>
+                            <li><strong>Donkere streepkleur</strong></li>
+                            <li><strong>Opaak</strong></li>
+                        </ul>
+                        <div class="example">Pyriet</div>
+                    </div>
+                    <div class="definition">
+                        <h3>Niet-metaal glans</h3>
+                        <p>Verschillende subtypes:</p>
+                        <ul style="margin-top: 10px; font-size: 0.9em;">
+                            <li>Diamant, Glas, Parelmoer</li>
+                            <li>Vet, Zijde, Hars, Mat/Aardachtig</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <h2>Niet-Metaal Glans Types</h2>
+            
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0;">
+            
+                    <div class="definition">
+                        <h4>💎 Diamant glans</h4>
+                        <p><strong>Doorzichtig</strong>, hoge brekingsindex</p>
+                        <div class="example">Diamant</div>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🥛 Glas glans</h4>
+                        <p><strong>Doorzichtig</strong>, middelmatige brekingsindex</p>
+                        <div class="example">Amethist</div>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🐚 Parelmoer glans</h4>
+                        <p>Zachte glans als <strong>parelmoer/schelp</strong></p>
+                        <p>Kleurverandering per lichthoek</p>
+                        <div class="example">Parel</div>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🛢️ Vet glans</h4>
+                        <p><strong>Vettig/glimmend</strong> als olie</p>
+                        <p>Voelt ook <strong>vettig</strong> aan</p>
+                        <div class="example">Roze kwarts</div>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🧵 Zijde glans</h4>
+                        <p><strong>Zijdeachtig</strong>, zacht reflecterend</p>
+                        <div class="example">Gips</div>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🌲 Hars glans</h4>
+                        <p>Glans als <strong>hars/barnsteen</strong></p>
+                        <div class="example">Amber</div>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🌾 Matte/Aardachtige glans</h4>
+                        <p><strong>Dof</strong>, reflecteert niet</p>
+                        <p>Rood-bruin = <strong>aardachtig</strong></p>
+                        <div class="example">Hematiet (aardachtig), Flint (mat)</div>
+                    </div>
+                </div>
+            
+                <h2>Lichtspel & Vlakglinstering</h2>
+                <p>Speciale lichtreflectie effecten:</p>
+            
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+            
+                    <div class="definition">
+                        <h4>🐱 Chatoyancy</h4>
+                        <p><strong>Kattenoog/tijgeroog effect</strong></p>
+                        <p>Licht loodrecht op lengte</p>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>⭐ Asterisme</h4>
+                        <p><strong>Stervormig patroon</strong></p>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🌈 Opaliseren</h4>
+                        <p><strong>Parelmoerachtige glans</strong></p>
+                        <p>Kleur verandert per lichthoek</p>
+                    </div>
+            
+                    <div class="definition">
+                        <h4>🎨 Labradorescentie</h4>
+                        <p><strong>Kleurveranderend</strong></p>
+                        <p>Verschillende kleuren bij draaien</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1.5 KRISTALVORM, HABITUS, AGGREGATEN SECTION -->
+            <div class="content-section">
+                <h1 class="section-title">💎 KRISTALVORM, HABITUS & AGGREGATEN (1.5)</h1>
+            
+                <h2>1. Kristalvorm</h2>
+                <div class="definition">
+                    <p>Kristalvorm = <strong>uiterlijke uitdrukking interne atoomorde</strong></p>
+                    <p>Ungehinderd groei → <strong>karakteristieke 3D vorm</strong></p>
+                </div>
+            
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div class="definition">
+                        <h4>Euhedraal</h4>
+                        <p><strong>Goed gevormde vlakken</strong></p>
+                        <div class="example">Fluoriet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Subhedraal</h4>
+                        <p><strong>1-2 goed gevormde vlakken</strong></p>
+                        <div class="example">Almandien</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Anhedraal</h4>
+                        <p><strong>Geen goed gevormde vlakken</strong></p>
+                        <div class="example">Sodaliet</div>
+                    </div>
+                </div>
+            
+                <h2>2. Habitus</h2>
+                <div class="definition">
+                    <p><strong>Kenmerkende externe vorm</strong> van individuele kristallen/groepen</p>
+                </div>
+            
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div class="definition">
+                        <h4>Prismatisch</h4>
+                        <p><strong>Langwerpig</strong>, vlakken evenwijdig</p>
+                        <div class="example">Kwarts</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Kubisch</h4>
+                        <p><strong>6 vlakken → kubus</strong></p>
+                        <div class="example">Pyriet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Dodecahedraal</h4>
+                        <p><strong>12 vlakken → dodecahedron</strong></p>
+                        <div class="example">Sodaliet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Octahedraal</h4>
+                        <p><strong>8 vlakken → octahedron</strong></p>
+                        <div class="example">Fluoriet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Hexagonaal</h4>
+                        <p><strong>6 vlakken → hexagon</strong></p>
+                        <div class="example">Galeniet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Hopper</h4>
+                        <p><strong>Piramide-vorm</strong>, buitenkant sneller groei</p>
+                        <div class="example">Haliet</div>
+                    </div>
+                </div>
+            
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div class="definition">
+                        <h4>Kolom/zuilvormig</h4>
+                        <p><strong>Langwerpig</strong>, vlakken parallel</p>
+                        <div class="example">Toermalijn</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Naaldvormig</h4>
+                        <p><strong>Dunne naalden</strong>, radiaal/globulair</p>
+                        <div class="example">Zeoliet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Tafelvormig</h4>
+                        <p><strong>Plat als tafel</strong></p>
+                        <div class="example">Bariet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Bladed</h4>
+                        <p><strong>Mesblad-vorm</strong></p>
+                        <div class="example">Kyaniet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Haarvormig</h4>
+                        <p><strong>Heel fijn haar</strong></p>
+                        <div class="example">Calciet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Vezelachtig</h4>
+                        <p><strong>Dunne vezelbundels</strong></p>
+                        <div class="example">Asbest</div>
+                    </div>
+                </div>
+            
+                <h2>3. Mineraal Aggregaten</h2>
+                <div class="definition">
+                    <p><strong>Mengsels verschillende mineralen</strong> → uniek geheel</p>
+                </div>
+            
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div class="definition">
+                        <h4>Massief</h4>
+                        <p><strong>Zonder kristalvlakken</strong></p>
+                        <div class="example">Turquoise</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Compact</h4>
+                        <p><strong>Korrels onzichtbaar</strong></p>
+                        <div class="example">Chert (kwarts)</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Korrelig/granulair</h4>
+                        <p><strong>Gelijke, zichtbare korrels</strong></p>
+                        <div class="example">Olivijn</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Geband</h4>
+                        <p><strong>Lagen verschillende kleur/textuur</strong></p>
+                        <div class="example">Malachiet</div>
+                    </div>
+                </div>
+            
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div class="definition">
+                        <h4>Mammillary</h4>
+                        <p><strong>Ronde borstvormen</strong></p>
+                        <div class="example">Malachiet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Botryoïdaal</h4>
+                        <p><strong>Druiventros-vorm</strong></p>
+                        <div class="example">Hematiet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Niervormig</h4>
+                        <p><strong>Nier-vorm</strong></p>
+                        <div class="example">Hematiet</div>
+                    </div>
+                    <div class="definition">
+                        <h4>Stalactitisch</h4>
+                        <p><strong>Druppelvormig</strong></p>
+                    </div>
+                    <div class="definition">
+                        <h4>Geode</h4>
+                        <p><strong>Kristallen in holte</strong></p>
+                    </div>
+                    <div class="definition">
+                        <h4>Oolitisch/Pisolitisch</h4>
+                        <p><strong>Kleine bolletjes</strong></p>
+                        <div class="example">Bauxiet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MARK DONE +5 GEMS (HTML ONLY) -->
+            <div class="mark-done-section">
+                <div class="done-header">
+                    <h2>✅ AFGEROND</h2>
+                    <div class="gems-reward">💎💎💎💎💎</div>
+                </div>
+                <button id="markDoneBtn" class="mark-done-btn">+5 GEMS EARNED</button>
+                <p class="done-message">Sectie voltooid! <span id="gemCount">0</span> gems verdiend 🎉</p>
+            </div>
+            
+            
 
 
-    </main>
-    <footer>
-        &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway
-        Worldwide Online
-    </footer>
 
+        </main>
+        
+        
 
-
-
+        <footer>
+            &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online
+        </footer>
+    </div>
 </body>
 
 </html>

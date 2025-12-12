@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GemstoneGateway | Home</title>
+    <title id="mineral-title">Mineraal | GemstoneGateway</title>
     <link rel="stylesheet" href="/css/style.css" />
     <script type="module" src="/js/mission.js" defer></script>
     <script type="module" src="/js/dragon.js" defer></script>
@@ -12,14 +12,12 @@
 </head>
 
 <body>
-
     <header class="divider">
         <div class="logo">
             <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
             <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
         </div>
         <div class="player-status">
-
             <div class="dragon-info">
                 <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
                 <span id="dragon-level">Lvl 1</span>
@@ -33,20 +31,115 @@
                 <span id="player-name">PlayerName</span>
             </div>
         </div>
-
     </header>
+
     <main class="divider">
+        <!-- Back button -->
+        <div class="back-btn-container">
+            <a href="/mineralListing/mineralListing.html" class="back-btn">← Alle Elementen</a>
+        </div>
 
+        <!-- Mineral Detail Card -->
+        <article id="mineral-detail" class="mineral-detail">
+            <!-- HEADER -->
+            <div class="mineral-header">
+                <h1 id="mineral-name">Loading...</h1>
+                <div class="mineral-number">Mineraal #<span id="mineral-number">0</span></div>
+                <img id="mineral-image" src="" alt="" class="mineral-main-image">
+            </div>
 
+            <!-- BASIC PROPERTIES -->
+            <section class="properties-grid">
+                <div class="property-card">
+                    <h3>Mineraal Eigenschappen</h3>
+                    <div class="property-row">
+                        <span>Chemische formule:</span>
+                        <strong id="formula">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Kleur:</span>
+                        <strong id="color">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Streep kleur:</span>
+                        <strong id="streak">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Hardheid:</span>
+                        <strong id="hardness">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Kristalvorm:</span>
+                        <strong id="habit">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Glans:</span>
+                        <strong id="luster">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Splijting:</span>
+                        <strong id="cleavage">-</strong>
+                    </div>
+                    <div class="property-row">
+                        <span>Breuk:</span>
+                        <strong id="fracture">-</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TYPICAL PROPERTIES -->
+            <section class="typical-properties">
+                <h3>Typische eigenschappen</h3>
+                <ul id="properties-list"></ul>
+            </section>
+
+            <!-- ADDITIONAL INFO -->
+            <section class="additional-info">
+                <h3>Additionele informatie</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Kristalstelsel:</strong>
+                        <span id="crystal-system">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Voorkomens:</strong>
+                        <span id="occurrences">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Plaatsen:</strong>
+                        <span id="locations">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Associaties:</strong>
+                        <span id="associations">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Toepassingen:</strong>
+                        <span id="uses">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Naam oorsprong:</strong>
+                        <span id="etymology">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mark Done for THIS mineral -->
+            <div class="mark-done-section">
+                <div class="done-header">
+                    <h2>✅ MINERAAL BESTUDEERD</h2>
+                    <div class="gems-reward">💎💎</div>
+                </div>
+                <button id="markMineralDone" class="mark-done-btn">+2 GEMS EARNED</button>
+            </div>
+        </article>
     </main>
+
     <footer>
-        &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway
-        Worldwide Online
+        &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online
     </footer>
 
-
-
-
+    <script type="module" src="/js/mineral.js" defer></script>
 </body>
 
 </html>

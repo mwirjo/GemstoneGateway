@@ -7,32 +7,12 @@
   <title>D&D Dragon Stat Block Generator</title>
   <link rel="stylesheet" href="../css/style.css">
   <script type="module" src="/js/externalServices.js"></script>
-  <script type="module" src="/js/preloader.js"></script>
   <script type="module" src="/js/dragon.js" defer></script>
 
 </head>
 
 <body>
-  <!-- Hidden preloader structure -->
-  <div id="preloader" style="display: none;">
-    <div class="logo-container">
-      <img src="/images/logos/logo.png" alt="Gemstone Gateway Logo" class="preloader-logo">
-      <h1>GemstoneGateway</h1>
-    </div>
-    <div class="progress-container">
-      <div class="progress-bar" id="progress-bar"></div>
-    </div>
-    <div class="auth-main-buttons" style="display:none;">
-      <div id="google-login"></div>
-      <button id="guest-login" class="auth-btn">Continue as Guest</button>
-    </div>
-    <div id="google-username-form" class="auth-section" style="display:none;">
-      <h2>Choose a Username</h2>
-      <input type="text" id="google-username-input" placeholder="Your Username">
-      <button id="google-save-username">Save</button>
-    </div>
-  </div>
-
+  
   <!-- Main content -->
   <div id="main-content">
     <header class="divider">
@@ -67,10 +47,17 @@
           <h2>🐉 Owned Dragons</h2>
           <div id="ownedDragonContent">
             <p>No dragons owned yet. <strong>Hatch your first dragon!</strong></p>
+            
           </div>
-          <div display="none"><label for="givename">Give your dragon a Name:</label>
-          <input type="text" id="givename" placeholder="Enter custom name"></div>
           
+        </div>
+        <!-- Add this standalone dev button after ownedDragons div -->
+        <div
+          style="text-align: center; margin: 20px 0; padding: 15px; background: #ffebee; border: 2px dashed #f44336; border-radius: 8px;">
+          <button id="devResetLevel"
+            style="padding: 12px 24px; background: #f44336; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer;">
+            🔄 RESET LEVEL TO 0 (DEV)
+          </button>
         </div>
 
         <!-- Summon Dragon Section -->
@@ -83,6 +70,9 @@
 
         <h2>Generated Stat Block:</h2>
         <div id="statBlockDetails">
+          <div display="none"><label for="givename">Give your dragon a Name:</label>
+            <input type="text" id="givename" placeholder="Enter custom name">
+          </div>
           <p>Click "Generate Dragon Stat Block" to load a random dragon.</p>
         </div>
       </div>
@@ -93,118 +83,13 @@
     </footer>
   </div>
 
-  <script>
-    // Player object with dragon state
-    const player = {
-      dragonLevel: 0,
-      currentDragon: null
-    };
 
-    // Sample dragon list (wyvern as starter)
-    const dragonList = [
-      {
-        name: "Shadow Wyvern",
-        size: "Medium dragon",
-        ac: 14,
-        hp: "52 (7d8 + 21)",
-        speed: "40 ft., fly 80 ft.",
-        str: 17, dex: 14, con: 16, int: 6, wis: 12, cha: 10,
-        cr: "3",
-        traits: ["Keen Senses", "Flyby"],
-        actions: ["Multiattack", "Bite", "Sting"]
-      }
-    ];
+    
 
-    // Update dragon level display
-    function updateDragonLevel() {
-      document.getElementById('dragon-level').textContent = `Lvl ${player.dragonLevel}`;
-    }
-
-    // Initialize owned dragons section
-    function initOwnedDragons() {
-      const ownedContent = document.getElementById('ownedDragonContent');
-
-      if (player.dragonLevel === 0) {
-        // Show hatch button
-        ownedContent.innerHTML = `
-          <p>You don't own any dragons yet!</p>
-          <button id="hatchDragon" class="hatch-btn">🥚 Hatch a Dragon</button>
-        `;
-
-        // Add hatch button event listener
-        document.getElementById('hatchDragon').addEventListener('click', hatchDragon);
-      } else {
-        // Show owned dragon stat bar
-        showOwnedDragonStats();
-      }
-    }
-
-    // Hatch first dragon (wyvern)
-    function hatchDragon() {
-      player.dragonLevel = 1;
-      player.currentDragon = dragonList[0]; // Random wyvern from list
-
-      // Update UI
-      updateDragonLevel();
-      initOwnedDragons();
-
-      // Show stat block
-      generateStatBlock(player.currentDragon.name);
-
-      alert("🥚 Your Shadow Wyvern has hatched! Dragon level updated to 1.");
-    }
-
-    // Show owned dragon stats
-    function showOwnedDragonStats() {
-      const ownedContent = document.getElementById('ownedDragonContent');
-      const dragon = player.currentDragon;
-
-      ownedContent.innerHTML = `
-        <div class="dragon-stat-bar">
-          <h3>🐲 ${dragon.name} (Level ${player.dragonLevel})</h3>
-          <p><strong>CR ${dragon.cr}</strong> | AC: ${dragon.ac} | HP: ${dragon.hp}</p>
-          <p>STR ${dragon.str} DEX ${dragon.dex} CON ${dragon.con} INT ${dragon.int} WIS ${dragon.wis} CHA ${dragon.cha}</p>
-        </div>
-      `;
-    }
-
-    // Generate stat block display
-    function generateStatBlock(customName = '') {
-      const statBlock = document.getElementById('statBlockDetails');
-      const dragon = player.currentDragon || { name: 'Random Dragon' };
-      const name = customName || dragon.name;
-
-      statBlock.innerHTML = `
-        <div style="background: #2c3e50; color: white; padding: 20px; border-radius: 8px; font-family: monospace;">
-          <h2 style="color: #f39c12; margin-top: 0;">${name}</h2>
-          <p><strong>Medium dragon</strong>, chaotic neutral</p>
-          <p><strong>Armor Class</strong> ${dragon.ac || 15}</p>
-          <p><strong>Hit Points</strong> ${dragon.hp || '110 (13d10 + 39)'}</p>
-          <p><strong>Speed</strong> 40 ft., fly 80 ft.</p>
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0;">
-            <p><strong>STR</strong><br>17 (+3)</p>
-            <p><strong>DEX</strong><br>14 (+2)</p>
-            <p><strong>CON</strong><br>16 (+3)</p>
-            <p><strong>INT</strong><br>6 (-2)</p>
-            <p><strong>WIS</strong><br>12 (+1)</p>
-            <p><strong>CHA</strong><br>10 (+0)</p>
-          </div>
-          <p><strong>Challenge</strong> ${dragon.cr || 5} (${(dragon.cr || 5) * 450} XP)</p>
-        </div>
-      `;
-    }
-
-    // Event listeners
-    document.addEventListener('DOMContentLoaded', function () {
-      updateDragonLevel();
-      initOwnedDragons();
-
-      document.getElementById('generateBtn').addEventListener('click', function () {
-        const givenName = document.getElementById('givename').value.trim();
-        generateStatBlock(givenName || '');
-      });
-    });
-  </script>
+    
+    
+   
+  
 </body>
 
 </html>

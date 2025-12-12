@@ -1,9 +1,9 @@
 /* --------------------- Root Variables --------------------- */
 :root {
   /* Fonts */
-  --font-body: 'Inter', 'Lato', sans-serif;
-  --font-headline: 'Montserrat', sans-serif;
-  --font-code: 'Source Code Pro', monospace;
+  --font-body: "Inter", "Lato", sans-serif;
+  --font-headline: "Montserrat", sans-serif;
+  --font-code: "Source Code Pro", monospace;
 
   /* Colors */
   --primary-color: #006D75;
@@ -31,6 +31,7 @@ body {
   font-size: var(--font-base);
   color: var(--dark-grey);
   background-color: var(--bg-color);
+  line-height: 1.6;
 }
 
 img {
@@ -42,10 +43,10 @@ img {
 header {
   display: flex;
   flex-wrap: wrap;
-  /* wrap for mobile */
   justify-content: space-between;
   padding: 0.5rem 1rem;
   gap: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .logo {
@@ -54,7 +55,6 @@ header {
   align-items: center;
   font-size: 30px;
   font-family: var(--font-headline);
-  overflow: visible;
 }
 
 .logo img {
@@ -69,14 +69,13 @@ header {
   white-space: nowrap;
 }
 
-/* --------------------- Player Status Header --------------------- */
 .player-status {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-items: center;
 }
 
-/* Uniform divs */
 .player-status>div {
   display: flex;
   align-items: center;
@@ -86,17 +85,13 @@ header {
   padding: 0.25em 0.5em;
   background-color: #f7f7f7;
   min-width: 120px;
-  justify-content: flex-start;
-  box-sizing: border-box;
   height: 50px;
 }
 
-/* Player profile slightly darker */
 .player-profile {
   background-color: #e0e0e0;
 }
 
-/* Profile icon or letter */
 .profile-icon,
 .profile-letter {
   flex-shrink: 0;
@@ -112,7 +107,6 @@ header {
   color: white;
 }
 
-/* Player name next to icon */
 #player-name {
   white-space: nowrap;
   overflow: hidden;
@@ -120,33 +114,9 @@ header {
   font-weight: bold;
   color: #333;
   flex-grow: 1;
-  text-align: left;
 }
 
 /* --------------------- Hero Section --------------------- */
-
-
-/* --------------------- Utility Classes --------------------- */
-.highlight {
-  color: var(--accent-color);
-}
-
-button {
-  padding: 0.5em 2em;
-  background-color: var(--secondary-color);
-  color: white;
-  margin: auto;
-  display: block;
-  border: 0;
-  font-size: var(--large-font);
-  cursor: pointer;
-}
-
-.divider {
-  border-bottom: 2px solid var(--primary-color);
-}
-
-/* -------------------- Hero Section -------------------- */
 .hero {
   position: relative;
   width: 100%;
@@ -156,11 +126,103 @@ button {
 .hero-img img {
   width: 100%;
   height: auto;
-  display: block;
 }
 
+.mark-done-section {
+  text-align: center;
+  margin: 50px 0;
+  padding: 40px;
+  background: linear-gradient(145deg, #d4edda, #c3e6cb);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 4px solid #28a745;
+}
 
-/* -------------------- Mission Box -------------------- */
+.done-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.done-header h2 {
+  color: #155724;
+  margin: 0;
+}
+
+.gems-reward {
+  font-size: 2em;
+  color: #28a745;
+}
+
+.mark-done-btn {
+  background: linear-gradient(145deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  padding: 18px 50px;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mark-done-btn:hover {
+  transform: scale(1.05);
+}
+
+.mark-done-btn:active {
+  transform: scale(0.95);
+}
+
+.done-message {
+  color: #155724;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.minerals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.mineral-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.mineral-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.mineral-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.mineral-card h3 {
+  margin: 15px;
+  color: #333;
+}
+
+.formula {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #666;
+  margin: 0 15px 10px;
+}
 .mission {
   position: absolute;
   bottom: 10%;
@@ -182,128 +244,382 @@ button {
   font-size: 1.1rem;
 }
 
-/* --------------------- Mode Selection --------------------- */
+/* --------------------- PERFECTED MODE CARDS --------------------- */
 .mode-selection {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem auto;
-  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 2rem;
 }
 
 .mode-card {
-  flex: 1 1 220px;
-  background-color: white;
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
-  padding: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.mode-card h3 {
-  font-family: var(--font-headline);
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
-}
-
-.mode-card p {
-  font-size: 0.9rem;
-  color: var(--dark-grey);
-}
-
-.mode-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* ---------------------- MODE CARD ADVANCED EFFECTS ---------------------- */
-
-/* Card container for 3D flipping */
-.mode-card {
-  perspective: 1000px;
-  /* enables 3D effects */
+  perspective: 1200px;
+  height: 240px;
   position: relative;
-  height: 260px;
+  cursor: pointer;
+}
+.main-card.active {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+.content-section {
+  background: white;
+  margin: 30px 0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #006D75;
+}
+
+.section-title {
+  color: #006D75;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.definition {
+  background: linear-gradient(145deg, #e8f4fd, #b8e6fc);
+  padding: 25px;
+  border-radius: 12px;
+  margin: 20px 0;
+  border-left: 4px solid #1C9E63;
+}
+
+.example {
+  background: #fff3cd;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 15px 0;
+  border-left: 4px solid #FFC145;
+}
+
+.highlight {
+  color: #1C9E63;
+  font-weight: bold;
+  background: rgba(28, 158, 99, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.note {
+  background: #fff3cd;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #856404;
+  margin: 20px 0;
+}
+
+
+
+.sub-container {
+  margin-top: 20px;
+}
+
+.sub-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
 }
 
 .mode-card-inner {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.7s ease;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 16px;
 }
 
-/* Hover flips the card */
 .mode-card:hover .mode-card-inner {
-  transform: rotateY(180deg) scale(1.03);
+  transform: rotateY(180deg);
 }
 
-/* FRONT + BACK of the card */
 .mode-card-front,
 .mode-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 12px;
-  border: 2px solid var(--accent-color);
-  padding: 1.4rem;
+  border-radius: 16px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: white;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  align-items: center;
+  text-align: center;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* BACK SIDE */
-.mode-card-back {
-  transform: rotateY(180deg);
-  background: var(--accent-color);
-  color: white;
-}
-
-/* Glow effect */
-.mode-card:hover .mode-card-front,
-.mode-card:hover .mode-card-back {
-  box-shadow: 0 0 18px var(--accent-color);
-}
-
-/* Slight lift animation */
-.mode-card:hover {
-  transform: translateY(-6px);
-}
-
-/* Title styling */
-.mode-card h3 {
-  font-size: 1.4rem;
-  color: var(--primary-color);
-  margin-bottom: 0.4rem;
-  font-family: var(--font-headline);
-}
-
-/* Back text style */
-.mode-card-back h3 {
-  color: white;
-}
-
-.mode-card p {
+.mode-card-front {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
   color: var(--dark-grey);
 }
 
-.mode-card-back p {
-  color: #f1f1f1;
+.mode-card-back {
+  background: linear-gradient(145deg, var(--primary-color), var(--accent-color));
+  color: white;
+  transform: rotateY(180deg);
 }
 
-/* Entry fade animation */
+.mode-card h3,
+.mode-card h4 {
+  font-family: var(--font-headline);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: var(--secondary-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mode-card-front h3,
+.mode-card-front h4 {
+  color: var(--primary-color);
+}
+
+.mode-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.mode-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Sub-section headers */
+#visual-color-section h3,
+#streak-color-section h3 {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.8rem;
+  background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Sub-topic buttons */
+.sub-topic-btn {
+  flex: 1;
+  background: linear-gradient(145deg, var(--secondary-color), #ffbb4d);
+  color: var(--dark-grey);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 193, 69, 0.4);
+  font-family: var(--font-headline);
+}
+
+.sub-topic-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(255, 193, 69, 0.6);
+}
+
+/* --------------------- Utility Classes --------------------- */
+.highlight {
+  color: var(--accent-color);
+}
+
+button {
+  padding: 0.75em 2em;
+  background: linear-gradient(145deg, var(--secondary-color), #ffbb4d);
+  color: var(--dark-grey);
+  border: none;
+  border-radius: 10px;
+  font-size: var(--large-font);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 193, 69, 0.4);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 193, 69, 0.6);
+}
+
+.divider {
+  border-bottom: 3px solid var(--primary-color);
+}
+
+/* --------------------- Preloader --------------------- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, var(--primary-color), var(--accent-color));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 9999;
+  text-align: center;
+}
+
+.preloader-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1.5rem;
+  animation: logoBounce 1.8s infinite ease-in-out;
+}
+
+@keyframes logoBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+.progress-container {
+  width: 70%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary-color), #ffbb4d);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 20px rgba(255, 193, 69, 0.6);
+}
+
+/* --------------------- Burger Menu --------------------- */
+.burger-btn {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-grey);
+}
+
+/* --------------------- Dragon & Stat Block --------------------- */
+.dragon-section {
+  margin: 2rem 0;
+  padding: 2rem;
+  border: 3px solid var(--secondary-color);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #f8f9fa, #ffffff);
+}
+
+.dragon-stat-bar {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.hatch-btn {
+  background: linear-gradient(145deg, #28a745, #20c997);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.stat-block {
+  background: linear-gradient(145deg, #fdf1dc, #f9e4c1);
+  border: 2px solid var(--secondary-color);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  font-family: "Georgia", serif;
+}
+
+/* --------------------- Responsive Design --------------------- */
+@media (max-width: 768px) {
+  .burger-btn {
+    display: block;
+  }
+
+  .player-status {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: white;
+    border-top: 2px solid var(--primary-color);
+    padding: 1rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .player-status.active {
+    display: flex;
+  }
+
+  .mode-selection {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 24px;
+    line-height: 50px;
+  }
+
+  .logo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .mission {
+    position: static;
+    transform: none;
+    width: 95%;
+    margin: 1rem auto;
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* --------------------- Footer --------------------- */
+footer {
+  font-size: var(--small-font);
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--dark-grey);
+  border-top: 2px solid var(--light-grey);
+  margin-top: 4rem;
+}
+
+/* --------------------- Animations --------------------- */
 @keyframes fadeUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
 
   100% {
@@ -322,376 +638,25 @@ button {
 }
 
 .mode-card:nth-child(2) {
-  animation-delay: 0.25s;
+  animation-delay: 0.2s;
 }
 
 .mode-card:nth-child(3) {
-  animation-delay: 0.4s;
+  animation-delay: 0.3s;
 }
 
 .mode-card:nth-child(4) {
-  animation-delay: 0.55s;
+  animation-delay: 0.4s;
 }
 
-/* Preloader full screen */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #006D75;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  z-index: 9999;
-  text-align: center;
+.mode-card:nth-child(5) {
+  animation-delay: 0.5s;
 }
 
-/* Logo */
-.preloader-logo {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 1rem;
-  animation: logo-bounce 1.5s infinite;
+.mode-card:nth-child(6) {
+  animation-delay: 0.6s;
 }
 
-@keyframes logo-bounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-}
-
-/* Progress bar container */
-.progress-container {
-  width: 70%;
-  height: 20px;
-  background-color: #f3f3f3;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 1.5rem 0;
-}
-
-/* Progress bar */
-.progress-bar {
-  width: 0%;
-  height: 100%;
-  background-color: #FFC145;
-  transition: width 0.2s ease-in-out;
-}
-
-.auth-main-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  /* increase space between buttons */
-  margin-top: 20px;
-  /* optional extra spacing from elements above */
-}
-
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Login options buttons */
-.login-options button {
-  margin: 0.5rem;
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--secondary-color);
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.login-options button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Hamburger button hidden on desktop */
-.burger-btn {
-  display: none;
-  font-size: 1.8rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--dark-grey);
-}
-
-/* Mobile Styles */
-@media screen and (max-width: 768px) {
-  header {
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  /* Show burger button on mobile */
-  .burger-btn {
-    display: inline-block;
-  }
-
-  /* Hide player-status by default on mobile */
-  .player-status {
-    display: none;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  /* Show player-status when active */
-  .player-status.active {
-    display: flex;
-  }
-
-  .player-status>div {
-    flex: 1 1 100%;
-  }
-}
-
-.dragon-section {
-  margin: 20px 0;
-  padding: 20px;
-  border: 2px solid #d4af37;
-  border-radius: 8px;
-}
-
-.owned-dragons {
-  background-color: #f8f8f8;
-}
-
-.summon-dragon {
-  background-color: #e8f4f8;
-}
-
-.dragon-stat-bar {
-  background: linear-gradient(90deg, #ff6b6b, #ffd93d);
-  padding: 15px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.hatch-btn {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.hatch-btn:hover {
-  background-color: #218838;
-}
-
-.stat-block {
-  background-color: #fdf1dc;
-  border: 1px solid #c9c9c9;
-  padding: 15px;
-  max-width: 600px;
-  font-family: 'Georgia', serif;
-  font-size: 14px;
-  line-height: 1.4;
-  margin: 20px auto;
-}
-
-.image-placeholder {
-  height: 150px;
-  background-color: #e0e0e0;
-  border: 1px dashed #aaa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-style: italic;
-  color: #666;
-  margin-bottom: 15px;
-  border-radius: 5px;
-}
-
-.stat-block h1 {
-  border-bottom: 2px solid #8A1A23;
-  font-size: 24px;
-  font-variant: small-caps;
-  margin: 0 0 10px 0;
-  padding-bottom: 5px;
-  color: #8A1A23;
-}
-
-.stat-block h2 {
-  border-bottom: 1px solid #8A1A23;
-  font-size: 18px;
-  font-variant: small-caps;
-  margin: 15px 0 10px 0;
-  padding-bottom: 5px;
-  color: #8A1A23;
-}
-
-.stat-block p {
-  margin: 5px 0;
-}
-
-.stat-block .property-line {
-  font-weight: bold;
-}
-
-.stat-block .property-line span {
-  font-weight: normal;
-}
-
-.stat-block .abilities {
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  margin: 15px 0;
-  border-top: 2px solid #8A1A23;
-  border-bottom: 2px solid #8A1A23;
-  padding: 10px 0;
-}
-
-.stat-block .ability-score {
-  flex: 1;
-}
-
-.stat-block .ability-score strong {
-  display: block;
-  font-size: 16px;
-}
-
-.stat-block .ability-score span {
-  font-size: 12px;
-  font-style: italic;
-}
-
-.stat-block .dragon-type-line {
-  font-style: italic;
-  margin-bottom: 10px;
-  color: #8A1A23;
-}
-
-.dragon-image {
-  width: 100%;
-  max-height: auto;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-
-
-/* --------------------- Responsive --------------------- */
-@media screen and (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  
-
-    .burger-btn {
-      display: inline-block;
-    }
-  
-    /* Hide player-status by default on mobile */
-    .player-status {
-      display: none;
-      flex-direction: column;
-      gap: 0.5rem;
-      width: 100%;
-      margin-top: 0.5rem;
-    }
-  
-    /* Show player-status when active */
-    .player-status.active {
-      display: flex;
-    }
-
-  .player-status>div {
-    flex: 1 1 100%;
-  }
-
-  .mode-selection {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mode-card {
-    width: 300px;
-    height: 300px;
-  }
-
-    /* HEADER LOGO + TEXT SMALLER */
-    .logo img {
-      width: 40px;
-      height: 40px;
-    }
-  
-    .logo {
-      font-size: 20px;
-      /* reduce text size */
-      line-height: 40px;
-    }
-  
-    /* HERO LOGO SMALLER */
-        /* Remove old absolute positioning */
-        .hero .logo {
-          position: static;
-          transform: none;
-          margin: -25px auto 0;
-          /* slight overlap with hero image top edge */
-          z-index: 10;
-        }
-    
-        /* Adjust hero logo size for mobile */
-        .hero .logo img {
-          width: 40px;
-          height: 40px;
-        }
-    
-        .hero .logo div {
-          font-size: 20px;
-        }
-    
-        /* Mission moves BELOW logo now */
-        .mission {
-          position: static;
-          transform: none;
-          width: 100%;
-          max-width: 100%;
-          margin: 0.8rem auto 0;
-          text-align: center;
-        }
-    
-        .mission p {
-          width: 100%;
-        }
-}
-
-@media screen and (min-width: 769px) {
-  body {
-    max-width: 1080px;
-    margin: auto;
-  }
-
-  .mission {
-    font-size: 1.2em;
-  }
-}
-
-/* --------------------- Footer --------------------- */
-footer {
-  font-size: var(--small-font);
-  padding: 1em;
-  text-align: center;
+.mode-card:nth-child(7) {
+  animation-delay: 0.7s;
 }

@@ -1,48 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GemstoneGateway | Home</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script type="module" src="/js/mission.js" defer></script>
-    <script type="module" src="/js/dragon.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Dragon Stat Block Generator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="/js/externalServices.js"></script>
     <script type="module" src="/js/modes.js" defer></script>
+
 </head>
 
 <body>
 
-    <header class="divider">
-        <div class="logo">
-            <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
-            <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
-        </div>
-        <div class="player-status">
-
-            <div class="dragon-info">
-                <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
-                <span id="dragon-level">Lvl 1</span>
+    <!-- Main content -->
+    <div id="main-content">
+        <header class="divider">
+            <div class="logo">
+                <img src="../images/logos/logo.png" alt="tent image for logo" />
+                <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
             </div>
-            <div class="gems-info">
-                <img src="/images/logos/dragon-icon.png" alt="Gems" class="icon" />
-                <span id="gem-amount">0</span>
+            <div class="player-status">
+                <div class="dragon-info">
+                    <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
+                    <span id="dragon-level">Lvl 0</span>
+                </div>
+                <div class="gems-info">
+                    <img src="/images/logos/gem-icon.png" alt="Gems" class="icon" />
+                    <span id="gem-amount">0</span>
+                </div>
+                <div class="player-profile">
+                    <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" />
+                    <span id="player-name">PlayerName</span>
+                </div>
             </div>
-            <div class="player-profile">
-                <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" />
-                <span id="player-name">PlayerName</span>
-            </div>
-        </div>
+        </header>
 
-    </header>
-    <main class="divider">
+        <main class="divider">
+            <!-- Replace your entire <section class="mode-selection"> with these 7 cards + existing modes -->
+            
+            <section class="mode-selection">
+            
+                <!-- 1. Macroscopic Determination -->
+                <div class="mode-card" id="macroscopic-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>1. Macroscopic Determination</h3>
+                            <p>Study macroscopic properties and identification.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Macroscopic</h3>
+                            <p>Click to explore macroscopic theory!</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 2. Elements -->
+                <div class="mode-card" id="elements-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>2. Elements</h3>
+                            <p>Native elements and their characteristics.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Elements</h3>
+                            <p>Click to study native elements!</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 3. Oxides & Hydroxides -->
+                <div class="mode-card" id="oxides-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>3. Oxides & Hydroxides</h3>
+                            <p>Explore oxide and hydroxide minerals.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Oxides</h3>
+                            <p>Click to learn oxides & hydroxides!</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 4. Halides -->
+                <div class="mode-card" id="halides-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>4. Halides</h3>
+                            <p>Halide mineral groups and properties.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Halides</h3>
+                            <p>Click to study halide minerals!</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 5. Sulfides -->
+                <div class="mode-card" id="sulfides-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>5. Sulfides</h3>
+                            <p>Sulfide minerals and their formations.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Sulfides</h3>
+                            <p>Click to explore sulfide minerals!</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 6. Carbonates Sulfates & Phosphates -->
+                <div class="mode-card" id="carbonates-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>6. Carbonates, Sulfates & Phosphates</h3>
+                            <p>Carbonate, sulfate, and phosphate families.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Carbonates</h3>
+                            <p>Click to study carbonate groups!</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 7. Silicates -->
+                <div class="mode-card" id="silicates-card">
+                    <div class="mode-card-inner">
+                        <div class="mode-card-front">
+                            <h3>7. Silicates</h3>
+                            <p>The most important mineral group - silicates.</p>
+                        </div>
+                        <div class="mode-card-back">
+                            <h3>Start Silicates</h3>
+                            <p>Click to master silicate minerals!</p>
+                        </div>
+                    </div>
+                </div>
+            
+            </section>
+
+        </main>
+
+        <footer>
+            &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online
+        </footer>
+    </div>
 
 
-    </main>
-    <footer>
-        &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway
-        Worldwide Online
-    </footer>
+
+
 
 
 
