@@ -15,15 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const googleSaveBtn = qs("#google-save-username");
     // -----------------------------
     // If player is already logged in
-    // -----------------------------
-    const existingPlayer = getLocalStorage("player");
-    if (existingPlayer) {
-        // Skip preloader
-        preloader.style.display = "none";
-        mainContent.style.display = "block";
-        loadPlayer(existingPlayer); // updates header
-        return; // stop further preloader logic
-    }
 
     // -----------------------------
     // Progress bar animation
