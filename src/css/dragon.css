@@ -632,3 +632,35 @@ summary {
     width: 200px;
     border-radius: 2px;
 }
+
+.progress-bar-container {
+    width: 100%;
+    height: 20px;
+    /* ✅ SET FIXED HEIGHT */
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    /* ✅ CRITICAL - contains the bar */
+    padding: 0;
+    margin: 0;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 100%;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    /* ✅ NESTED OVERFLOW */
+}
+
+.dragon-progress-bar {
+    height: 100%;
+    /* ✅ FULL HEIGHT */
+    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    width: 0%;
+    /* ✅ STARTS AT 0 */
+    transition: width 0.5s ease-in-out;
+    /* ✅ SMOOTH ANIMATION */
+    border-radius: 10px;
+}

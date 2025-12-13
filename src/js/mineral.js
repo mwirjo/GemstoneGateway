@@ -2,8 +2,9 @@
 import { getParam } from "./utils.mjs";
 import mineralDetails from "./mineralDetails.mjs";
 import MineralServices from "./mineralServices.mjs";
+import { initPlayerHeader } from "./playerLoader";
 
-
+initPlayerHeader();
 
 const category = getParam("category") || "elements";
 const dataSource = new MineralServices(category);

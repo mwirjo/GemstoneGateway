@@ -1,10 +1,10 @@
-// playerLoader.js - localStorage ONLY - UPDATES EVERY TIME!
+// playerLoader.js - COMPLETE with dragonId & dragonName SUPPORT!
 import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 let currentPlayer = null;
 
 // -----------------------------
-// PLAYER CLASS - SAVES TO localStorage
+// PLAYER CLASS - FULL DRAGON SUPPORT
 // -----------------------------
 export class Player {
   constructor(username, data = {}) {
@@ -12,6 +12,8 @@ export class Player {
     this.gems = data.gems || 0;
     this.dragonLevel = data.dragonLevel || 0;
     this.dragonExperience = data.dragonExperience || 0;
+    this.dragonId = data.dragonId || null;           // 🐉 ACTIVE DRAGON ID
+    this.dragonName = data.dragonName || null;       // 🐉 ACTIVE DRAGON NAME
     this.dragonMood = data.dragonMood || "Happy";
     this.icon = data.icon || null;
     
@@ -21,24 +23,69 @@ export class Player {
 
   addGems(amount = 1) {
     this.gems = Math.max(0, this.gems + amount);
-    console.log(`💎 ${this.username}: +${amount} gems = ${this.gems}`); // DEBUG
+    console.log(`💎 ${this.username}: +${amount} gems = ${this.gems}`);
     this._autoSave();
     this._autoUpdateHeader();
     return this.gems;
   }
 
+  // 🐉 DRAGON METHODS - AUTO-SAVE!
+  setActiveDragon(id, name, level = 1, xp = 0) {
+    this.dragonId = id;
+    this.dragonName = name;
+    this.dragonLevel = level;
+    this.dragonExperience = xp;
+    this._autoSave();
+    this._autoUpdateHeader();
+    console.log(`🐉 Active: ${name} (Lvl ${level})`);
+  }
+
+  addDragonXP(amount) {
+    this.dragonExperience = Math.max(0, (this.dragonExperience || 0) + amount);
+    this._autoSave();
+    this._autoUpdateHeader();
+  }
+
+  levelUpDragon() {
+    this.dragonLevel += 1;
+    this.dragonExperience = 0;
+    this._autoSave();
+    this._autoUpdateHeader();
+    console.log(`🎉 ${this.dragonName} leveled to ${this.dragonLevel}!`);
+  }
+
+  resetDragon() {
+    this.dragonLevel = 0;
+    this.dragonExperience = 0;
+    this.dragonId = null;
+    this.dragonName = null;
+    this._autoSave();
+    this._autoUpdateHeader();
+  }
+
+  spendGems(amount) {
+    if (this.gems >= amount) {
+      this.gems -= amount;
+      this._autoSave();
+      this._autoUpdateHeader();
+      return true;
+    }
+    return false;
+  }
+
   _autoSave() {
-    // SAVES TO localStorage - WORKS EVERY TIME!
     const allPlayers = getLocalStorage("allPlayers") || {};
     allPlayers[this.username] = {
       gems: this.gems,
       dragonLevel: this.dragonLevel,
       dragonExperience: this.dragonExperience,
+      dragonId: this.dragonId,
+      dragonName: this.dragonName,
       dragonMood: this.dragonMood,
       icon: this.icon
     };
     setLocalStorage("allPlayers", allPlayers);
-    console.log("💾 SAVED:", allPlayers[this.username]); // DEBUG
+    console.log("💾 SAVED:", allPlayers[this.username]);
   }
 
   _autoUpdateHeader() {
@@ -52,11 +99,12 @@ export class Player {
 export async function loadPlayerFromUsername(username, payload = {}) {
   const allPlayers = getLocalStorage("allPlayers") || {};
   
-  // Get existing stats or start fresh
   const playerData = allPlayers[username] || {
     gems: 0,
     dragonLevel: 0,
     dragonExperience: 0,
+    dragonId: null,
+    dragonName: null,
     dragonMood: "Happy",
     icon: payload.picture || null
   };
@@ -64,7 +112,7 @@ export async function loadPlayerFromUsername(username, payload = {}) {
   currentPlayer = new Player(username, playerData);
   setLocalStorage("currentUser", username);
   
-  console.log("✅ LOADED:", currentPlayer.username, playerData.gems, "gems"); // DEBUG
+  console.log("✅ LOADED:", currentPlayer.username, playerData.gems, "gems");
   return currentPlayer;
 }
 
@@ -94,7 +142,7 @@ export function addGems(amount = 1) {
 }
 
 // -----------------------------
-// Header
+// Header Display
 // -----------------------------
 function updateHeader(player) {
   const nameEl = qs("#player-name");
@@ -105,19 +153,26 @@ function updateHeader(player) {
   if (player && player.username) {
     if (nameEl) nameEl.textContent = player.username;
     if (gemEl) gemEl.textContent = `${player.gems} `;
-    if (levelEl) levelEl.textContent = `Lvl ${player.dragonLevel}`;
+    if (levelEl) {
+      const dragonDisplay = player.dragonLevel > 0 
+        ? `Lvl ${player.dragonLevel}`  // ✅ ONLY NUMBER!
+        : "No Dragon";
+      levelEl.textContent = dragonDisplay;
+    }
     if (logoutBtn) {
       logoutBtn.style.display = "inline-block";
       logoutBtn.onclick = logoutPlayer;
     }
   } else {
-    if (nameEl) nameEl.textContent = "";
-    if (gemEl) gemEl.textContent = "";
-    if (levelEl) levelEl.textContent = "";
+    if (nameEl) nameEl.textContent = "Guest";
+    if (gemEl) gemEl.textContent = "0 💎";
+    if (levelEl) levelEl.textContent = "🐲 No Dragon";
     if (logoutBtn) logoutBtn.style.display = "none";
   }
 }
 
+
 export function initPlayerHeader() {
   getPlayer();
+  updateHeader(getPlayer());
 }
