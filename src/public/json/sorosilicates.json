@@ -1,0 +1,46 @@
+{
+  "category": "sorosilicates",
+  "minerals": [
+    {
+      "number": 93,
+      "name": "Epidoot",
+      "formula": "Ca₂(Fe³⁺,Al)Al₂O(OH)(SiO₄)₃",
+      "color": "groen, geel, grijs",
+      "streak": "wit",
+      "hardness": "6-7",
+      "habit": "granulair",
+      "luster": "glasachtig, mat",
+      "cleavage": "—",
+      "fracture": "onregelmatig, schelpvormig",
+      "properties": ["Epidote-groep"],
+      "crystalSystem": "Monoklien",
+      "occurrences": "metamorfe gesteenten, hydrothermale aderen",
+      "locations": ["VS", "Oostenrijk", "Suriname (Paramaka)"],
+      "associations": ["kwarts", "veldspaat", "granaat", "amfibolen"],
+      "uses": ["sieraden", "verzamelaars"],
+      "etymology": "Grieks epidosis (toenemen)",
+      "image": "https://www.mindat.org/imagecache/76/ec/08303990017436407535524.jpg"
+    },
+    {
+      "number": 95,
+      "name": "Tanzaniet",
+      "formula": "Ca₂Al₃(SiO₄)(Si₂O₇)O(OH)",
+      "color": "blauw, paars, violet",
+      "streak": "grijs/wit",
+      "hardness": "6-7",
+      "habit": "bladed",
+      "luster": "glasachtig, parelmoer",
+      "cleavage": "planair",
+      "fracture": "onregelmatig",
+      "properties": ["Zoisiet-variant"],
+      "crystalSystem": "Orthorombisch",
+      "occurrences": "metamorfe gesteenten",
+      "locations": ["Tanzania (Merelani Hills)"],
+      "associations": ["diopside", "grafiet"],
+      "uses": ["sieraden", "investeringen"],
+      "etymology": "Naar Tanzania",
+      "image": "https://www.mindat.org/imagecache/c3/ae/08105470017381412086781.jpg"
+    }
+  ]
+}
+

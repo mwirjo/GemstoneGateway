@@ -1,0 +1,634 @@
+/* --------------------- DRAGON PAGE STYLES - ENHANCED --------------------- */
+
+/* Hero Banner */
+.dragon-hero {
+    background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
+    padding: clamp(3rem, 8vw, 5rem) clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 5px solid #f39c12;
+}
+
+.dragon-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f39c12, #e67e22, #d35400, #f39c12);
+    animation: shimmer 3s infinite;
+}
+
+.dragon-hero-title {
+    font-family: var(--font-headline);
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    background: linear-gradient(145deg, #f39c12, #e67e22);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 40px rgba(243, 156, 18, 0.6);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.dragon-hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: #ecf0f1;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: rgba(243, 156, 18, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    border: 2px solid rgba(243, 156, 18, 0.4);
+    font-weight: 700;
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
+}
+
+/* Progress Bar */
+.dragon-progress-section {
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    border-radius: 24px;
+    padding: clamp(2rem, 5vw, 3rem);
+    margin: clamp(2rem, 6vw, 3rem) auto;
+    max-width: 1000px;
+    border: 3px solid #f39c12;
+    text-align: center;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.progress-header h3 {
+    color: #f39c12;
+    font-family: var(--font-headline);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.progress-bar-container {
+    background: rgba(255, 255, 255, 0.1);
+    height: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid rgba(243, 156, 18, 0.4);
+}
+
+#dragon-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #f39c12, #e67e22, #d35400);
+    border-radius: 18px;
+    width: 0%;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
+    position: relative;
+}
+
+#dragon-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: progressShine 2s infinite;
+}
+
+/* No Dragon Placeholder */
+.no-dragon-placeholder {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.egg-animation {
+    font-size: clamp(4rem, 12vw, 8rem);
+    animation: eggBounce 2s infinite ease-in-out;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.no-dragon-text {
+    color: #bdc3c7;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+/* Dragon Sections */
+.dragon-section {
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    border-radius: 24px;
+    padding: clamp(2rem, 5vw, 3rem);
+    margin: clamp(2rem, 6vw, 3rem) auto;
+    max-width: 1000px;
+    box-shadow: 0 25px 60px rgba(44, 62, 80, 0.4);
+    border: 3px solid #f39c12;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.dragon-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f39c12, #e67e22, #f39c12);
+}
+
+.dragon-section h2 {
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: #f39c12;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+}
+
+/* Buttons */
+.hatch-btn,
+.summon-btn,
+.apply-name-btn {
+    background: linear-gradient(145deg, #e67e22, #f39c12);
+    color: white;
+    border: none;
+    padding: clamp(1rem, 3vw, 1.25rem) clamp(2.5rem, 6vw, 3.5rem);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 15px 40px rgba(243, 156, 18, 0.4);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hatch-btn:hover,
+.summon-btn:hover,
+.apply-name-btn:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 25px 60px rgba(243, 156, 18, 0.6);
+}
+
+#generateBtn {
+    background: linear-gradient(145deg, #9b59b6, #8e44ad);
+    box-shadow: 0 15px 40px rgba(155, 89, 182, 0.4);
+}
+
+#generateBtn:hover {
+    box-shadow: 0 25px 60px rgba(155, 89, 182, 0.6);
+}
+
+.summon-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+#dragonFilter {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(243, 156, 18, 0.4);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.name-input-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+#givename {
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(243, 156, 18, 0.4);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    min-width: 250px;
+}
+
+/* Dragon Stat Bar */
+.dragon-stat-bar {
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    border-radius: 24px;
+    padding: clamp(2rem, 5vw, 3rem);
+    box-shadow: 0 25px 60px rgba(44, 62, 80, 0.5);
+    border: 3px solid #f39c12;
+    text-align: center;
+}
+
+.dragon-avatar {
+    margin-bottom: 1.5rem;
+}
+
+.dragon-avatar img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #f39c12;
+    box-shadow: 0 15px 40px rgba(243, 156, 18, 0.4);
+}
+
+.dragon-stat-bar h3 {
+    font-family: var(--font-headline);
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+    color: #f39c12 !important;
+    margin: 1.5rem 0;
+    text-shadow: 0 0 15px rgba(243, 156, 18, 0.7);
+}
+
+.dragon-stats p {
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+}
+
+.dragon-stats p strong {
+    color: #ecf0f1;
+    font-weight: 700;
+}
+
+.abilities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1.2rem;
+    margin: 2rem 0;
+}
+
+.abilities div {
+    background: rgba(243, 156, 18, 0.2);
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid rgba(243, 156, 18, 0.4);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
+}
+
+.abilities div:hover {
+    background: rgba(243, 156, 18, 0.4);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(243, 156, 18, 0.4);
+}
+
+.abilities strong {
+    display: block;
+    font-size: 1.4em;
+    color: #f39c12;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-headline);
+}
+
+.challenge {
+    font-size: 1.2rem;
+    background: rgba(243, 156, 18, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+    border-left: 5px solid #f39c12;
+    margin: 1.5rem 0;
+}
+
+.dragon-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.feed-btn {
+    background: linear-gradient(145deg, #27ae60, #2ecc71);
+    flex: 1;
+    min-width: 180px;
+}
+
+.reset-btn {
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+}
+
+.dragon-actions button:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.dragon-actions details {
+    margin: 1.5rem 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+summary {
+    font-weight: 700;
+    color: #f39c12;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Stat Block */
+.stat-block {
+    background: linear-gradient(145deg, #1a252f, #2c3e50);
+    border-radius: 24px;
+    padding: clamp(2.5rem, 6vw, 4rem);
+    margin: 2rem 0;
+    color: white;
+    box-shadow: 0 30px 70px rgba(44, 62, 80, 0.6);
+    border: 3px solid #f39c12;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #f39c12, #e67e22, #d35400, #f39c12);
+}
+
+.stat-block-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stat-block-title h1 {
+    font-family: var(--font-headline);
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    color: #f39c12;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(243, 156, 18, 0.8);
+}
+
+.dragon-type-line {
+    font-size: 1.3rem;
+    color: #bdc3c7;
+    margin: 0.5rem 0 0 0;
+    font-style: italic;
+}
+
+.stat-block-stats p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    border-left: 4px solid #f39c12;
+}
+
+.stat-block-proficiencies p {
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    opacity: 0.9;
+}
+
+.stat-block h2 {
+    color: #f39c12;
+    font-family: var(--font-headline);
+    border-bottom: 3px solid #f39c12;
+    padding-bottom: 0.75rem;
+    margin: 2.5rem 0 1.5rem 0;
+    font-size: 1.6rem;
+}
+
+.actions {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.actions div {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border-left: 4px solid rgba(243, 156, 18, 0.4);
+}
+
+/* Quick Stats */
+.dragon-quick-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: clamp(3rem, 8vw, 4rem) 0;
+    flex-wrap: wrap;
+}
+
+.quick-stat {
+    background: linear-gradient(145deg, rgba(243, 156, 18, 0.2), rgba(230, 126, 34, 0.2));
+    padding: 2rem;
+    border-radius: 20px;
+    border: 3px solid rgba(243, 156, 18, 0.4);
+    text-align: center;
+    min-width: 150px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.quick-stat:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(243, 156, 18, 0.3);
+}
+
+.stat-number {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #f39c12;
+    font-family: var(--font-headline);
+}
+
+.stat-label {
+    color: #ecf0f1;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.dragon-footer {
+    background: linear-gradient(145deg, #1a252f, #2c3e50);
+    color: #bdc3c7;
+    padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 3vw, 2rem);
+    margin-top: clamp(3rem, 8vw, 4rem);
+    border-top: 4px solid #f39c12;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.quick-action-btn {
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    color: #ecf0f1;
+    border: 2px solid #f39c12;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.quick-action-btn:hover {
+    background: linear-gradient(145deg, #f39c12, #e67e22);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(243, 156, 18, 0.4);
+}
+
+/* Animations */
+@keyframes shimmer {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(243, 156, 18, 0.5));
+    }
+
+    to {
+        filter: drop-shadow(0 0 20px rgba(243, 156, 18, 0.8));
+    }
+}
+
+@keyframes eggBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
+}
+
+@keyframes progressShine {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .hero-stats,
+    .dragon-quick-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .summon-controls,
+    .name-input-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .stat-block-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .abilities {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+    }
+
+    .dragon-actions {
+        flex-direction: column;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .abilities {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dragon-stat-bar,
+    .stat-block {
+        padding: 1.5rem;
+    }
+
+    #givename {
+        min-width: 100%;
+    }
+}
+
+.dragon-divider {
+    border: none;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #f39c12, #e67e22, #f39c12, transparent);
+    margin: 4rem auto;
+    width: 200px;
+    border-radius: 2px;
+}

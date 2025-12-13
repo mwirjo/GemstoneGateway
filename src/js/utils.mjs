@@ -71,3 +71,25 @@ export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alert");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
+
+// utils.mjs - ADD THIS
+export function initBurgerMenu(burgerBtnId = "burger-btn", statusId = "player-status") {
+    const burgerBtn = document.getElementById(burgerBtnId);
+    const playerStatus = document.getElementById(statusId);
+    
+    if (!burgerBtn || !playerStatus) return false;
+    
+    burgerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        playerStatus.classList.toggle("mobile-active"); // Use specific class
+    });
+    
+    // Close on outside click
+    document.addEventListener("click", (e) => {
+        if (!burgerBtn.contains(e.target) && !playerStatus.contains(e.target)) {
+            playerStatus.classList.remove("mobile-active");
+        }
+    });
+    
+    return true;
+}

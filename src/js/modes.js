@@ -1,14 +1,15 @@
-// modes.js - RENDER PRODUCTION SAFE
-import { qs, setClick } from "./utils.mjs";
+// modes.js - COMPLETE PRODUCTION SAFE VERSION
+import { qs, setClick, initBurgerMenu} from "./utils.mjs";
 import { getPlayer, updateHeader, addGems } from "./playerLoader.js";
 
-// SINGLE DOMContentLoaded - handles ALL initialization
+// SINGLE DOMContentLoaded - ALL INITIALIZATION
 document.addEventListener("DOMContentLoaded", async () => {
-    // Player header (safe)
+    initBurgerMenu(); // Uses utils!
+    // 1. Player header (safe)
     const user = getPlayer();
     if (user) updateHeader(user);
 
-    // Mode navigation buttons
+    // 2. Mode navigation buttons
     const modeMap = {
         "learn-mode": "learn/index.html",
         "guess-mode": "guess/index.html",
@@ -23,92 +24,59 @@ document.addEventListener("DOMContentLoaded", async () => {
                 window.location.href = modeMap[modeId];
             });
             
-            // Hover effects (safe)
+            // Hover effects
             element.addEventListener("mouseenter", () => element.classList.add("hovered"));
             element.addEventListener("mouseleave", () => element.classList.remove("hovered"));
         }
     });
 
-    // Burger menu (safe null check)
-    const burgerBtn = document.getElementById("burger-btn");
-    const playerStatus = document.getElementById("player-status");
-    if (burgerBtn && playerStatus) {
-        burgerBtn.addEventListener("click", () => {
-            playerStatus.classList.toggle("active");
-        });
-    }
+    
 
-    // Mineral category cards (safe querySelectorAll)
-    document.querySelectorAll("#macroscopic-card, #elements-card, #oxides-card, #halides-card, #sulfides-card, #carbonates-card, #silicates-card").forEach(card => {
-        if (card) {
-            card.addEventListener("click", function() {
-                const cardId = this.id;
-                if (cardId === "macroscopic-card") {
-                    window.location.href = "/macrotheory/index.html";
-                } else {
-                    window.location.href = "/minerallist/index.html";
-                }
-            });
-        }
-    });
+    // 4. UNIVERSAL CARD HANDLER - ALL 15+ categories
+    setupCardClicks();
 
-    const elementsCard = document.getElementById("elements-card");
-      if (elementsCard) {
-          setClick("#elements-card", () => {
-              window.location.href = "/minerallist/?category=elements";
-          });
-      }
-    const oxidesCard = document.getElementById("oxides-card");
-      if (oxidesCard) {
-          setClick("#oxides-card", () => {
-              window.location.href = "/minerallist/?category=oxides";
-          });
-      }
-    const halidesCard = document.getElementById("halides-card");
-      if (halidesCard) {
-          setClick("#halides-card", () => {
-              window.location.href = "/minerallist/?category=halides";
-          });
-      }
-
-    const sulfidesCard = document.getElementById("sulfides-card");
-      if (sulfidesCard) {
-          setClick("#sulfides-card", () => {
-              window.location.href = "/minerallist/?category=sulfides";
-          });
-      }
-    const carbonatesCard = document.getElementById("carbonates-card");
-      if (carbonatesCard) {
-          setClick("#carbonates-card", () => {
-              window.location.href = "/minerallist/?category=carbonates";
-          });
-      }
-    
-    const sulfatesCard = document.getElementById("sulfates-card");
-      if (sulfatesCard) {
-          setClick("#sulfates-card", () => {
-              window.location.href = "/minerallist/?category=sulfates";
-          });
-      }
-    
-    const phosphatesCard = document.getElementById("phosphates-card");
-      if (phosphatesCard) {
-          setClick("#phosphates-card", () => {
-              window.location.href = "/minerallist/?category=phosphates";
-          });
-      }
-    
-    
-    // Main/Sub card toggle system (SAFE)
+    // 5. Main/Sub card toggle system
     initMainSubCards();
 
-    // Mark done buttons (SAFE dynamic import)
+    // 6. Mark done buttons
     initMarkDoneButtons();
 });
 
-// -----------------------------
-// Main/Sub Cards - SAFE
-// -----------------------------
+// ========================================
+// UNIVERSAL CARD CLICK HANDLER
+// ========================================
+function setupCardClicks() {
+    const cardCategories = [
+        // Chapter 1-6: Native + Other groups
+        "macroscopic", 
+        "elements", "oxides", "halides", "sulfides", 
+        "carbonates", "sulfates", "phosphates",
+        // Chapter 7: Silicates (7a-7f)
+        "nesosilicates", "sorosilicates", "cyclosilicates", 
+        "inosilicates", "phyllosilicates", "tektosilicates"
+    ];
+
+    cardCategories.forEach(category => {
+        const card = document.getElementById(`${category}-card`);
+        if (card) {
+            setClick(`#${category}-card`, () => {
+                if (category === "macroscopic") {
+                    window.location.href = "/macrotheory/index.html";
+                } else {
+                    window.location.href = `/minerallist/?category=${category}`;
+                }
+            });
+            
+            // Hover flip effect
+            card.addEventListener("mouseenter", () => card.classList.add("hovered"));
+            card.addEventListener("mouseleave", () => card.classList.remove("hovered"));
+        }
+    });
+}
+
+// ========================================
+// MAIN/SUB CARDS SYSTEM
+// ========================================
 function initMainSubCards() {
     const mainCards = document.querySelectorAll(".main-card");
     const mainContainer = document.getElementById("main-cards-container");
@@ -122,7 +90,7 @@ function initMainSubCards() {
             const subSection = this.dataset.subSection;
             const isActive = this.classList.contains("active");
             
-            // Hide ALL
+            // Hide ALL main cards & subcontainers
             mainCards.forEach(card => card.classList.remove("active"));
             document.querySelectorAll(".sub-container").forEach(container => {
                 if (container) container.style.display = "none";
@@ -160,7 +128,7 @@ function initMainSubCards() {
         }
     });
 
-    // Flip cards
+    // Flip cards in sub-containers
     document.querySelectorAll(".sub-container .mode-card").forEach(card => {
         if (card) {
             card.addEventListener("click", function(e) {
@@ -171,6 +139,9 @@ function initMainSubCards() {
     });
 }
 
+// ========================================
+// MARK DONE BUTTONS (GEMS SYSTEM)
+// ========================================
 async function initMarkDoneButtons() {
     document.querySelectorAll("#markDoneBtn").forEach(btn => {
         if (btn) {
@@ -181,13 +152,14 @@ async function initMarkDoneButtons() {
                     // 1. Add gems (awaited)
                     await addGems(5);
                     
-                    // 2. IMMEDIATE visual feedback (like mineral)
+                    // 2. IMMEDIATE visual feedback
+                    const originalText = this.innerHTML;
                     this.innerHTML = "✅ +5 GEMS!";
                     this.style.background = "#218838";
                     this.style.transform = "scale(0.95)";
                     this.disabled = true;
                     
-                    // 3. Read FRESH from localStorage (bypasses getPlayer cache)
+                    // 3. Update gem count from localStorage
                     const playerData = JSON.parse(localStorage.getItem("player") || "{}");
                     const gemCountEl = this.closest(".mark-done-section")?.querySelector("#gemCount");
                     
@@ -195,9 +167,9 @@ async function initMarkDoneButtons() {
                         gemCountEl.textContent = playerData.gems || 0;
                     }
                     
-                    // 4. Reset button (like mineral)
+                    // 4. Reset button after celebration
                     setTimeout(() => {
-                        this.innerHTML = "+5 GEMS EARNED";
+                        this.innerHTML = originalText;
                         this.disabled = false;
                         this.style.background = "";
                         this.style.transform = "scale(1)";
@@ -206,10 +178,13 @@ async function initMarkDoneButtons() {
                 } catch (error) {
                     console.error("Mark done failed:", error);
                     this.innerHTML = "❌ Try again";
-                    setTimeout(() => { this.innerHTML = "+5 GEMS"; }, 1500);
+                    setTimeout(() => { 
+                        this.innerHTML = "+5 GEMS"; 
+                    }, 1500);
                 }
             });
         }
     });
 }
+
 

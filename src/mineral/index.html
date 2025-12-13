@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="mineral-title">Mineraal | GemstoneGateway</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <script type="module" src="/js/dragon.js" defer></script>
     <script type="module" src="/js/mineral.js" defer></script>
 </head>
@@ -13,7 +13,7 @@
 <body>
     <header class="divider">
         <div class="logo">
-            <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
+            <img src="/images/logos/logo.png" alt="tent image for logo" />
             <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
         </div>
         <div class="player-status">
@@ -22,7 +22,7 @@
                 <span id="dragon-level">Lvl 1</span>
             </div>
             <div class="gems-info">
-                <img src="/images/logos/dragon-icon.png" alt="Gems" class="icon" />
+                <img src="/images/logos/gem-icon.png" alt="Gems" class="icon" />
                 <span id="gem-amount">0</span>
             </div>
             <div class="player-profile">
@@ -33,103 +33,107 @@
     </header>
 
     <main class="divider">
-        <!-- Back button -->
+        <!-- ✅ DYNAMIC BACK BUTTON -->
         <div class="back-btn-container">
-            <a href="/minerallist/?category=elements" class="back-btn">← Alle Elementen</a>
+            <a href="#" class="back-btn" id="back-to-list">← Loading...</a>
         </div>
 
-        <!-- Mineral Detail Card -->
+        <!-- ✅ ONE DYNAMIC CONTAINER -->
         <article id="mineral-detail" class="mineral-detail">
-            <!-- HEADER -->
+            <!-- HEADER - JS fills -->
             <div class="mineral-header">
                 <h1 id="mineral-name">Loading...</h1>
                 <div class="mineral-number">Mineraal #<span id="mineral-number">0</span></div>
                 <img id="mineral-image" src="" alt="" class="mineral-main-image">
             </div>
 
-            <!-- BASIC PROPERTIES -->
+            <!-- BASIC PROPERTIES - JS fills -->
             <section class="properties-grid">
                 <div class="property-card">
                     <h3>Mineraal Eigenschappen</h3>
-                    <div class="property-row">
+                    <!-- ✅ JS populates these rows -->
+                    <div class="property-row" data-prop="formula">
                         <span>Chemische formule:</span>
                         <strong id="formula">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="color">
                         <span>Kleur:</span>
                         <strong id="color">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="streak">
                         <span>Streep kleur:</span>
                         <strong id="streak">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="hardness">
                         <span>Hardheid:</span>
                         <strong id="hardness">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="habit">
                         <span>Kristalvorm:</span>
                         <strong id="habit">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="luster">
                         <span>Glans:</span>
                         <strong id="luster">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="cleavage">
                         <span>Splijting:</span>
                         <strong id="cleavage">-</strong>
                     </div>
-                    <div class="property-row">
+                    <div class="property-row" data-prop="fracture">
                         <span>Breuk:</span>
                         <strong id="fracture">-</strong>
                     </div>
                 </div>
             </section>
 
-            <!-- TYPICAL PROPERTIES -->
+            <!-- TYPICAL PROPERTIES - JS fills list -->
             <section class="typical-properties">
                 <h3>Typische eigenschappen</h3>
-                <ul id="properties-list"></ul>
+                <ul id="properties-list">
+                    <li>Loading...</li> <!-- ✅ JS replaces -->
+                </ul>
             </section>
 
-            <!-- ADDITIONAL INFO -->
+            <!-- ADDITIONAL INFO - JS fills -->
             <section class="additional-info">
                 <h3>Additionele informatie</h3>
                 <div class="info-grid">
-                    <div class="info-item">
+                    <!-- ✅ ONE dynamic container per property -->
+                    <div class="info-item" data-field="crystal-system">
                         <strong>Kristalstelsel:</strong>
                         <span id="crystal-system">-</span>
                     </div>
-                    <div class="info-item">
+                    <div class="info-item" data-field="occurrences">
                         <strong>Voorkomens:</strong>
                         <span id="occurrences">-</span>
                     </div>
-                    <div class="info-item">
+                    <div class="info-item" data-field="locations">
                         <strong>Plaatsen:</strong>
                         <span id="locations">-</span>
                     </div>
-                    <div class="info-item">
+                    <div class="info-item" data-field="associations">
                         <strong>Associaties:</strong>
                         <span id="associations">-</span>
                     </div>
-                    <div class="info-item">
+                    <div class="info-item" data-field="uses">
                         <strong>Toepassingen:</strong>
                         <span id="uses">-</span>
                     </div>
-                    <div class="info-item">
+                    <div class="info-item" data-field="etymology">
                         <strong>Naam oorsprong:</strong>
                         <span id="etymology">-</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Mark Done for THIS mineral -->
+            <!-- MARK DONE - JS handles -->
             <div class="mark-done-section">
                 <div class="done-header">
                     <h2>✅ MINERAAL BESTUDEERD</h2>
                     <div class="gems-reward">💎💎</div>
                 </div>
-                <button id="markMineralDone" class="mark-done-btn">+2 GEMS EARNED</button>
+                <button id="markMineralDone" class="mark-done-btn">+2 GEMS</button>
             </div>
         </article>
     </main>

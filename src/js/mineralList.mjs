@@ -6,10 +6,14 @@ function mineralCardTemplate(mineral) {
   return `
     <li class="mineral-card">
       <a href="/mineral/?mineral=${mineral.number}&category=${this.category}">
-        <img src="${proxyImg}" alt="${mineral.name}" loading="lazy">
-        <h3>${mineral.name}</h3>
-        <p class="formula">${mineral.formula}</p>
-        <p class="properties">${mineral.properties[0]}</p>
+        <div class="mineral-image">
+          <img src="${proxyImg}" alt="${mineral.name}" loading="lazy">
+        </div>
+        <div class="mineral-info">
+          <h3>${mineral.name}</h3>
+          <div class="formula">${mineral.formula}</div>
+          <div class="mineral-properties">${mineral.properties[0]}</div>
+        </div>
       </a>
     </li>
   `;

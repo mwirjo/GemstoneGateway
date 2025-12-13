@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D&D Dragon Stat Block Generator</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title>🐉 D&D Dragon Stat Block Generator - Gemstone Gateway</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dragon.css">
   <script type="module" src="/js/preloader.js"></script>
   <script type="module" src="/js/dragon.js" defer></script>
-
 </head>
 
 <body>
@@ -34,9 +34,10 @@
 
   <!-- Main content -->
   <div id="main-content">
-    <header class="divider">
+    <!-- ENHANCED HEADER with Dragon Theme -->
+    <header class="divider dragon-header">
       <div class="logo">
-        <img src="../images/logos/logo.png" alt="tent image for logo" />
+        <img src="/images/logos/logo.png" alt="tent image for logo" />
         <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
       </div>
       <div class="player-status">
@@ -55,56 +56,107 @@
       </div>
     </header>
 
+    <!-- DRAGON HERO BANNER -->
+    <section class="dragon-hero">
+      <div class="hero-content">
+        <h1 class="dragon-hero-title">🐲 Dragon Lair</h1>
+        <p class="dragon-hero-subtitle">Hatch your wyrmling, train it with gems, summon ancient dragons!</p>
+        <div class="hero-stats">
+          <span class="stat-item">🥚 <strong>10 Wyrmlings</strong> Available</span>
+          <span class="stat-item">⚔️ <strong>43 Dragons</strong> in Bestiary</span>
+          <span class="stat-item">💎 <strong>Feed</strong> to Level Up</span>
+        </div>
+      </div>
+    </section>
+
     <main class="divider">
       <div class="character-container">
-        
-
-        
+        <!-- PROGRESS BAR FOR DRAGON LEVEL -->
+        <div class="dragon-progress-section">
+          <div class="progress-header">
+            <h3>🐉 Dragon Growth</h3>
+            <span id="dragon-xp">0 / 100 XP</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="dragon-progress-bar" id="dragon-progress-bar"></div>
+          </div>
+        </div>
 
         <!-- Owned Dragons Section -->
         <div id="ownedDragons" class="dragon-section owned-dragons">
-          <h2>🐉 Owned Dragons</h2>
+          <h2>🥚 Your Wyrmling</h2>
           <div id="ownedDragonContent">
-            <p>No dragons owned yet. <strong>Hatch your first dragon!</strong></p>
-            <button id="reset-dragon-btn"
-              style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
-              🗑️ Delete Wyrmling (Dev)
-            </button>
+            <div class="no-dragon-placeholder">
+              <div class="egg-animation">🥚</div>
+              <p class="no-dragon-text">No dragons owned yet.</p>
+              <p><strong>Hatch your first wyrmling companion!</strong></p>
+              <button id="hatchDragon" class="hatch-btn">🥚 Hatch Wyrmling</button>
+            </div>
           </div>
-          
-          
         </div>
 
         <!-- Summon Dragon Section -->
         <div id="summonDragon" class="dragon-section summon-dragon">
-          <h2>⚡ Summon Dragon</h2>
-          <button id="generateBtn">Generate Dragon Stat Block</button>
+          <h2>⚡ Summon Ancient Dragon</h2>
+          <div class="summon-controls">
+            <button id="generateBtn" class="summon-btn">🎲 Generate Random Dragon</button>
+            <div class="summon-options">
+              <label for="dragonFilter">Filter:</label>
+              <select id="dragonFilter">
+                <option value="all">All Dragons</option>
+                <option value="wyrmling">Wyrmlings Only</option>
+                <option value="adult">Adult Dragons</option>
+                <option value="ancient">Ancient Dragons</option>
+              </select>
+            </div>
+          </div>
         </div>
 
-        <hr>
+        <hr class="dragon-divider">
 
-        <h2>Generated Stat Block:</h2>
-        <div id="statBlockDetails">
-          <div display="none"><label for="givename">Give your dragon a Name:</label>
-            <input type="text" id="givename" placeholder="Enter custom name">
+        <!-- Generated Stat Block -->
+        <div class="stat-block-section">
+          <h2>📜 Generated Stat Block</h2>
+          <div id="statBlockDetails">
+            <div class="name-input-container">
+              <label for="givename">👤 Custom Dragon Name:</label>
+              <input type="text" id="givename" placeholder="Enter epic dragon name...">
+              <button id="applyNameBtn" class="apply-name-btn">✨ Apply Name</button>
+            </div>
+            <p class="stat-placeholder">Click "Generate Random Dragon" to summon a mighty beast from the D&D 5e
+              bestiary!</p>
           </div>
-          <p>Click "Generate Dragon Stat Block" to load a random dragon.</p>
+        </div>
+
+        <!-- DRAGON QUICK STATS -->
+        <div class="dragon-quick-stats">
+          <div class="quick-stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Owned Wyrmling</span>
+          </div>
+          <div class="quick-stat">
+            <span class="stat-number" id="totalSummons">0</span>
+            <span class="stat-label">Dragons Summoned</span>
+          </div>
+          <div class="quick-stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Gems per Feed</span>
+          </div>
         </div>
       </div>
     </main>
 
-    <footer>
-      &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online
+    <!-- DRAGON FOOTER with Quick Actions -->
+    <footer class="dragon-footer">
+      <div class="footer-content">
+        <p>&copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online</p>
+        <div class="quick-actions">
+          <button class="quick-action-btn" id="devResetLevel">🔄 Dev Reset</button>
+          <a href="/index.html" class="quick-action-btn">🏠 Home</a>
+        </div>
+      </div>
     </footer>
   </div>
-
-
-    
-
-    
-    
-   
-  
 </body>
 
 </html>
