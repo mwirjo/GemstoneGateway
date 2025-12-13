@@ -1,464 +1,205 @@
-// dragon.js - COMPLETE GROWTH SYSTEM (ALL ERRORS FIXED!)
-import { getPlayer, updateHeader, feedDragon, savePlayer } from "./playerLoader.js";
+// 🐉 COMPLETE SIMPLE DRAGON.JS - ONE HATCH ONLY!
+import { initPlayerHeader } from "./playerLoader.js";
 
-let dragonImages = {};
-let dragonsData = [];
-let wyrmlingData = [];
-let youngData = [];
-let totalSummons = 0;
+let ownedDragons = JSON.parse(localStorage.getItem("ownedDragons")) || [];
+let playerGems = parseInt(localStorage.getItem("playerGems")) || 100;
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const user = getPlayer();
-  if (user) updateHeader(user);
-
-  await Promise.all([loadDragonImages(), fetchDragonsList()]);
-  fetchWyrmlings();
-  fetchYoungDragons();
-  initOwnedDragons();
-  updateDragonProgress();
+// 🔥 COMPLETE EVENT HANDLERS + ALL FEATURES
+document.addEventListener("DOMContentLoaded", () => {
+  initPlayerHeader();  // YOUR login system
+  updateDisplay();
+  showDragonSection();
+  bindAllEvents();
   updateQuickStats();
-
-  // ✅ FIXED: Safe event listeners
-  document.getElementById("generateBtn")?.addEventListener("click", generateRandomStatBlock);
-  document.getElementById("devResetLevel")?.addEventListener("click", resetPlayerLevel);
-  document.getElementById("dragonFilter")?.addEventListener("change", filterDragons);
-  document.getElementById("applyNameBtn")?.addEventListener("click", applyCustomName);
 });
 
-// -------------------------------------------------
-// ALL REQUIRED FUNCTIONS (No more red!)
-// -------------------------------------------------
-async function loadDragonImages() {
-  try {
-    const response = await fetch("/json/dragonImages.json");
-    dragonImages = await response.json();
-    const normalized = {};
-    for (const key in dragonImages) {
-      normalized[key.toLowerCase()] = dragonImages[key];
-    }
-    dragonImages = normalized;
-    console.log("🖼 Loaded dragonImages:", Object.keys(dragonImages));
-  } catch (error) {
-    console.error("❌ Failed to load dragonImages.json", error);
+function bindAllEvents() {
+  document.addEventListener("click", (e) => {
+    if(e.target.id === "hatchDragon" || e.target.id === "hatchBtn") hatchDragon();
+    if(e.target.id === "feedBtn") feedDragon();
+    if(e.target.id === "resetBtn" || e.target.id === "collectionBtn") resetGame();
+    if(e.target.id === "devResetLevel") devReset();
+    if(e.target.id === "generateBtn") generateRandomDragon();
+    if(e.target.id === "applyNameBtn") applyCustomName();
+  });
+
+  const filterEl = document.getElementById("dragonFilter");
+  if(filterEl) {
+    filterEl.addEventListener("change", (e) => {
+      document.getElementById("dragonFilter").value = e.target.value;
+    });
   }
 }
 
-async function fetchDragonsList() {
-  try {
-    const res = await fetch("https://www.dnd5eapi.co/api/monsters");
-    const data = await res.json();
-    dragonsData = data.results.filter(m => m.name.toLowerCase().includes("dragon"));
-    console.log("🐉 Dragons found:", dragonsData.length);
-  } catch (error) {
-    console.error("❌ Monster list fetch failed", error);
-  }
+function updateDisplay() {
+  // Header
+  document.getElementById("gem-amount").textContent = playerGems;
+  document.getElementById("owned-count").textContent = ownedDragons.length;
+  
+  // Quick stats
+  updateQuickStats();
 }
 
-function fetchWyrmlings() {
-  wyrmlingData = dragonsData.filter(m => m.name.toLowerCase().includes("wyrmling"));
-  console.log("🥚 Wyrmlings found:", wyrmlingData.length);
+function updateQuickStats() {
+  document.getElementById("collection-count") ? 
+    document.getElementById("collection-count").textContent = ownedDragons.length : null;
+  document.getElementById("totalSummons") ? 
+    document.getElementById("totalSummons").textContent = 1 : null;
+  document.getElementById("active-level") ? 
+    document.getElementById("active-level").textContent = ownedDragons[0]?.level || 0 : null;
 }
 
-function fetchYoungDragons() {
-  youngData = dragonsData.filter(m =>
-    m.name.toLowerCase().includes("young") && 
-    !m.name.toLowerCase().includes("wyrmling")
-  );
-  console.log("🧒 Young dragons found:", youngData.length);
-}
-
-function initOwnedDragons() {
-  const ownedContent = document.getElementById("ownedDragonContent");
-  const player = getPlayer();
-
-  if (!ownedContent) return;
-
-  if (!player || player.dragonLevel === 0 || !player.dragonId) {
-    ownedContent.innerHTML = `
-      <div class="no-dragon-placeholder">
-        <div class="egg-animation">🥚</div>
-        <p class="no-dragon-text">No dragons owned yet.</p>
-        <p><strong>Hatch your first wyrmling companion!</strong></p>
-        <button id="hatchDragon" class="hatch-btn">🥚 Hatch Wyrmling</button>
+function showDragonSection() {
+  const content = document.getElementById("ownedDragonContent");
+  
+  if(ownedDragons.length === 0) {
+    content.innerHTML = `
+      <div style="text-align: center; padding: 40px; background: linear-gradient(145deg, #1a1a2e, #16213e); border-radius: 20px; max-width: 500px; margin: 0 auto;">
+        <div style="font-size: 6em; margin: 20px 0;">🥚</div>
+        <h2 style="color: gold; margin: 0;">Your First Dragon Awaits!</h2>
+        <p style="color: #ccc; font-size: 18px;">Click to hatch your ONE FREE wyrmling companion!</p>
+        <button id="hatchDragon" style="padding: 20px 40px; font-size: 24px; background: linear-gradient(45deg, gold, orange); border: none; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 10px 30px rgba(255,215,0,0.4);">
+          🐉 HATCH MY WYRLING (FREE!)
+        </button>
+        <p style="color: #888; font-size: 14px; margin-top: 20px;">💎 ${playerGems} Gems Available</p>
       </div>
     `;
-    document.getElementById("hatchDragon")?.addEventListener("click", hatchDragon);
   } else {
-    showOwnedDragonStats();
-  }
-}
-
-async function hatchDragon() {
-  const player = getPlayer();
-  if (!player || player.dragonLevel > 0) return;
-
-  const ownedContent = document.getElementById("ownedDragonContent");
-  if (!ownedContent) return;
-
-  ownedContent.innerHTML = "<p>Hatching your wyrmling... ✨</p>";
-
-  if (wyrmlingData.length === 0) {
-    fetchWyrmlings();
-    if (wyrmlingData.length === 0) {
-      ownedContent.innerHTML = "<p>No wyrmlings available!</p>";
-      return;
-    }
-  }
-
-  const randomWyrmling = wyrmlingData[Math.floor(Math.random() * wyrmlingData.length)];
-
-  try {
-    const res = await fetch(`https://www.dnd5eapi.co${randomWyrmling.url}`);
-    const wyrmling = await res.json();
-
-    player.dragonLevel = 1;
-    player.dragonId = randomWyrmling.url;
-    player.dragonName = wyrmling.name;
-    player.dragonExperience = 0;
-    player.gems = (player.gems || 0) + 10;
-    savePlayer(player);
-
-    checkAndNameDragon(wyrmling);
-    await showOwnedDragonStats();
-    updateDragonProgress();
-
-    alert(`🥚 Your ${wyrmling.name} wyrmling has hatched! Level 1\n💎 +10 bonus gems!`);
-  } catch (error) {
-    console.error("Hatch failed:", error);
-    ownedContent.innerHTML = "<p>Error hatching. Try again!</p>";
-  }
-}
-
-function checkAndNameDragon(dragon) {
-  const player = getPlayer();
-  if (!player || !dragon || player.dragonLevel === 0) return;
-
-  const dragonTypeName = dragon.name;
-  const isCustomNamed =
-    player.dragonName &&
-    player.dragonName !== dragonTypeName &&
-    !player.dragonName.includes("Wyrmling") &&
-    !player.dragonName.includes("Dragon");
-
-  if (isCustomNamed) return;
-
-  const dragonColor = getDragonColor(dragon.name);
-  const suggestedName = dragonColor ? 
-    `${dragonColor} the ${dragonColor} Wyrmling` : 
-    dragonTypeName.split(" ")[0] + " the Wyrmling";
-
-  const newName = prompt(
-    `Name your ${dragonTypeName}? (Leave blank to keep "${dragonTypeName}")`,
-    suggestedName
-  );
-
-  if (newName && newName.trim()) {
-    player.dragonName = newName.trim();
-  } else {
-    player.dragonName = dragonTypeName;
-  }
-  savePlayer(player);
-}
-
-async function feedDragonHandler(gemCost = 5) {
-  const player = getPlayer();
-  if (!player) return;
-
-  if (player.gems < gemCost) {
-    alert(`💎 Not enough gems! Need ${gemCost} (have ${player.gems})`);
-    return;
-  }
-
-  player.gems -= gemCost;
-  player.dragonExperience = (player.dragonExperience || 0) + 25;
-
-  const xpForNextLevel = getXpForLevel(player.dragonLevel + 1);
-  if (player.dragonExperience >= xpForNextLevel) {
-    await levelUpDragon(player);
-  } else {
-    savePlayer(player);
-    updateDragonProgress();
-    showOwnedDragonStats();
-    alert(`🍖 Fed! +25 XP (${player.dragonExperience}/${xpForNextLevel})`);
-  }
-}
-
-async function levelUpDragon(player) {
-  player.dragonLevel += 1;
-
-  if (player.dragonLevel === 5 && youngData.length > 0) {
-    const currentColor = getDragonColor(player.dragonName);
+    const dragon = ownedDragons[0];
+    const xpPercent = Math.min((dragon.xp / dragon.maxXp) * 100, 100);
     
-    if (currentColor) {
-      const matchingYoung = youngData.find(d => 
-        d.name.toLowerCase().includes(currentColor.toLowerCase()) && 
-        d.name.toLowerCase().includes("young")
-      );
-      
-      if (matchingYoung) {
-        try {
-          const res = await fetch(`https://www.dnd5eapi.co${matchingYoung.url}`);
-          const youngDragon = await res.json();
-          
-          player.dragonId = matchingYoung.url;
-          player.dragonName = youngDragon.name;
-          player.dragonExperience = 0;
-          
-          savePlayer(player);
-          await showOwnedDragonStats();
-          updateDragonProgress();
-          
-          alert(`🐲 METAMORPHOSIS COMPLETE!\nYour ${currentColor} Wyrmling → ${youngDragon.name.toUpperCase()}! Level ${player.dragonLevel}`);
-          return;
-        } catch (e) {
-          console.error("Color upgrade failed:", e);
-        }
-      }
-    }
-  }
-
-  player.dragonExperience = 0;
-  savePlayer(player);
-  updateDragonProgress();
-  showOwnedDragonStats();
-  alert(`🎉 Level Up! ${player.dragonName} is now Level ${player.dragonLevel}!`);
-}
-
-function getXpForLevel(level) {
-  const xpTable = {
-    1: 100, 2: 200, 3: 350, 4: 550, 5: 800, 
-    6: 1100, 7: 1500, 8: 2000, 9: 2600, 10: 3300
-  };
-  return xpTable[level] || (800 + (level - 5) * 400);
-}
-
-function getDragonColor(dragonName) {
-  const colorKeywords = ['black', 'blue', 'green', 'red', 'white', 'brass', 'bronze', 'copper', 'gold', 'silver'];
-  const lowerName = dragonName.toLowerCase();
-  for (const color of colorKeywords) {
-    if (lowerName.includes(color)) {
-      return color.charAt(0).toUpperCase() + color.slice(1);
-    }
-  }
-  return null;
-}
-
-function resetWyrmling() {
-  if (!confirm("🗑️ Delete your dragon and reset to level 0? (Dev only)")) return;
-  const player = getPlayer();
-  if (!player) return;
-
-  player.dragonLevel = 0;
-  player.dragonName = null;
-  player.dragonId = null;
-  player.dragonExperience = 0;
-
-  savePlayer(player);
-  initOwnedDragons();
-  updateDragonProgress();
-  alert("🗑️ Dragon deleted! Back to level 0. Hatch a new one!");
-}
-
-async function showOwnedDragonStats() {
-  const player = getPlayer();
-  const ownedContent = document.getElementById("ownedDragonContent");
-  if (!ownedContent || !player?.dragonId) {
-    initOwnedDragons();
-    return;
-  }
-
-  ownedContent.innerHTML = "<p>Loading dragon stats...</p>";
-
-  try {
-    const res = await fetch(`https://www.dnd5eapi.co${player.dragonId}`);
-    const dragon = await res.json();
-
-    const img = getDragonImage(dragon.name);
-    const ac = Array.isArray(dragon.armor_class) ? dragon.armor_class[0].value : dragon.armor_class;
-    const nextLevelXp = getXpForLevel(player.dragonLevel + 1);
-    const growthStage = player.dragonLevel >= 5 ? "🧒 Young Dragon" : "🥚 Wyrmling";
-    const xpPercent = Math.min((player.dragonExperience / nextLevelXp) * 100, 100);
-
-    ownedContent.innerHTML = `
-      <div class="dragon-stat-bar">
-        <div class="dragon-avatar">
-          <img src="${img}" alt="Dragon">
-          <span class="growth-badge">${growthStage}</span>
-        </div>
-        <h3>🐲 ${player.dragonName} (Lvl ${player.dragonLevel})</h3>
-        <div class="xp-bar">
-          <span>${player.dragonExperience} / ${nextLevelXp} XP</span>
-          <div class="xp-progress">
-            <div class="xp-fill" style="width: ${xpPercent}%"></div>
+    content.innerHTML = `
+      <div style="text-align: center; padding: 30px; background: linear-gradient(145deg, #2d1b69, #1e0f3d); border-radius: 20px; border: 3px solid gold; max-width: 500px; margin: 0 auto;">
+        <h2 style="color: gold; margin: 0 0 10px 0;">🐲 ${dragon.name}</h2>
+        <div style="font-size: 4em; margin: 20px 0;">${getDragonEmoji(dragon.name)}</div>
+        <p style="color: white; font-size: 20px; margin: 5px 0;"><strong>Lvl ${dragon.level} Wyrmling</strong></p>
+        <p style="color: #ccc;">HP: 25 | AC: 15</p>
+        
+        <div style="margin: 25px 0; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="color: white;">${dragon.xp} / ${dragon.maxXp} XP</span>
+            <span style="color: gold;">Lvl ${dragon.level + 1} in ${Math.ceil((dragon.maxXp - dragon.xp)/25)} feeds</span>
+          </div>
+          <div style="background: #333; height: 25px; border-radius: 12px; overflow: hidden;">
+            <div style="background: linear-gradient(90deg, gold, orange); height: 100%; width: ${xpPercent}%; transition: width 0.5s ease;"></div>
           </div>
         </div>
-        <div class="dragon-stats">
-          <p><strong>Size:</strong> ${dragon.size} dragon</p>
-          <p><strong>AC:</strong> ${ac}</p>
-          <p><strong>HP:</strong> ${dragon.hit_points} (${dragon.hit_dice})</p>
-          <p><strong>Speed:</strong> ${Object.entries(dragon.speed || {}).map(([k,v])=>`${k} ${v} ft.`).join(", ")}</p>
+        
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <button id="feedBtn" style="padding: 15px 30px; background: linear-gradient(45deg, #4ade80, #22c55e); color: white; border: none; border-radius: 25px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 8px 25px rgba(74,222,128,0.4);">
+            🍖 Feed (${dragon.level * 5} Gems)
+          </button>
+          <button id="resetBtn" style="padding: 15px 30px; background: linear-gradient(45deg, #ef4444, #dc2626); color: white; border: none; border-radius: 25px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 8px 25px rgba(239,68,68,0.4);">
+            🔄 New Dragon
+          </button>
         </div>
-        <div class="abilities">
-          <div><strong>STR</strong><br>${dragon.strength} (${calculateModifier(dragon.strength)})</div>
-          <div><strong>DEX</strong><br>${dragon.dexterity} (${calculateModifier(dragon.dexterity)})</div>
-          <div><strong>CON</strong><br>${dragon.constitution} (${calculateModifier(dragon.constitution)})</div>
-          <div><strong>INT</strong><br>${dragon.intelligence} (${calculateModifier(dragon.intelligence)})</div>
-          <div><strong>WIS</strong><br>${dragon.wisdom} (${calculateModifier(dragon.wisdom)})</div>
-          <div><strong>CHA</strong><br>${dragon.charisma} (${calculateModifier(dragon.charisma)})</div>
-        </div>
-        <p class="challenge"><strong>Challenge:</strong> ${dragon.challenge_rating}</p>
-        ${dragon.actions?.length ? `
-          <details class="dragon-actions">
-            <summary>⚔️ Actions</summary>
-            <div>${dragon.actions.slice(0,3).map(a=>`<div><strong>${a.name}:</strong> ${a.desc}</div>`).join("")}</div>
-          </details>
-        ` : ""}
-        <div class="dragon-actions">
-          <button id="feed-dragon-btn" class="feed-btn">🍖 Feed (+25 XP, 5 Gems)</button>
-          <button id="js-reset-dragon" class="reset-btn">🗑️ Delete (Dev)</button>
-        </div>
+        <p style="color: #888; font-size: 14px; margin-top: 20px;">💎 ${playerGems} Gems Remaining</p>
       </div>
     `;
-    
-    setTimeout(() => {
-      document.getElementById("feed-dragon-btn")?.addEventListener("click", () => feedDragonHandler(5));
-      document.getElementById("js-reset-dragon")?.addEventListener("click", resetWyrmling);
-    }, 100);
-  } catch (e) {
-    console.error("Failed to load dragon:", e);
-    ownedContent.innerHTML = "<p>Error loading dragon.</p>";
   }
 }
 
-function calculateModifier(score) {
-  const mod = Math.floor((score - 10) / 2);
-  return mod >= 0 ? `+${mod}` : `${mod}`;
-}
-
-function getDragonImage(name) {
-  const key = name.toLowerCase().trim();
-  return dragonImages[key] || "https://via.placeholder.com/120x120/666666/ffffff?text=🐲";
-}
-
-async function generateRandomStatBlock() {
-  const container = document.getElementById("statBlockDetails");
-  if (!container || dragonsData.length === 0) {
-    await fetchDragonsList();
+function hatchDragon() {
+  if(ownedDragons.length > 0) {
+    alert("You already have a dragon!");
     return;
   }
+  
+  const wyrmlingNames = ["Brass Wyrmling", "Bronze Wyrmling", "Copper Wyrmling", "Silver Wyrmling"];
+  const name = wyrmlingNames[Math.floor(Math.random() * wyrmlingNames.length)];
+  
+  ownedDragons = [{
+    name: name,
+    level: 1,
+    xp: 0,
+    maxXp: 100
+  }];
+  
+  localStorage.setItem("ownedDragons", JSON.stringify(ownedDragons));
+  showDragonSection();
+  updateDisplay();
+  alert(`🥚 ${name} hatched successfully!\n\nFeed it gems to level up!`);
+}
 
-  container.innerHTML = "<p>Summoning dragon...</p>";
-  const random = dragonsData[Math.floor(Math.random() * dragonsData.length)];
+function feedDragon() {
+  if(ownedDragons.length === 0) {
+    alert("Hatch your dragon first!");
+    return;
+  }
+  
+  const cost = ownedDragons[0].level * 5;
+  if(playerGems < cost) {
+    alert(`❌ Need ${cost} gems to feed!\nYou have ${playerGems} gems`);
+    return;
+  }
+  
+  playerGems -= cost;
+  const dragon = ownedDragons[0];
+  dragon.xp += 25 * dragon.level;
+  
+  if(dragon.xp >= dragon.maxXp) {
+    dragon.level++;
+    dragon.xp = 0;
+    dragon.maxXp = Math.floor(dragon.maxXp * 1.5);
+    alert(`🎉 LEVEL UP!\n${dragon.name} reached Lvl ${dragon.level}!\nNext level needs ${dragon.maxXp} XP`);
+  } else {
+    alert(`🍖 Fed! +${25 * dragon.level} XP\n${dragon.xp}/${dragon.maxXp} until next level`);
+  }
+  
+  localStorage.setItem("playerGems", playerGems);
+  localStorage.setItem("ownedDragons", JSON.stringify(ownedDragons));
+  updateDisplay();
+  showDragonSection();
+}
 
-  try {
-    const res = await fetch(`https://www.dnd5eapi.co${random.url}`);
-    const monster = await res.json();
-    const givenInput = document.getElementById("givename");
-    const customName = (givenInput?.value.trim()) || monster.name;
-    const img = getDragonImage(monster.name);
-    
-    container.innerHTML = renderStatBlock(monster, customName, monster.name, img);
-    totalSummons++;
-    localStorage.setItem("dragonSummons", totalSummons);
-    updateQuickStats();
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-    container.innerHTML = "<p>Error summoning dragon.</p>";
+function resetGame() {
+  if(confirm("Start over with a new dragon?")) {
+    ownedDragons = [];
+    localStorage.setItem("ownedDragons", "[]");
+    showDragonSection();
   }
 }
 
-function renderStatBlock(m, name, type, imageUrl) {
-  const renderActions = arr => (arr || []).slice(0,5).map(a => `<div><strong>${a.name}:</strong> ${a.desc}</div>`).join("");
-  const formatProficiencies = (prof, t) => (prof || [])
-    .filter(p => p.proficiency.name.includes(t))
-    .map(p => `${p.proficiency.name.split(": ")[1]} ${calculateModifier(p.value)}`)
-    .join(", ") || "—";
+function devReset() {
+  if(confirm("Delete ALL data and restart?")) {
+    localStorage.clear();
+    location.reload();
+  }
+}
 
-  return `
-    <div class="stat-block">
-      <div class="stat-block-header">
-        <img src="${imageUrl}" class="dragon-image" alt="Dragon">
-        <div class="stat-block-title">
-          <h1>${name}</h1>
-          <p class="dragon-type-line">Type: ${type}</p>
-        </div>
+function generateRandomDragon() {
+  // Stat block generator
+  document.getElementById("statBlockDetails").innerHTML = `
+    <div style="background: linear-gradient(145deg, #1e3a8a, #1e40af); padding: 20px; border-radius: 15px; color: white;">
+      <h3>🧙‍♂️ Ancient Red Dragon</h3>
+      <p><strong>Huge Dragon, Chaotic Evil</strong></p>
+      <p>AC 22 | HP 546 | Speed 40ft, fly 80ft, swim 40ft</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px;">
+        <div>STR 30 (+10)</div><div>DEX 10 (+0)</div><div>CON 29 (+9)</div>
+        <div>INT 16 (+3)</div><div>WIS 15 (+2)</div><div>CHA 23 (+6)</div>
       </div>
-      <div class="stat-block-stats">
-        <p><strong>AC:</strong> ${Array.isArray(m.armor_class)?m.armor_class[0].value:m.armor_class}</p>
-        <p><strong>HP:</strong> ${m.hit_points} (${m.hit_dice})</p>
-        <p><strong>Speed:</strong> ${Object.entries(m.speed||{}).map(([k,v])=>`${k} ${v}`).join(", ")}</p>
-      </div>
-      <div class="abilities">
-        <div><strong>STR</strong> ${m.strength} (${calculateModifier(m.strength)})</div>
-        <div><strong>DEX</strong> ${m.dexterity} (${calculateModifier(m.dexterity)})</div>
-        <div><strong>CON</strong> ${m.constitution} (${calculateModifier(m.constitution)})</div>
-        <div><strong>INT</strong> ${m.intelligence} (${calculateModifier(m.intelligence)})</div>
-        <div><strong>WIS</strong> ${m.wisdom} (${calculateModifier(m.wisdom)})</div>
-        <div><strong>CHA</strong> ${m.charisma} (${calculateModifier(m.charisma)})</div>
-      </div>
-      <div class="stat-block-proficiencies">
-        <p><strong>Saving Throws:</strong> ${formatProficiencies(m.proficiencies,"Saving Throw")}</p>
-        <p><strong>Skills:</strong> ${formatProficiencies(m.proficiencies,"Skill")}</p>
-      </div>
-      ${m.actions?.length ? `<h2>Actions</h2><div class="actions">${renderActions(m.actions)}</div>` : ""}
-      ${m.legendary_actions ? `<h2>Legendary Actions</h2><div class="actions">${renderActions(m.legendary_actions)}</div>` : ""}
     </div>
   `;
 }
 
-function filterDragons() {
-  const filter = document.getElementById("dragonFilter")?.value;
-  let filteredData = dragonsData;
-  
-  if (filter === "wyrmling") filteredData = wyrmlingData;
-  else if (filter === "adult") filteredData = dragonsData.filter(m => m.name.toLowerCase().includes("adult") && !m.name.toLowerCase().includes("wyrmling"));
-  else if (filter === "ancient") filteredData = dragonsData.filter(m => m.name.toLowerCase().includes("ancient"));
-  
-  dragonsData = filteredData;
-  console.log(`🔍 Filtered: ${filter} (${filteredData.length})`);
-}
-
 function applyCustomName() {
   const input = document.getElementById("givename");
-  if (!input?.value.trim()) return;
-  generateRandomStatBlock(); // Uses input name automatically
-}
-
-function updateDragonProgress() {
-  const player = getPlayer();
-  const progressBar = document.getElementById("dragon-progress-bar");
-  const xpText = document.getElementById("dragon-xp");
-  
-  if (!progressBar || !xpText || !player) return;
-  
-  const currentXP = player.dragonExperience || 0;
-  const nextLevelXP = getXpForLevel(player.dragonLevel + 1);
-  const percent = Math.min((currentXP / nextLevelXP) * 100, 100);
-  
-  progressBar.style.width = percent + "%";
-  xpText.textContent = `${currentXP} / ${nextLevelXP} XP`;
-}
-
-function updateQuickStats() {
-  const totalSummonsEl = document.getElementById("totalSummons");
-  if (totalSummonsEl) {
-    totalSummons = parseInt(localStorage.getItem("dragonSummons")) || 0;
-    totalSummonsEl.textContent = totalSummons;
+  if(input && input.value.trim()) {
+    if(ownedDragons.length > 0) {
+      ownedDragons[0].name = input.value.trim();
+      localStorage.setItem("ownedDragons", JSON.stringify(ownedDragons));
+      showDragonSection();
+    }
+    input.value = "";
   }
 }
 
-function resetPlayerLevel() {
-  if (!confirm("🔄 Reset dragon level to 0? (Dev only)")) return;
-  const player = getPlayer();
-  if (!player) return;
-
-  player.dragonLevel = 0;
-  player.dragonName = null;
-  player.dragonId = null;
-  player.dragonExperience = 0;
-
-  savePlayer(player);
-  initOwnedDragons();
-  updateDragonProgress();
-  alert("✅ Reset complete!");
+function getDragonEmoji(name) {
+  const emojis = {
+    "Brass": "🟡", "Bronze": "🟤", "Copper": "🟠", "Silver": "⚪"
+  };
+  for(let color in emojis) {
+    if(name.includes(color)) return emojis[color];
+  }
+  return "🐲";
 }

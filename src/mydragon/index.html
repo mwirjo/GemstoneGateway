@@ -62,8 +62,8 @@
         <h1 class="dragon-hero-title">🐲 Dragon Lair</h1>
         <p class="dragon-hero-subtitle">Hatch your wyrmling, train it with gems, summon ancient dragons!</p>
         <div class="hero-stats">
-          <span class="stat-item">🥚 <strong>10 Wyrmlings</strong> Available</span>
-          <span class="stat-item">⚔️ <strong>43 Dragons</strong> in Bestiary</span>
+          <span class="stat-item">🥚 <strong id="wyrmling-count">10</strong> Wyrmlings Available</span>
+          <span class="stat-item">⚔️ <strong>43</strong> Dragons in Bestiary</span>
           <span class="stat-item">💎 <strong>Feed</strong> to Level Up</span>
         </div>
       </div>
@@ -78,19 +78,23 @@
             <span id="dragon-xp">0 / 100 XP</span>
           </div>
           <div class="progress-bar-container">
-            <div class="dragon-progress-bar" id="dragon-progress-bar"></div>
+            <div class="progress-bar-bg">
+              <div class="dragon-progress-bar" id="dragon-progress-bar"></div>
+            </div>
           </div>
         </div>
 
-        <!-- Owned Dragons Section -->
+        <!-- ✅ FULL DRAGON COLLECTION SECTION -->
         <div id="ownedDragons" class="dragon-section owned-dragons">
-          <h2>🥚 Your Wyrmling</h2>
+          <h2>🐉 Your Dragon Collection (<span id="collection-count">0</span>)</h2>
           <div id="ownedDragonContent">
+            <!-- JS POPULATES FULL GRID HERE -->
             <div class="no-dragon-placeholder">
               <div class="egg-animation">🥚</div>
               <p class="no-dragon-text">No dragons owned yet.</p>
               <p><strong>Hatch your first wyrmling companion!</strong></p>
-              <button id="hatchDragon" class="hatch-btn">🥚 Hatch Wyrmling</button>
+              <button id="hatchDragon" class="hatch-btn-large">🥚 Hatch Wyrmling <span id="hatch-cost">(FREE
+                  FIRST!)</span></button>
             </div>
           </div>
         </div>
@@ -128,19 +132,19 @@
           </div>
         </div>
 
-        <!-- DRAGON QUICK STATS -->
+        <!-- ✅ DYNAMIC DRAGON QUICK STATS -->
         <div class="dragon-quick-stats">
           <div class="quick-stat">
-            <span class="stat-number">0</span>
-            <span class="stat-label">Owned Wyrmling</span>
+            <span class="stat-number" id="owned-count">0</span>
+            <span class="stat-label">Dragons Owned</span>
           </div>
           <div class="quick-stat">
             <span class="stat-number" id="totalSummons">0</span>
             <span class="stat-label">Dragons Summoned</span>
           </div>
           <div class="quick-stat">
-            <span class="stat-number">5</span>
-            <span class="stat-label">Gems per Feed</span>
+            <span class="stat-number" id="active-level">0</span>
+            <span class="stat-label">Active Dragon Lvl</span>
           </div>
         </div>
       </div>

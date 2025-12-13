@@ -1,13 +1,12 @@
 // modes.js - COMPLETE PRODUCTION SAFE VERSION
 import { qs, setClick, initBurgerMenu} from "./utils.mjs";
-import { getPlayer, updateHeader, addGems } from "./playerLoader.js";
+import { getPlayer, addGems, initPlayerHeader } from "./playerLoader.js";
 
 // SINGLE DOMContentLoaded - ALL INITIALIZATION
 document.addEventListener("DOMContentLoaded", async () => {
     initBurgerMenu(); // Uses utils!
     // 1. Player header (safe)
-    const user = getPlayer();
-    if (user) updateHeader(user);
+    initPlayerHeader();
 
     // 2. Mode navigation buttons
     const modeMap = {

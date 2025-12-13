@@ -2,7 +2,9 @@
 import { getParam } from "./utils.mjs";
 import MineralServices from "./mineralServices.mjs";
 import MineralList from "./mineralList.mjs";
+import { initPlayerHeader } from "./playerLoader";
 
+initPlayerHeader();
 const category = getParam("category") || "elements";
 const dataSource = new MineralServices(category);  // ✅ PASS category!
 const element = document.querySelector("#minerals-grid");
@@ -13,3 +15,4 @@ if (element) {
 } else {
   console.error("❌ #minerals-grid element not found");
 }
+

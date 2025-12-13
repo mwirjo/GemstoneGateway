@@ -178,7 +178,7 @@ header {
 }
 
 .gems-reward {
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(rem, 6vw, 3rem);
   color: #28a745;
   font-weight: bold;
 }
@@ -914,6 +914,35 @@ header {
   transform: none;
 }
 
+/* Simple Header Logout Button - Production Ready */
+#logout-btn {
+  display: none;
+  /* Hidden until logged in */
+  background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+  color: white;
+  border: none;
+  padding: 12px ;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#logout-btn:hover {
+  background: linear-gradient(145deg, #ff5252, #d32f2f);
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+}
+
+#logout-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
 /* --------------------- RESPONSIVE - PERFECT BURGER --------------------- */
 @media (max-width: 1024px) {
   :root {
@@ -939,6 +968,12 @@ header {
 
 @media (max-width: 768px) {
 
+  #logout-btn {
+      width: 100%;
+      margin-top: 15px;
+      padding: 15px;
+      font-size: 1.1rem;
+    }
   /* MOBILE BURGER - SHOW BUTTON + HIDE STATUS */
   .burger-btn {
     display: flex !important;

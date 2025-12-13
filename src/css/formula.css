@@ -1,0 +1,172 @@
+/* formula.css - Mineral Formula Game Styles */
+
+
+
+.game-section {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: linear-gradient(145deg, #0f0f23, #1a1a3a);
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-section h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(0, 212, 170, 0.5);
+    background: linear-gradient(45deg, #00d4aa, #00b894);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.minerals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.8rem;
+    margin: 2.5rem 0;
+}
+
+
+
+
+
+
+
+
+
+.mineral-index {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.formula-input {
+    display: flex;
+    gap: 1.5rem;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#formula-input {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    backdrop-filter: blur(20px);
+    font-family: monospace;
+    transition: all 0.3s ease;
+}
+
+#formula-input:focus {
+    outline: none;
+    border-color: #00d4aa;
+    box-shadow: 0 0 30px rgba(0, 212, 170, 0.4);
+    transform: scale(1.02);
+}
+
+#formula-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: monospace;
+}
+
+#check-formula {
+    padding: 1.5rem 3rem;
+    background: linear-gradient(145deg, #00d4aa, #00b894);
+    border: none;
+    border-radius: 18px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 212, 170, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#check-formula:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 212, 170, 0.6);
+}
+
+.feedback-result {
+    padding: 2.2rem;
+    border-radius: 20px;
+    margin: 2.5rem 0;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    backdrop-filter: blur(15px);
+}
+
+.feedback-result.success {
+    background: linear-gradient(145deg, #00b894, #00d4aa);
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 184, 148, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.feedback-result.error {
+    background: linear-gradient(145deg, #e17055, #d63031);
+    color: white;
+    box-shadow: 0 20px 40px rgba(225, 112, 85, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.new-challenge-btn {
+    margin-top: 1.5rem;
+    padding: 1.2rem 2.5rem;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.new-challenge-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .minerals-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .formula-input {
+        flex-direction: column;
+    }
+
+    #check-formula {
+        padding: 1.2rem 2rem;
+        font-size: 1.1rem;
+    }
+}

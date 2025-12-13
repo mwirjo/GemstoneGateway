@@ -1,55 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D&D Dragon Stat Block Generator</title>
-  <link rel="stylesheet" href="../css/style.css">
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GemstoneGateway | Guess Mode Challenge</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/formula.css" />
+  <script type="module" src="/js/guess.js" defer></script>
 </head>
 
 <body>
-
-  <!-- Main content -->
-  <div id="main-content">
-    <header class="divider">
-      <div class="logo">
-        <img src="../images/logos/logo.png" alt="tent image for logo" />
-        <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
+  <header class="divider">
+    <div class="logo">
+      <img src="/images/logos/logo.png" alt="tent image for logo" />
+      <a href="/index.html"> Gemstone<span class="highlight">Gateway</span></a>
+    </div>
+    <div class="player-status">
+      <div class="dragon-info">
+        <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
+        <span id="dragon-level">Lvl 1</span>
       </div>
-      <div class="player-status">
-        <div class="dragon-info">
-          <img src="/images/logos/dragon-icon.png" alt="Dragon" class="icon" />
-          <span id="dragon-level">Lvl 0</span>
-        </div>
-        <div class="gems-info">
-          <img src="/images/logos/gem-icon.png" alt="Gems" class="icon" />
-          <span id="gem-amount">0</span>
-        </div>
-        <div class="player-profile">
-          <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" />
-          <span id="player-name">PlayerName</span>
-        </div>
+      <div class="gems-info">
+        <img src="/images/logos/gem-icon.png" alt="Gems" class="icon" />
+        <span id="gem-amount">0</span>
       </div>
-    </header>
+      <div class="player-profile">
+        <img src="/images/player-icon.png" alt="Player Profile" class="profile-icon" />
+        <span id="player-name">PlayerName</span>
+      </div>
+    </div>
+  </header>
 
-    <main class="divider">
-    </main>
+  <main class="divider">
+    <div class="back-btn-container">
+      <a href="/index.html" class="back-btn" id="back-to-list">← Back</a>
+    </div>
+    <section id="guess-game" class="game-section">
+      <h2>🧠 Mineral Guess Challenge</h2>
+      <div id="mineral-challenge">
+        <div id="progress-display" style="text-align:center; color:white; font-size:1.2rem; margin-bottom:1rem;"></div>
+        <div class="minerals-grid" id="minerals-grid">Loading minerals...</div>
+        <div class="formula-input">
+          <input type="text" id="formula-input" placeholder="Enter Name (e.g. SiO2, CaCO3)" />
+          <button id="check-formula">✅ Check Name</button>
+        </div>
+        <div id="feedback"></div>
+      </div>
+    </section>
+  </main>
 
-    <footer>
-      &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online
-    </footer>
-  </div>
-
-
-
-
-
-
-
-
+  <footer>
+    &copy;2025 ⛺ Gemstone Gateway ⛺ WDD 330 | Mi-an Wirjosentono ⛺ BYU-Idaho for BYU-Pathway Worldwide Online
+  </footer>
 </body>
 
 </html>

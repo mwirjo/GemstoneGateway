@@ -1,0 +1,18 @@
+{
+  "players": {
+    "Guest": {
+      "gems": 0,
+      "dragonLevel": 0,
+      "dragonExperience": 0,
+      "dragonMood": "Happy",
+      "icon": null
+    },
+    "Miner": {
+      "gems": 50,
+      "dragonLevel": 2,
+      "dragonExperience": 120,
+      "dragonMood": "Happy",
+      "icon": null
+    }
+  }
+}
