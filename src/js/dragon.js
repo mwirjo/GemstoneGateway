@@ -441,12 +441,9 @@ function resetWyrmling() {
   if (!confirm("Delete active dragon?")) return;
   const player = getPlayer();
   if (!player) return;
-
-  player.dragonLevel = 0;
-  player.dragonName = null;
-  player.dragonId = null;
-  player.dragonExperience = 0;
-
+  
+  player.resetDragon();  // ✅ AUTO-SAVES!
+  updateQuickStats();
   showOwnedCollection();
   updateDragonProgress();
   alert("Active dragon reset!");
@@ -454,18 +451,22 @@ function resetWyrmling() {
 
 function updateDragonProgress() {
   const player = getPlayer();
-  const progressBar = document.getElementById("dragon-progress-bar");  // ❌ Wrong ID?
-  const xpText = document.getElementById("dragon-xp");                 // ❌ Wrong ID?
+  const progressBar = document.querySelector(".dragon-progress-bar");  // ✅ CLASS SELECTOR
+  const xpText = document.getElementById("dragon-xp");
   
-  if (!progressBar || !xpText || !player) return;
+  if (!progressBar || !xpText || !player?.dragonLevel) return;
   
   const currentXP = player.dragonExperience || 0;
   const nextLevelXP = getXpForLevel(player.dragonLevel + 1);
   const percent = Math.min((currentXP / nextLevelXP) * 100, 100);
   
-  progressBar.style.width = `${percent}%`;  // ✅ This works!
+  // ✅ TRIPLE UPDATE for Netlify
+  progressBar.style.width = `${percent}%`;
+  progressBar.style.setProperty("width", `${percent}%`, "important");
+  
   xpText.textContent = `${currentXP}/${nextLevelXP} XP`;
 }
+
 
 function updateQuickStats() {
   const totalSummonsEl = document.getElementById("totalSummons");
@@ -480,7 +481,8 @@ function updateQuickStats() {
   
   // Owned Dragons Count
   if (ownedDragonsEl) {
-    ownedDragonsEl.textContent = ownedDragons.length;
+    const owned = JSON.parse(localStorage.getItem("ownedDragons") || "[]");
+    ownedDragonsEl.textContent = owned.length;
   }
   
   // Active Dragon Level
@@ -565,10 +567,7 @@ function resetPlayerLevel() {
   const player = getPlayer();
   if (!player) return;
 
-  player.dragonLevel = 0;
-  player.dragonName = null;
-  player.dragonId = null;
-  player.dragonExperience = 0;
+  player.resetDragon();  // ✅ Use Player method!
 
   showOwnedCollection();
   updateDragonProgress();
